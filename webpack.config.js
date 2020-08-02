@@ -6,6 +6,7 @@ module.exports = env => {
   console.log('Production:', !!env.prod);
   return {
     mode: env.prod ? 'production' : 'development',
+    devtool: env.dev ? 'eval-cheap-module-source-map' : undefined,
     module: {
       rules: [
         {
