@@ -11,12 +11,12 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <HelloWorld/>
+        <HelloWorld />
 
-        <CreateElementContainer/>
-        <Component/>
-        <PureComponent/>
-        <FunctionalComponent/>
+        <CreateElementContainer />
+        <Component />
+        <PureComponent />
+        <FunctionalComponent />
       </header>
     </div>
   );
