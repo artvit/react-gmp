@@ -4,13 +4,13 @@
   "private": true,
   "scripts": {
     "start": "npm run start:dev",
-    "start:prod": "webpack-dev-server --open --env.prod",
-    "start:dev": "webpack-dev-server --open --env.dev",
+    "start:prod": "webpack-dev-server --open --config config/webpack.prod.js",
+    "start:dev": "webpack-dev-server --open --config config/webpack.dev.js",
     "build": "npm run build:prod",
-    "build:prod": "webpack --env.prod",
-    "build:dev": "webpack --env.dev",
+    "build:prod": "webpack --config config/webpack.prod.js",
+    "build:dev": "webpack --config config/webpack.dev.js",
     "test": "jest",
-    "lint": "eslint ./src"
+    "lint": "eslint src/**/*.js src/**/*.jsx --no-error-on-unmatched-pattern"
   },
   "dependencies": {
     "react": "^16.13.1",
@@ -44,6 +44,7 @@
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^5.1.0"
   }
 }

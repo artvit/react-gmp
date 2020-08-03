@@ -1,40 +1,12 @@
-const HtmlWebPackPlugin = require('html-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const devConfig = require('./config/webpack.dev');
+const prodConfig = require('./config/webpack.prod');
 
-module.exports = (env) => ({
-  mode: env.prod ? 'production' : 'development',
-  devtool: env.dev ? 'eval-cheap-module-source-map' : undefined,
-  resolve: {
-    extensions: ['.js', '.jsx']
-  },
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: 'babel-loader'
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader']
-      },
-      {
-        test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
-      },
-      {
-        test: /\.(png|jpe?g|gif|svg)$/,
-        use: 'file-loader'
-      }
-    ]
-  },
-  plugins: [
-    new HtmlWebPackPlugin({
-      template: './src/index.html',
-      filename: './index.html'
-    })
-  ],
-  optimization: {
-    minimizer: [new UglifyJsPlugin({ cache: true, parallel: true })]
+module.exports = (env) => {
+  if (process.env.NODE_ENV.toLowerCase() === 'prod' || env.prod) {
+    return prodConfig;
   }
-});
+  if (process.env.NODE_ENV.toLowerCase() === 'dev' || env.dev) {
+    return devConfig;
+  }
+  return devConfig;
+};
