@@ -1,12 +1,7 @@
 const devConfig = require('./config/webpack.dev');
 const prodConfig = require('./config/webpack.prod');
 
-module.exports = (env) => {
-  if (process.env.NODE_ENV.toLowerCase() === 'prod' || env.prod) {
-    return prodConfig;
-  }
-  if (process.env.NODE_ENV.toLowerCase() === 'dev' || env.dev) {
-    return devConfig;
-  }
-  return devConfig;
-};
+const nodeEnv = process.env.NODE_ENV && process.env.NODE_ENV.toLowerCase();
+const config = nodeEnv === 'prod' ? prodConfig : devConfig;
+
+module.exports = config;

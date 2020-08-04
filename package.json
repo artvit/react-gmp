@@ -1,14 +1,14 @@
 {
   "name": "react-gmp",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "private": true,
   "scripts": {
     "start": "npm run start:dev",
-    "start:prod": "webpack-dev-server --open --config config/webpack.prod.js",
-    "start:dev": "webpack-dev-server --open --config config/webpack.dev.js",
+    "start:prod": "cross-env NODE_ENV=prod webpack-dev-server --open",
+    "start:dev": "cross-env NODE_ENV=dev webpack-dev-server --open",
     "build": "npm run build:prod",
-    "build:prod": "webpack --config config/webpack.prod.js",
-    "build:dev": "webpack --config config/webpack.dev.js",
+    "build:prod": "cross-env NODE_ENV=prod webpack",
+    "build:dev": "cross-env NODE_ENV=dev webpack",
     "test": "jest",
     "lint": "eslint src/**/*.js src/**/*.jsx --no-error-on-unmatched-pattern"
   },
@@ -26,6 +26,7 @@
     "@testing-library/react": "^10.4.7",
     "babel-jest": "^26.2.2",
     "babel-loader": "^8.1.0",
+    "cross-env": "^7.0.2",
     "css-loader": "^4.2.0",
     "eslint": "^7.6.0",
     "eslint-config-airbnb": "^18.2.0",
