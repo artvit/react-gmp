@@ -19,6 +19,9 @@
     "react"
   ],
   "rules": {
-    "comma-dangle": "off"
+    "comma-dangle": ["error", "never"],
+    "arrow-parens": ["error", "as-needed"],
+    "react/jsx-one-expression-per-line": "off",
+    "react/prop-types": ["error", { "ignore": ["children"] }]
   }
 }

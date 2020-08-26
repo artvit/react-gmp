@@ -1,6 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const BackgroundImg = styled.div`
+  background-image: url("https://d1v224g40dbxxy.cloudfront.net/s3fs-public/banner-images/poster2_mobile_1.jpg?WeqzVGAT5VMelUiAwmnVDDCai3uqeGVM");
+  background-size: cover;
+`;
+
+const Blur = styled.div`
+  backdrop-filter: blur(8px) brightness(0.6);
+`;
+
+const Background = ({ children }) => (
+  <BackgroundImg>
+    <Blur>
+      {children}
+    </Blur>
+  </BackgroundImg>
+);
+
 const HeadingBlock = styled.div`
   display: flex;
   flex-flow: row nowrap;
@@ -25,7 +42,7 @@ const AddButton = styled(Button)`
 `;
 
 const SearchBlock = styled.div`
-  padding: 50px 150px;
+  padding: 0 150px 100px;
   display: grid;
   grid-template-columns: auto 200px;
   grid-template-rows: auto 50px;
@@ -45,7 +62,7 @@ const SearchLabel = styled.h1`
 const SearchInput = styled.input`
   grid-area: input;
   padding-left: 30px;
-  background: rgba(255, 255, 255, 0.10);
+  background: rgba(50, 50, 50, 0.40);
   color: white;
   border: 0;
   border-radius: 4px;
@@ -58,7 +75,7 @@ const SearchButton = styled(Button)`
 `;
 
 const Header = () => (
-  <>
+  <Background>
     <HeadingBlock>
       <div>Logo</div>
       <AddButton>+ Add movie</AddButton>
@@ -68,7 +85,7 @@ const Header = () => (
       <SearchInput placeholder="What do you want to watch?" />
       <SearchButton>Search</SearchButton>
     </SearchBlock>
-  </>
+  </Background>
 );
 
 export default Header;
