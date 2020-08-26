@@ -10,14 +10,10 @@ const MoviesBox = styled.div`
 `;
 
 const Movies = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  padding-top: 20px;
-  >* {
-    margin-right: 50px;
-    margin-bottom: 50px;
-  }
+  margin-top: 20px;
+  display: grid;
+  grid-gap: 50px 50px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 `;
 
 const CountBox = styled.div`
