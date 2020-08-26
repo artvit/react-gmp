@@ -2,6 +2,7 @@ import React from 'react';
 
 import Header from './components/header/Header';
 import MovieList from './components/movie-list/MovieList';
+import ErrorBoundary from './components/util/ErrorBoundary';
 
 const mockedMovies = new Array(31).fill({
   title: 'Pulp Fiction',
@@ -9,11 +10,16 @@ const mockedMovies = new Array(31).fill({
   genre: 'Action & Adventure',
   year: 1994
 });
+  // .concat(null);
 
 const App = () => (
   <>
-    <Header />
-    <MovieList movies={mockedMovies} />
+    <ErrorBoundary>
+      <Header />
+    </ErrorBoundary>
+    <ErrorBoundary>
+      <MovieList movies={mockedMovies} />
+    </ErrorBoundary>
   </>
 );
 
