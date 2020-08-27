@@ -3,6 +3,7 @@ import React from 'react';
 import Header from './components/header/Header';
 import MovieList from './components/movie-list/MovieList';
 import ErrorBoundary from './components/util/ErrorBoundary';
+import Footer from './components/footer/Footer';
 
 const mockedMovies = new Array(31).fill({
   title: 'Pulp Fiction',
@@ -20,6 +21,7 @@ const App = () => (
     <ErrorBoundary>
       <MovieList movies={mockedMovies} />
     </ErrorBoundary>
+    <Footer />
   </>
 );
 
