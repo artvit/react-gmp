@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Logo from '../util/Logo';
 
 const BackgroundImg = styled.div`
   background-image: url("https://d1v224g40dbxxy.cloudfront.net/s3fs-public/banner-images/poster2_mobile_1.jpg?WeqzVGAT5VMelUiAwmnVDDCai3uqeGVM");
@@ -77,7 +78,7 @@ const SearchButton = styled(Button)`
 const Header = () => (
   <Background>
     <HeadingBlock>
-      <div>Logo</div>
+      <Logo size="20px" />
       <AddButton>+ Add movie</AddButton>
     </HeadingBlock>
     <SearchBlock>
