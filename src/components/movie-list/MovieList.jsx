@@ -13,7 +13,7 @@ const Movies = styled.div`
   margin-top: 20px;
   display: grid;
   grid-gap: 50px 50px;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 `;
 
 const CountBox = styled.div`

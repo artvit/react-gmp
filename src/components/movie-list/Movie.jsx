@@ -1,10 +1,13 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import movieType from '../../types/movie';
 
 const MovieBox = styled.div`
-  width: 250px;
+  width: 300px;
   color: lightgray;
+  position: relative;
 `;
 
 const textEllipsis = css`
@@ -16,8 +19,8 @@ const textEllipsis = css`
 const Cover = styled.img`
   display: block;
   object-fit: cover;
-  width: 250px;
-  height: 400px;
+  width: 100%;
+  height: 450px;
 `;
 
 const TitleBox = styled.div`
@@ -44,8 +47,28 @@ const Genre = styled.div`
   ${textEllipsis}
 `;
 
+const OptionsButton = styled.button`
+  position: absolute;
+  display: block;
+  height: 40px;
+  width: 40px;
+  font-size: 20px;
+  right: 10px;
+  top: 10px;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  border: 0;
+  border-radius: 50%;
+  visibility: hidden;
+
+  ${MovieBox}:hover & {
+    visibility: visible;
+  }
+`;
+
 const Movie = ({ movie }) => (
   <MovieBox>
+    <OptionsButton><FontAwesomeIcon icon={faEllipsisV} /></OptionsButton>
     <Cover src={movie.imgSrc} alt={movie.title} />
     <TitleBox>
       <Title>{movie.title}</Title>
