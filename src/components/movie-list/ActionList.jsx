@@ -27,13 +27,19 @@ const CloseIcon = styled(FontAwesomeIcon)`
   cursor: pointer;
 `;
 
-const ActionList = ({ onDelete, onEdit, onClose }) => (
-  <ActionsBox>
-    <CloseButton><CloseIcon icon={faTimes} size="xs" onClick={onClose} /></CloseButton>
-    <Action onClick={onEdit}>Edit</Action>
-    <Action onClick={onDelete}>Delete</Action>
-  </ActionsBox>
-);
+const ActionList = React.forwardRef(({ onDelete, onEdit, onClose }, ref) => {
+  const curryAction = fn => () => {
+    fn();
+    onClose();
+  };
+  return (
+    <ActionsBox ref={ref}>
+      <CloseButton><CloseIcon icon={faTimes} size="xs" onClick={onClose} /></CloseButton>
+      <Action onClick={curryAction(onEdit)}>Edit</Action>
+      <Action onClick={curryAction(onDelete)}>Delete</Action>
+    </ActionsBox>
+  );
+});
 
 ActionList.propTypes = {
   onDelete: PropTypes.func.isRequired,

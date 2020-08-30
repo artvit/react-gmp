@@ -34,7 +34,7 @@ Modal.defaultStyles.content = {
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isAddEditOpened: true };
+    this.state = { isAddEditOpened: false };
   }
 
   closeAddEditDialog() {

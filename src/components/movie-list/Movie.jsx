@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import movieType from '../../types/movie';
 import ActionList from './ActionList';
+import useClickOutside from '../shared/use-click-outside.effect';
 
 const MovieBox = styled.div`
   width: 300px;
@@ -70,24 +71,36 @@ const ActionButton = styled.button`
   }
 `;
 
-const Movie = ({ movie }) => (
-  <MovieBox>
-    <ActionBox>
-      <ActionButton><FontAwesomeIcon icon={faEllipsisV} /></ActionButton>
-      <ActionList
-        onDelete={() => console.log('Delete')}
-        onEdit={() => console.log('Edit')}
-        onClose={() => console.log('close')}
-      />
-    </ActionBox>
-    <Cover src={movie.imgSrc} alt={movie.title} />
-    <TitleBox>
-      <Title>{movie.title}</Title>
-      <Year>{movie.year}</Year>
-    </TitleBox>
-    <Genre>{movie.genre}</Genre>
-  </MovieBox>
-);
+const Movie = ({ movie }) => {
+  const [actionsOpened, setActionsOpened] = useState(false);
+  const actionListRef = useRef(null);
+  const closeOptions = useCallback(() => setActionsOpened(false), []);
+  useClickOutside(actionListRef, closeOptions);
+  return (
+    <MovieBox>
+      <ActionBox>
+        {actionsOpened ? (
+          <ActionList
+            ref={actionListRef}
+            onEdit={() => console.log('Edit')}
+            onDelete={() => console.log('Delete')}
+            onClose={closeOptions}
+          />
+        ) : (
+          <ActionButton>
+            <FontAwesomeIcon icon={faEllipsisV} onClick={() => setActionsOpened(true)} />
+          </ActionButton>
+        )}
+      </ActionBox>
+      <Cover src={movie.imgSrc} alt={movie.title} />
+      <TitleBox>
+        <Title>{movie.title}</Title>
+        <Year>{movie.year}</Year>
+      </TitleBox>
+      <Genre>{movie.genre}</Genre>
+    </MovieBox>
+  );
+};
 
 Movie.propTypes = {
   movie: movieType.isRequired
