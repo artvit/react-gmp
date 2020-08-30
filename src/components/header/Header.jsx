@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import Logo from '../shared/Logo';
 
 const BackgroundImg = styled.div`
@@ -75,11 +76,11 @@ const SearchButton = styled(Button)`
   color: white;
 `;
 
-const Header = () => (
+const Header = ({ onAddClick }) => (
   <Background>
     <HeadingBlock>
       <Logo size="20px" />
-      <AddButton>+ Add movie</AddButton>
+      <AddButton onClick={onAddClick}>+ Add movie</AddButton>
     </HeadingBlock>
     <SearchBlock>
       <SearchLabel>Find your movie</SearchLabel>
@@ -88,5 +89,9 @@ const Header = () => (
     </SearchBlock>
   </Background>
 );
+
+Header.propTypes = {
+  onAddClick: PropTypes.func.isRequired
+};
 
 export default Header;
