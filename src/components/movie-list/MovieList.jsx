@@ -26,7 +26,7 @@ const MovieList = ({ movies }) => (
     <CountBox>
       <b>{movies.length}</b> movies found
     </CountBox>
-    <Movies>{movies.map(m => (<Movie key={m.title} movie={m} />))}</Movies>
+    <Movies>{movies.map(m => (<Movie key={m.id} movie={m} />))}</Movies>
   </MoviesBox>
 );
 

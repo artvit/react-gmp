@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import movieType from '../../types/movie';
+import ActionList from './ActionList';
 
 const MovieBox = styled.div`
   width: 300px;
@@ -47,14 +48,17 @@ const Genre = styled.div`
   ${textEllipsis}
 `;
 
-const OptionsButton = styled.button`
+const ActionBox = styled.div`
   position: absolute;
+  right: 10px;
+  top: 10px;
+`;
+
+const ActionButton = styled.button`
   display: block;
   height: 40px;
   width: 40px;
   font-size: 20px;
-  right: 10px;
-  top: 10px;
   background: rgba(0,0,0,0.6);
   color: white;
   border: 0;
@@ -68,7 +72,14 @@ const OptionsButton = styled.button`
 
 const Movie = ({ movie }) => (
   <MovieBox>
-    <OptionsButton><FontAwesomeIcon icon={faEllipsisV} /></OptionsButton>
+    <ActionBox>
+      <ActionButton><FontAwesomeIcon icon={faEllipsisV} /></ActionButton>
+      <ActionList
+        onDelete={() => console.log('Delete')}
+        onEdit={() => console.log('Edit')}
+        onClose={() => console.log('close')}
+      />
+    </ActionBox>
     <Cover src={movie.imgSrc} alt={movie.title} />
     <TitleBox>
       <Title>{movie.title}</Title>
