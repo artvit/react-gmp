@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import InputControl from './InputControl';
@@ -14,9 +14,8 @@ const SelectInputControl = ({
 }) => {
   const [selected, setSelected] = useState(value);
   const [showOptions, setShowOptions] = useState(false);
-  const listRef = useRef(null);
   const onClickOutside = useCallback(() => setShowOptions(false), []);
-  useClickOutside(listRef, onClickOutside);
+  const listRef = useClickOutside(onClickOutside);
 
   const select = option => () => {
     setSelected(option);

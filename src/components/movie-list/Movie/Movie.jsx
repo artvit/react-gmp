@@ -1,10 +1,10 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
-import movieType from '../../types/movie';
+import movieType from '../../../types/movie';
 import ActionList from './ActionList';
-import useClickOutside from '../shared/use-click-outside.effect';
+import useClickOutside from '../../shared/use-click-outside.effect';
 
 const MovieBox = styled.div`
   width: 300px;
@@ -73,9 +73,8 @@ const ActionButton = styled.button`
 
 const Movie = ({ movie }) => {
   const [actionsOpened, setActionsOpened] = useState(false);
-  const actionListRef = useRef(null);
   const closeOptions = useCallback(() => setActionsOpened(false), []);
-  useClickOutside(actionListRef, closeOptions);
+  const actionListRef = useClickOutside(closeOptions);
   return (
     <MovieBox>
       <ActionBox>
@@ -87,8 +86,8 @@ const Movie = ({ movie }) => {
             onClose={closeOptions}
           />
         ) : (
-          <ActionButton>
-            <FontAwesomeIcon icon={faEllipsisV} onClick={() => setActionsOpened(true)} />
+          <ActionButton onClick={() => setActionsOpened(true)}>
+            <FontAwesomeIcon icon={faEllipsisV} />
           </ActionButton>
         )}
       </ActionBox>
