@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Movie from './Movie/Movie';
 import movieType from '../../types/movie';
 import ControlPanel from './ControlPanel/ControlPanel';
+import { optionArrayType } from '../shared/options/option-type';
 
 const MoviesBox = styled.div`
   margin: 10px 70px;
@@ -26,18 +27,30 @@ const filterMovies = (movies, genre, sortBy) => {
     result = result.filter(m => m.genre === genre);
   }
   if (sortBy) {
-    result = result.sort((m1, m2) => (m1[sortBy] < m2[sortBy] ? -1 : 1));
+    result = result.sort((m1, m2) => {
+      if (m1[sortBy] === m2[sortBy]) {
+        return 0;
+      }
+      return m1[sortBy] < m2[sortBy] ? -1 : 1;
+    });
   }
   return result;
 };
 
-const MovieList = ({ movies }) => {
-  const [sortBy, setSortBy] = useState();
-  const [genre, setGenre] = useState();
+const MovieList = ({ movies, filterGenres, sortByOptions }) => {
+  const [sortBy, setSortBy] = useState(sortByOptions[0].value);
+  const [genre, setGenre] = useState(filterGenres[0]);
   const filteredMovies = filterMovies(movies, genre, sortBy);
   return (
     <MoviesBox>
-      <ControlPanel onFilterChange={setGenre} onSortChange={setSortBy} />
+      <ControlPanel
+        selectedFilter={genre}
+        selectedSortBy={sortBy}
+        genreOptions={filterGenres}
+        sortByOptions={sortByOptions}
+        onFilterChange={setGenre}
+        onSortChange={setSortBy}
+      />
       <CountBox>
         <b>{filteredMovies.length}</b> movies found
       </CountBox>
@@ -47,11 +60,15 @@ const MovieList = ({ movies }) => {
 };
 
 MovieList.defaultProps = {
-  movies: []
+  movies: [],
+  filterGenres: [],
+  sortByOptions: []
 };
 
 MovieList.propTypes = {
-  movies: PropTypes.arrayOf(movieType)
+  movies: PropTypes.arrayOf(movieType),
+  filterGenres: PropTypes.arrayOf(PropTypes.string),
+  sortByOptions: optionArrayType
 };
 
 export default MovieList;

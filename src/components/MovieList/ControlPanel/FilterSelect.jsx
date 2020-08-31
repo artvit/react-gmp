@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from './ControlPanel.styles';
-import genres from '../../../data/genres';
 
-const filters = ['All', ...genres.slice(0, 4)];
-
-const FilterSelect = ({ onFilterChange }) => {
+const FilterSelect = ({ onFilterChange, filters }) => {
   const [activeFilter, setActiveFilter] = useState(filters[0]);
   const selectFilter = f => {
     setActiveFilter(f);
@@ -21,7 +18,8 @@ const FilterSelect = ({ onFilterChange }) => {
 };
 
 FilterSelect.propTypes = {
-  onFilterChange: PropTypes.func.isRequired
+  onFilterChange: PropTypes.func.isRequired,
+  filters: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 export default FilterSelect;

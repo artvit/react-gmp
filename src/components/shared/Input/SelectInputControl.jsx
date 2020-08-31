@@ -1,44 +1,20 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import InputControl from './InputControl';
-import { Option, OptionList } from './option-list';
-import useClickOutside from '../use-click-outside.effect';
-
-const PositionedOptionList = styled(OptionList)`
-  position: absolute;
-`;
+import OptionsSelector from '../options/OptionsSelector';
+import { optionType } from '../options/option-type';
 
 const SelectInputControl = ({
   value, placeholder, options, onChange
-}) => {
-  const [selected, setSelected] = useState(value);
-  const [showOptions, setShowOptions] = useState(false);
-  const onClickOutside = useCallback(() => setShowOptions(false), []);
-  const listRef = useClickOutside(onClickOutside);
-
-  const select = option => () => {
-    setSelected(option);
-    setShowOptions(false);
-    onChange(option);
-  };
-
-  return (
-    <>
-      <InputControl
-        value={selected}
-        placeholder={placeholder}
-        readOnly
-        onClick={() => setShowOptions(true)}
-      />
-      {showOptions && (
-        <PositionedOptionList ref={listRef}>
-          {options.map(o => <Option key={o} onClick={select(o)}>{o}</Option>)}
-        </PositionedOptionList>
-      )}
-    </>
-  );
-};
+}) => (
+  <OptionsSelector onChange={onChange} options={options}>
+    <InputControl
+      value={value}
+      placeholder={placeholder}
+      readOnly
+    />
+  </OptionsSelector>
+);
 
 SelectInputControl.defaultProps = {
   value: '',
@@ -50,7 +26,7 @@ SelectInputControl.defaultProps = {
 SelectInputControl.propTypes = {
   value: PropTypes.string,
   placeholder: PropTypes.string,
-  options: PropTypes.arrayOf(PropTypes.string),
+  options: PropTypes.arrayOf(optionType),
   onChange: PropTypes.func
 };
 

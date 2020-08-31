@@ -2,13 +2,22 @@ import React from 'react';
 import Modal from 'react-modal';
 
 import Header from './components/header/Header';
-import MovieList from './components/movie-list/MovieList';
+import MovieList from './components/MovieList/MovieList';
 import ErrorBoundary from './components/shared/ErrorBoundary';
 import Footer from './components/footer/Footer';
 import AddEditDialog from './components/dialog/add-edit-dialog/AddEditDialog';
 import movies from './data/movies';
+import genres from './data/genres';
 
 const mockedMovies = movies;
+const filters = ['All', ...genres.slice(0, 4)];
+const sortByOptions = [{
+  value: 'released',
+  title: 'Released Date'
+}, {
+  value: 'title',
+  title: 'Title'
+}];
 
 Modal.setAppElement('#root');
 Object.assign(Modal.defaultStyles.overlay, {
@@ -21,7 +30,6 @@ Modal.defaultStyles.content = {
   margin: 'auto',
   width: 'fit-content',
   height: '100%',
-  paddingTop: '40px',
   overflow: 'auto',
   outline: 0
 };
@@ -49,7 +57,11 @@ class App extends React.Component {
           <Header onAddClick={() => this.openAddDialog()} />
         </ErrorBoundary>
         <ErrorBoundary>
-          <MovieList movies={mockedMovies} />
+          <MovieList
+            movies={mockedMovies}
+            sortByOptions={sortByOptions}
+            filterGenres={filters}
+          />
         </ErrorBoundary>
         <Footer />
 
