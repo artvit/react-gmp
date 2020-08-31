@@ -8,6 +8,7 @@ import Footer from './components/footer/Footer';
 import AddEditDialog from './components/dialog/AddEditDialog';
 import movies from './data/movies';
 import genres from './data/genres';
+import DeleteDialog from './components/dialog/DeleteDialog';
 
 const mockedMovies = movies;
 const filters = ['All', ...genres.slice(0, 4)];
@@ -38,29 +39,48 @@ Modal.defaultStyles.content = {
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isAddEditOpened: false };
+    this.state = {
+      isAddEditOpened: false,
+      isDeleteOpened: false
+    };
   }
 
   closeAddEditDialog() {
     this.setState({ isAddEditOpened: false });
   }
 
-  openAddDialog() {
-    this.setState({ isAddEditOpened: true });
+  openAddEditDialog(movie) {
+    this.setState({
+      isAddEditOpened: true,
+      editingMovie: movie
+    });
+  }
+
+  closeDeleteDialog() {
+    this.setState({ isDeleteOpened: false });
+  }
+
+  openDeleteDialog(movie) {
+    this.setState({
+      isDeleteOpened: true,
+      deletingMovie: movie
+    });
   }
 
   render() {
-    const { isAddEditOpened } = this.state;
+    const {
+      isAddEditOpened, editingMovie, isDeleteOpened, deletingMovie
+    } = this.state;
     return (
       <>
         <ErrorBoundary>
-          <Header onAddClick={() => this.openAddDialog()} />
+          <Header onAddClick={() => this.openAddEditDialog()} />
         </ErrorBoundary>
         <ErrorBoundary>
           <MovieList
             movies={mockedMovies}
-            onDelete={m => console.log('Delete', m)}
-            onEdit={m => console.log('Edit', m)}
+            onDelete={m => this.openDeleteDialog(m)}
+            onEdit={m => this.openAddEditDialog(m)}
             sortByOptions={sortByOptions}
             filterGenres={filters}
           />
@@ -69,9 +89,16 @@ class App extends React.Component {
 
         <Modal isOpen={isAddEditOpened}>
           <AddEditDialog
-            isEdit={false}
+            isEdit={!!editingMovie}
+            movie={editingMovie}
             onClose={() => this.closeAddEditDialog()}
-            onSave={() => console.log('save')}
+            onSave={m => console.log('save', m)}
+          />
+        </Modal>
+        <Modal isOpen={isDeleteOpened}>
+          <DeleteDialog
+            onClose={() => this.closeDeleteDialog()}
+            onConfirm={() => console.log('delete', deletingMovie)}
           />
         </Modal>
       </>

@@ -75,9 +75,9 @@ const Movie = ({ movie, onDelete, onEdit }) => {
   const actions = ['Edit', 'Delete'];
   const handleAction = action => {
     if (action === 'Edit') {
-      onEdit();
+      onEdit(movie);
     } else if (action === 'Delete') {
-      onDelete();
+      onDelete(movie);
     }
   };
   return (

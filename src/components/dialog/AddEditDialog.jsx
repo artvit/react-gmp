@@ -31,7 +31,7 @@ AddEditDialog.defaultProps = {
 AddEditDialog.propTypes = {
   isEdit: PropTypes.bool.isRequired,
   movie: (props, propName, componentName) => props.isEdit && PropTypes.checkPropTypes(
-    { propName: movieType.isRequired }, props, propName, componentName
+    { [propName]: movieType.isRequired }, props, propName, componentName
   ),
   onClose: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired
