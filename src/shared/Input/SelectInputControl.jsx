@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import InputControl from './InputControl';
-import OptionsSelector from '../options/OptionsSelector';
+import OptionSelector from '../options/OptionSelector';
 import { optionType } from '../options/option-type';
 
-const StyledOptionSelector = styled(OptionsSelector)`
+const StyledOptionSelector = styled(OptionSelector)`
   width: 100%;
 `;
 

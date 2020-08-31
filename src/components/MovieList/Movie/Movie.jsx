@@ -1,11 +1,10 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 import movieType from '../../../types/movie';
-import ActionList from './ActionList';
-import useClickOutside from '../../../shared/use-click-outside.effect';
+import OptionSelector from '../../../shared/options/OptionSelector';
 
 const MovieBox = styled.div`
   width: 300px;
@@ -73,24 +72,28 @@ const ActionButton = styled.button`
 `;
 
 const Movie = ({ movie, onDelete, onEdit }) => {
-  const [actionsOpened, setActionsOpened] = useState(false);
-  const closeOptions = useCallback(() => setActionsOpened(false), []);
-  const actionListRef = useClickOutside(closeOptions);
+  const actions = ['Edit', 'Delete'];
+  const handleAction = action => {
+    if (action === 'Edit') {
+      onEdit();
+    } else if (action === 'Delete') {
+      onDelete();
+    }
+  };
   return (
     <MovieBox>
       <ActionBox>
-        {actionsOpened ? (
-          <ActionList
-            ref={actionListRef}
-            onEdit={() => onEdit(movie)}
-            onDelete={() => onDelete(movie)}
-            onClose={closeOptions}
-          />
-        ) : (
-          <ActionButton onClick={() => setActionsOpened(true)}>
+        <OptionSelector
+          onChange={handleAction}
+          options={actions}
+          hideChildren
+          showCloseButton
+          positionRight
+        >
+          <ActionButton>
             <FontAwesomeIcon icon={faEllipsisV} />
           </ActionButton>
-        )}
+        </OptionSelector>
       </ActionBox>
       <Cover src={movie.imgSrc} alt={movie.title} />
       <TitleBox>

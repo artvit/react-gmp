@@ -4,8 +4,7 @@ import Input from '../../shared/Input';
 import Dialog from '../../shared/Dialog/Dialog';
 import { BottomButtons, Button, PrimaryButton } from '../../shared/Dialog/dialog-buttons';
 import movieType from '../../types/movie';
-
-const genres = ['Comedy', 'Thriller', 'Action'];
+import genres from '../../data/genres';
 
 const AddEditDialog = ({
   isEdit, onClose, onSave, movie

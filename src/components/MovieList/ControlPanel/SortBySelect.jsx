@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Label } from './ControlPanel.styles';
-import OptionsSelector from '../../../shared/options/OptionsSelector';
+import OptionSelector from '../../../shared/options/OptionSelector';
 import { optionArrayType } from '../../../shared/options/option-type';
 
 const SortBySelect = ({ onChange, selected, options }) => {
@@ -9,9 +9,9 @@ const SortBySelect = ({ onChange, selected, options }) => {
   return (
     <div>
       <Label>Sort by</Label>
-      <OptionsSelector onChange={onChange} options={options}>
+      <OptionSelector onChange={onChange} options={options}>
         <Button>{selectedItem.title}</Button>
-      </OptionsSelector>
+      </OptionSelector>
     </div>
   );
 };
