@@ -4,13 +4,13 @@ import styled from 'styled-components';
 import Movie from './Movie/Movie';
 import movieType from '../../types/movie';
 import ControlPanel from './ControlPanel/ControlPanel';
-import { optionArrayType } from '../shared/options/option-type';
+import { optionArrayType } from '../../shared/options/option-type';
 
 const MoviesBox = styled.div`
   margin: 10px 70px;
 `;
 
-const Movies = styled.div`
+const MoviesLayout = styled.div`
   margin-top: 20px;
   display: grid;
   grid-gap: 50px 50px;
@@ -37,7 +37,9 @@ const filterMovies = (movies, genre, sortBy) => {
   return result;
 };
 
-const MovieList = ({ movies, filterGenres, sortByOptions }) => {
+const MovieList = ({
+  movies, filterGenres, sortByOptions, onEdit, onDelete
+}) => {
   const [sortBy, setSortBy] = useState(sortByOptions[0].value);
   const [genre, setGenre] = useState(filterGenres[0]);
   const filteredMovies = filterMovies(movies, genre, sortBy);
@@ -54,21 +56,25 @@ const MovieList = ({ movies, filterGenres, sortByOptions }) => {
       <CountBox>
         <b>{filteredMovies.length}</b> movies found
       </CountBox>
-      <Movies>{filteredMovies.map(m => (<Movie key={m.id} movie={m} />))}</Movies>
+      <MoviesLayout>
+        {filteredMovies.map(m => (
+          <Movie key={m.id} movie={m} onEdit={onEdit} onDelete={onDelete} />
+        ))}
+      </MoviesLayout>
     </MoviesBox>
   );
 };
 
 MovieList.defaultProps = {
-  movies: [],
-  filterGenres: [],
-  sortByOptions: []
+  movies: []
 };
 
 MovieList.propTypes = {
   movies: PropTypes.arrayOf(movieType),
-  filterGenres: PropTypes.arrayOf(PropTypes.string),
-  sortByOptions: optionArrayType
+  filterGenres: PropTypes.arrayOf(PropTypes.string).isRequired,
+  sortByOptions: optionArrayType.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired
 };
 
 export default MovieList;

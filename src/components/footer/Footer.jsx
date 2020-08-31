@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Logo from '../shared/Logo';
+import Logo from '../../shared/Logo';
 
 const FooterBox = styled.div`
   padding: 10px;

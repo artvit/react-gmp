@@ -3,9 +3,9 @@ import Modal from 'react-modal';
 
 import Header from './components/header/Header';
 import MovieList from './components/MovieList/MovieList';
-import ErrorBoundary from './components/shared/ErrorBoundary';
+import ErrorBoundary from './shared/ErrorBoundary';
 import Footer from './components/footer/Footer';
-import AddEditDialog from './components/dialog/add-edit-dialog/AddEditDialog';
+import AddEditDialog from './components/dialog/AddEditDialog';
 import movies from './data/movies';
 import genres from './data/genres';
 
@@ -59,6 +59,8 @@ class App extends React.Component {
         <ErrorBoundary>
           <MovieList
             movies={mockedMovies}
+            onDelete={m => console.log('Delete', m)}
+            onEdit={m => console.log('Edit', m)}
             sortByOptions={sortByOptions}
             filterGenres={filters}
           />

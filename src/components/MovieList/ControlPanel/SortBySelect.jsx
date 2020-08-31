@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Label } from './ControlPanel.styles';
-import OptionsSelector from '../../shared/options/OptionsSelector';
-import { optionArrayType } from '../../shared/options/option-type';
+import OptionsSelector from '../../../shared/options/OptionsSelector';
+import { optionArrayType } from '../../../shared/options/option-type';
 
 const SortBySelect = ({ onChange, selected, options }) => {
   const selectedItem = options.find(o => o.value === selected);

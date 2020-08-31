@@ -2,9 +2,10 @@ import React, { useCallback, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
+import PropTypes from 'prop-types';
 import movieType from '../../../types/movie';
 import ActionList from './ActionList';
-import useClickOutside from '../../shared/use-click-outside.effect';
+import useClickOutside from '../../../shared/use-click-outside.effect';
 
 const MovieBox = styled.div`
   width: 300px;
@@ -71,7 +72,7 @@ const ActionButton = styled.button`
   }
 `;
 
-const Movie = ({ movie }) => {
+const Movie = ({ movie, onDelete, onEdit }) => {
   const [actionsOpened, setActionsOpened] = useState(false);
   const closeOptions = useCallback(() => setActionsOpened(false), []);
   const actionListRef = useClickOutside(closeOptions);
@@ -81,8 +82,8 @@ const Movie = ({ movie }) => {
         {actionsOpened ? (
           <ActionList
             ref={actionListRef}
-            onEdit={() => console.log('Edit')}
-            onDelete={() => console.log('Delete')}
+            onEdit={() => onEdit(movie)}
+            onDelete={() => onDelete(movie)}
             onClose={closeOptions}
           />
         ) : (
@@ -94,7 +95,7 @@ const Movie = ({ movie }) => {
       <Cover src={movie.imgSrc} alt={movie.title} />
       <TitleBox>
         <Title>{movie.title}</Title>
-        <Year>{movie.year}</Year>
+        <Year>{movie.released}</Year>
       </TitleBox>
       <Genre>{movie.genre}</Genre>
     </MovieBox>
@@ -102,7 +103,9 @@ const Movie = ({ movie }) => {
 };
 
 Movie.propTypes = {
-  movie: movieType.isRequired
+  movie: movieType.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired
 };
 
 export default Movie;

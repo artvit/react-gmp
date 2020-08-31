@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import Logo from '../shared/Logo';
+import Logo from '../../shared/Logo';
 
 const BackgroundImg = styled.div`
   background-image: url("https://d1v224g40dbxxy.cloudfront.net/s3fs-public/banner-images/poster2_mobile_1.jpg?WeqzVGAT5VMelUiAwmnVDDCai3uqeGVM");
