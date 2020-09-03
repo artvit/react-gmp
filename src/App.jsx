@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import Modal from 'react-modal';
 
 import Header from './components/header/Header';
@@ -36,98 +36,67 @@ Modal.defaultStyles.content = {
   outline: 0
 };
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isAddEditOpened: false,
-      isDeleteOpened: false,
-      isDetailsOpened: false
-    };
-  }
+const useOpenCloseDialog = (setOpened, setObject) => {
+  const openDialog = useCallback(obj => {
+    setOpened(true);
+    setObject(obj);
+  }, []);
+  const closeDialog = useCallback(() => setOpened(false), []);
+  return [openDialog, closeDialog];
+};
 
-  closeAddEditDialog() {
-    this.setState({ isAddEditOpened: false });
-  }
+const App = () => {
+  const [isAddEditOpened, setIsAddEditOpened] = useState(false);
+  const [editingMovie, setEditingMovie] = useState();
+  const [isDeleteOpened, setIsDeleteOpened] = useState(false);
+  const [deletingMovie, setDeletingMovie] = useState();
+  const [isDetailsOpened, setIsDetailsOpened] = useState(false);
+  const [movieDetails, setMovieDetails] = useState();
 
-  openAddEditDialog(movie) {
-    this.setState({
-      isAddEditOpened: true,
-      editingMovie: movie
-    });
-  }
+  const [openAddEdit, closeAddEdit] = useOpenCloseDialog(setIsAddEditOpened, setEditingMovie);
+  const [openDelete, closeDelete] = useOpenCloseDialog(setIsDeleteOpened, setDeletingMovie);
+  const [openDetails, closeDetails] = useOpenCloseDialog(setIsDetailsOpened, setMovieDetails);
 
-  closeDeleteDialog() {
-    this.setState({ isDeleteOpened: false });
-  }
-
-  openDeleteDialog(movie) {
-    this.setState({
-      isDeleteOpened: true,
-      deletingMovie: movie
-    });
-  }
-
-  openDetails(movie) {
-    this.setState({
-      isDetailsOpened: true,
-      movieDetails: movie
-    });
-  }
-
-  closeDetails() {
-    this.setState({
-      isDetailsOpened: false
-    });
-  }
-
-  render() {
-    const {
-      isAddEditOpened, editingMovie,
-      isDeleteOpened, deletingMovie,
-      isDetailsOpened, movieDetails
-    } = this.state;
-    return (
-      <>
-        <ErrorBoundary>
-          {isDetailsOpened ? (
-            <MovieDetails
-              movie={movieDetails}
-              onSearchClick={() => this.closeDetails()}
-            />
-          ) : (
-            <Header onAddClick={() => this.openAddEditDialog()} />
-          )}
-        </ErrorBoundary>
-        <ErrorBoundary>
-          <MovieList
-            movies={mockedMovies}
-            onDelete={m => this.openDeleteDialog(m)}
-            onEdit={m => this.openAddEditDialog(m)}
-            onOpenDetails={m => this.openDetails(m)}
-            sortByOptions={sortByOptions}
-            filterGenres={filters}
+  return (
+    <>
+      <ErrorBoundary>
+        {isDetailsOpened ? (
+          <MovieDetails
+            movie={movieDetails}
+            onSearchClick={closeDetails}
           />
-        </ErrorBoundary>
-        <Footer />
+        ) : (
+          <Header onAddClick={() => openAddEdit(null)} />
+        )}
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <MovieList
+          movies={mockedMovies}
+          onDelete={openDelete}
+          onEdit={openAddEdit}
+          onOpenDetails={openDetails}
+          sortByOptions={sortByOptions}
+          filterGenres={filters}
+        />
+      </ErrorBoundary>
+      <Footer />
 
-        <Modal isOpen={isAddEditOpened}>
-          <AddEditDialog
-            isEdit={!!editingMovie}
-            movie={editingMovie}
-            onClose={() => this.closeAddEditDialog()}
-            onSave={m => console.log('save', m)}
-          />
-        </Modal>
-        <Modal isOpen={isDeleteOpened}>
-          <DeleteDialog
-            onClose={() => this.closeDeleteDialog()}
-            onConfirm={() => console.log('delete', deletingMovie)}
-          />
-        </Modal>
-      </>
-    );
-  }
-}
+      <Modal isOpen={isAddEditOpened}>
+        <AddEditDialog
+          isEdit={!!editingMovie}
+          movie={editingMovie}
+          onClose={closeAddEdit}
+          onSave={m => console.log('save', m)}
+        />
+      </Modal>
+      <Modal isOpen={isDeleteOpened}>
+        <DeleteDialog
+          onClose={closeDelete}
+          onConfirm={() => console.log('delete', deletingMovie)}
+        />
+      </Modal>
+    </>
+  );
+};
 
 export default App;
