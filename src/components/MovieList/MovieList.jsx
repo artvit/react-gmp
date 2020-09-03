@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Movie from './Movie/Movie';
+import Movie from './Movie';
 import movieType from '../../types/movie';
 import ControlPanel from './ControlPanel/ControlPanel';
 import { optionArrayType } from '../../shared/options/option-type';

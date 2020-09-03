@@ -9,6 +9,7 @@ import AddEditDialog from './components/dialog/AddEditDialog';
 import movies from './data/movies';
 import genres from './data/genres';
 import DeleteDialog from './components/dialog/DeleteDialog';
+import MovieDetails from './components/MovieDetails/MovieDetails';
 
 const mockedMovies = movies;
 const filters = ['All', ...genres.slice(0, 4)];
@@ -75,6 +76,10 @@ class App extends React.Component {
       <>
         <ErrorBoundary>
           <Header onAddClick={() => this.openAddEditDialog()} />
+          <MovieDetails
+            movie={mockedMovies[0]}
+            onSearchClick={() => console.log('Search clicked')}
+          />
         </ErrorBoundary>
         <ErrorBoundary>
           <MovieList

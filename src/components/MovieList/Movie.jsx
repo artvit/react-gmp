@@ -3,8 +3,8 @@ import styled, { css } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
-import movieType from '../../../types/movie';
-import OptionSelector from '../../../shared/options/OptionSelector';
+import movieType from '../../types/movie';
+import OptionSelector from '../../shared/options/OptionSelector';
 
 const MovieBox = styled.div`
   width: 300px;

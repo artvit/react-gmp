@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import Logo from '../../shared/Logo';
+import Logo from '../../shared/layout/Logo';
+import LogoBlock from '../../shared/layout/LogoBlock';
 
 const BackgroundImg = styled.div`
   background-image: url("https://d1v224g40dbxxy.cloudfront.net/s3fs-public/banner-images/poster2_mobile_1.jpg?WeqzVGAT5VMelUiAwmnVDDCai3uqeGVM");
@@ -19,14 +20,6 @@ const Background = ({ children }) => (
     </Blur>
   </BackgroundImg>
 );
-
-const HeadingBlock = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  padding: 20px 35px;
-  font-weight: bold;
-`;
 
 const Button = styled.button`
   border: 0;
@@ -78,10 +71,10 @@ const SearchButton = styled(Button)`
 
 const Header = ({ onAddClick }) => (
   <Background>
-    <HeadingBlock>
+    <LogoBlock>
       <Logo size="20px" />
       <AddButton onClick={onAddClick}>+ Add movie</AddButton>
-    </HeadingBlock>
+    </LogoBlock>
     <SearchBlock>
       <SearchLabel>Find your movie</SearchLabel>
       <SearchInput placeholder="What do you want to watch?" />
