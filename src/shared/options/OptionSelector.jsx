@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Option, OptionList } from './option-list';
 import { optionType } from './option-type';
+import useClickOutside from '../use-click-outside.effect';
 
 const PositionedOptionList = styled(OptionList)`
   position: absolute;
@@ -26,80 +27,44 @@ const CloseIcon = styled(FontAwesomeIcon)`
   cursor: pointer;
 `;
 
-class OptionSelector extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { showOptions: false };
+const OptionSelector = ({
+  options, onChange, children, showCloseButton, hideChildren, positionRight
+}) => {
+  const [showOptions, setShowOptions] = useState(false);
+  const toggleOptionsShown = () => setShowOptions(prevState => !prevState);
+  const onClickOutside = useCallback(() => setShowOptions(false), []);
+  const listRef = useClickOutside(onClickOutside);
 
-    this.listRef = React.createRef();
-    this.handleClickOutside = this.onClickOutside.bind(this);
-  }
-
-  componentDidMount() {
-    document.addEventListener('mousedown', this.handleClickOutside);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('mousedown', this.handleClickOutside);
-  }
-
-  onClickOutside(event) {
-    if (this.listRef && !this.listRef.current.contains(event.target)) {
-      this.setState({ showOptions: false });
-    }
-  }
-
-  getOptionComponent(option) {
-    if (typeof option === 'string') {
-      return <Option key={option} onClick={() => this.selectOption(option)}>{option}</Option>;
-    }
-    return (
-      <Option
-        key={option.value}
-        onClick={() => this.selectOption(option)}
-      >
-        {option.title}
-      </Option>
-    );
-  }
-
-  toggleShowOptions() {
-    this.setState(({ showOptions }) => ({ showOptions: !showOptions }));
-  }
-
-  selectOption(option) {
-    const { onChange } = this.props;
+  const selectOption = option => {
     onChange(typeof option === 'string' ? option : option.value);
-    this.setState({ showOptions: false });
-  }
+    setShowOptions(false);
+  };
+  const getOptionComponent = option => {
+    if (typeof option === 'string') {
+      return <Option key={option} onClick={() => selectOption(option)}>{option}</Option>;
+    }
+    return <Option key={option.value} onClick={() => selectOption(option)}>{option.title}</Option>;
+  };
+  const showChildren = !hideChildren || !showOptions;
 
-  render() {
-    const {
-      options, children, showCloseButton, hideChildren, positionRight
-    } = this.props;
-    const { showOptions } = this.state;
-    const showChildren = !hideChildren || !showOptions;
-
-    return (
-      <InlineBlock ref={this.listRef}>
-        {showChildren
-        && React.cloneElement(children, { onClick: (() => this.toggleShowOptions()) })}
-        {showOptions
-        && (
-          <PositionedOptionList positionRight={positionRight}>
-            {showCloseButton
-            && (
-              <CloseButton>
-                <CloseIcon icon={faTimes} size="xs" onClick={() => this.toggleShowOptions()} />
-              </CloseButton>
-            )}
-            {options.map(o => this.getOptionComponent(o))}
-          </PositionedOptionList>
-        )}
-      </InlineBlock>
-    );
-  }
-}
+  return (
+    <InlineBlock ref={listRef}>
+      { showChildren && React.cloneElement(children, { onClick: toggleOptionsShown }) }
+      { showOptions
+      && (
+        <PositionedOptionList positionRight={positionRight}>
+          {showCloseButton
+          && (
+          <CloseButton>
+            <CloseIcon icon={faTimes} size="xs" onClick={toggleOptionsShown} />
+          </CloseButton>
+          )}
+          {options.map(getOptionComponent)}
+        </PositionedOptionList>
+      )}
+    </InlineBlock>
+  );
+};
 
 OptionSelector.defaultProps = {
   showCloseButton: false,
