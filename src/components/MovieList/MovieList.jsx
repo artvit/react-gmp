@@ -38,7 +38,7 @@ const filterMovies = (movies, genre, sortBy) => {
 };
 
 const MovieList = ({
-  movies, filterGenres, sortByOptions, onEdit, onDelete
+  movies, filterGenres, sortByOptions, onEdit, onDelete, onOpenDetails
 }) => {
   const [sortBy, setSortBy] = useState(sortByOptions[0].value);
   const [genre, setGenre] = useState(filterGenres[0]);
@@ -58,7 +58,13 @@ const MovieList = ({
       </CountBox>
       <MoviesLayout>
         {filteredMovies.map(m => (
-          <Movie key={m.id} movie={m} onEdit={onEdit} onDelete={onDelete} />
+          <Movie
+            key={m.id}
+            movie={m}
+            onEdit={onEdit}
+            onDelete={onDelete}
+            onOpenDetails={onOpenDetails}
+          />
         ))}
       </MoviesLayout>
     </MoviesBox>
@@ -74,7 +80,8 @@ MovieList.propTypes = {
   filterGenres: PropTypes.arrayOf(PropTypes.string).isRequired,
   sortByOptions: optionArrayType.isRequired,
   onDelete: PropTypes.func.isRequired,
-  onEdit: PropTypes.func.isRequired
+  onEdit: PropTypes.func.isRequired,
+  onOpenDetails: PropTypes.func.isRequired
 };
 
 export default MovieList;

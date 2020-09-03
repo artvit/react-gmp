@@ -36,13 +36,13 @@ Modal.defaultStyles.content = {
   outline: 0
 };
 
-// eslint-disable-next-line react/prefer-stateless-function
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isAddEditOpened: false,
-      isDeleteOpened: false
+      isDeleteOpened: false,
+      isDetailsOpened: false
     };
   }
 
@@ -68,24 +68,43 @@ class App extends React.Component {
     });
   }
 
+  openDetails(movie) {
+    this.setState({
+      isDetailsOpened: true,
+      movieDetails: movie
+    });
+  }
+
+  closeDetails() {
+    this.setState({
+      isDetailsOpened: false
+    });
+  }
+
   render() {
     const {
-      isAddEditOpened, editingMovie, isDeleteOpened, deletingMovie
+      isAddEditOpened, editingMovie,
+      isDeleteOpened, deletingMovie,
+      isDetailsOpened, movieDetails
     } = this.state;
     return (
       <>
         <ErrorBoundary>
-          <Header onAddClick={() => this.openAddEditDialog()} />
-          <MovieDetails
-            movie={mockedMovies[0]}
-            onSearchClick={() => console.log('Search clicked')}
-          />
+          {isDetailsOpened ? (
+            <MovieDetails
+              movie={movieDetails}
+              onSearchClick={() => this.closeDetails()}
+            />
+          ) : (
+            <Header onAddClick={() => this.openAddEditDialog()} />
+          )}
         </ErrorBoundary>
         <ErrorBoundary>
           <MovieList
             movies={mockedMovies}
             onDelete={m => this.openDeleteDialog(m)}
             onEdit={m => this.openAddEditDialog(m)}
+            onOpenDetails={m => this.openDetails(m)}
             sortByOptions={sortByOptions}
             filterGenres={filters}
           />

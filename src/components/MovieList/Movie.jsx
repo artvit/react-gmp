@@ -23,6 +23,7 @@ const Cover = styled.img`
   object-fit: cover;
   width: 100%;
   height: 450px;
+  cursor: pointer;
 `;
 
 const TitleBox = styled.div`
@@ -34,6 +35,7 @@ const TitleBox = styled.div`
 const Title = styled.div`
   flex: 1 0 auto;
   font-size: 20px;
+  cursor: pointer;
   ${textEllipsis}
 `;
 
@@ -71,7 +73,9 @@ const ActionButton = styled.button`
   }
 `;
 
-const Movie = ({ movie, onDelete, onEdit }) => {
+const Movie = ({
+  movie, onDelete, onEdit, onOpenDetails
+}) => {
   const actions = ['Edit', 'Delete'];
   const handleAction = action => {
     if (action === 'Edit') {
@@ -95,9 +99,9 @@ const Movie = ({ movie, onDelete, onEdit }) => {
           </ActionButton>
         </OptionSelector>
       </ActionBox>
-      <Cover src={movie.imgSrc} alt={movie.title} />
+      <Cover src={movie.imgSrc} alt={movie.title} onClick={() => onOpenDetails(movie)} />
       <TitleBox>
-        <Title>{movie.title}</Title>
+        <Title onClick={() => onOpenDetails(movie)}>{movie.title}</Title>
         <Year>{movie.released}</Year>
       </TitleBox>
       <Genre>{movie.genre}</Genre>
@@ -108,7 +112,8 @@ const Movie = ({ movie, onDelete, onEdit }) => {
 Movie.propTypes = {
   movie: movieType.isRequired,
   onDelete: PropTypes.func.isRequired,
-  onEdit: PropTypes.func.isRequired
+  onEdit: PropTypes.func.isRequired,
+  onOpenDetails: PropTypes.func.isRequired
 };
 
 export default Movie;
