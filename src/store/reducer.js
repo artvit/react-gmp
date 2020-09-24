@@ -2,10 +2,12 @@ import ActionTypes from './action-types';
 
 const movieReducer = (state, action) => {
   switch (action.type) {
+    case ActionTypes.OPEN_ADD_DIALOG:
+      return { ...state, isAddEditOpened: true };
     case ActionTypes.OPEN_EDIT_DIALOG:
-      return { ...state, editedMovie: action.payload };
-    case ActionTypes.CLOSE_EDIT_DIALOG:
-      return { ...state, editedMovie: null };
+      return { ...state, editedMovie: action.payload, isAddEditOpened: true };
+    case ActionTypes.CLOSE_ADD_EDIT_DIALOG:
+      return { ...state, editedMovie: null, isAddEditOpened: false };
     case ActionTypes.OPEN_DELETE_DIALOG:
       return { ...state, deletedMovie: action.payload };
     case ActionTypes.CLOSE_DELETE_DIALOG:

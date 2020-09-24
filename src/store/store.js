@@ -18,6 +18,7 @@ const initialState = {
   sortByOptions,
   sortBy: sortByOptions[0].value,
   editedMovie: null,
+  isAddEditOpened: false,
   deletedMovie: null,
   selected: null
 };

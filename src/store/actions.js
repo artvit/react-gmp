@@ -1,12 +1,16 @@
 import ActionTypes from './action-types';
 
+export const openAddDialog = () => ({
+  type: ActionTypes.OPEN_ADD_DIALOG
+});
+
 export const openEditDialog = movie => ({
   type: ActionTypes.OPEN_EDIT_DIALOG,
   payload: movie
 });
 
-export const closeEditDialog = () => ({
-  type: ActionTypes.CLOSE_EDIT_DIALOG
+export const closeAddEditDialog = () => ({
+  type: ActionTypes.CLOSE_ADD_EDIT_DIALOG
 });
 
 export const openDeleteDialog = movie => ({

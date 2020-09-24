@@ -3,6 +3,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import styled from 'styled-components';
+
 import { setFilterGenre, setSortBy } from '../../store';
 import ControlPanel from './ControlPanel/ControlPanel';
 import Movie from './Movie';

@@ -12,7 +12,7 @@ import ErrorBoundary from './shared/ErrorBoundary';
 import {
   closeDeleteDialog,
   closeDetails,
-  closeEditDialog,
+  closeAddEditDialog,
   openDeleteDialog,
   openDetails,
   openEditDialog
@@ -33,16 +33,17 @@ Modal.defaultStyles.content = {
   outline: 0
 };
 
-const selectEditedMovie = state => state.editedMovie;
-const selectSelected = state => state.selected;
-const selectDeleted = state => state.deletedMovie;
+const editedMovieSelector = state => state.editedMovie;
+const selectedSelector = state => state.selected;
+const deletedSelector = state => state.deletedMovie;
+const isAddEditOpenedSelector = state => state.isAddEditOpened;
 
 const App = () => {
   const dispatch = useDispatch();
-  const editedMovie = useSelector(selectEditedMovie);
-  const deletedMovie = useSelector(selectDeleted);
-  const selected = useSelector(selectSelected);
-
+  const editedMovie = useSelector(editedMovieSelector);
+  const deletedMovie = useSelector(deletedSelector);
+  const selected = useSelector(selectedSelector);
+  const isAddEditOpened = useSelector(isAddEditOpenedSelector);
   return (
     <>
       <ErrorBoundary>
@@ -64,11 +65,11 @@ const App = () => {
       </ErrorBoundary>
       <Footer />
 
-      <Modal isOpen={!!editedMovie}>
+      <Modal isOpen={isAddEditOpened}>
         <AddEditDialog
           isEdit={!!editedMovie}
           movie={editedMovie}
-          onClose={() => dispatch(closeEditDialog())}
+          onClose={() => dispatch(closeAddEditDialog())}
           onSave={m => console.log('save', m)}
         />
       </Modal>
