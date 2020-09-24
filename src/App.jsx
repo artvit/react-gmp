@@ -1,25 +1,22 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import Modal from 'react-modal';
+import { useDispatch, useSelector } from 'react-redux';
 
+import AddEditDialog from './components/dialog/AddEditDialog';
+import DeleteDialog from './components/dialog/DeleteDialog';
+import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
+import MovieDetails from './components/MovieDetails/MovieDetails';
 import MovieList from './components/MovieList/MovieList';
 import ErrorBoundary from './shared/ErrorBoundary';
-import Footer from './components/footer/Footer';
-import AddEditDialog from './components/dialog/AddEditDialog';
-import movies from './data/movies';
-import genres from './data/genres';
-import DeleteDialog from './components/dialog/DeleteDialog';
-import MovieDetails from './components/MovieDetails/MovieDetails';
-
-const mockedMovies = movies;
-const filters = ['All', ...genres.slice(0, 4)];
-const sortByOptions = [{
-  value: 'released',
-  title: 'Released Date'
-}, {
-  value: 'title',
-  title: 'Title'
-}];
+import {
+  closeDeleteDialog,
+  closeDetails,
+  closeEditDialog,
+  openDeleteDialog,
+  openDetails,
+  openEditDialog
+} from './store';
 
 Modal.setAppElement('#root');
 Object.assign(Modal.defaultStyles.overlay, {
@@ -36,63 +33,49 @@ Modal.defaultStyles.content = {
   outline: 0
 };
 
-const useOpenCloseDialog = (setOpened, setObject) => {
-  const openDialog = useCallback(obj => {
-    setOpened(true);
-    setObject(obj);
-  }, []);
-  const closeDialog = useCallback(() => setOpened(false), []);
-  return [openDialog, closeDialog];
-};
+const selectEditedMovie = state => state.editedMovie;
+const selectSelected = state => state.selected;
+const selectDeleted = state => state.deletedMovie;
 
 const App = () => {
-  const [isAddEditOpened, setIsAddEditOpened] = useState(false);
-  const [editingMovie, setEditingMovie] = useState();
-  const [isDeleteOpened, setIsDeleteOpened] = useState(false);
-  const [deletingMovie, setDeletingMovie] = useState();
-  const [isDetailsOpened, setIsDetailsOpened] = useState(false);
-  const [movieDetails, setMovieDetails] = useState();
-
-  const [openAddEdit, closeAddEdit] = useOpenCloseDialog(setIsAddEditOpened, setEditingMovie);
-  const [openDelete, closeDelete] = useOpenCloseDialog(setIsDeleteOpened, setDeletingMovie);
-  const [openDetails, closeDetails] = useOpenCloseDialog(setIsDetailsOpened, setMovieDetails);
+  const dispatch = useDispatch();
+  const editedMovie = useSelector(selectEditedMovie);
+  const deletedMovie = useSelector(selectDeleted);
+  const selected = useSelector(selectSelected);
 
   return (
     <>
       <ErrorBoundary>
-        {isDetailsOpened ? (
+        {selected ? (
           <MovieDetails
-            movie={movieDetails}
-            onSearchClick={closeDetails}
+            movie={selected}
+            onSearchClick={() => dispatch(closeDetails())}
           />
         ) : (
-          <Header onAddClick={() => openAddEdit(null)} />
+          <Header onAddClick={() => dispatch(openEditDialog(null))} />
         )}
       </ErrorBoundary>
       <ErrorBoundary>
         <MovieList
-          movies={mockedMovies}
-          onDelete={openDelete}
-          onEdit={openAddEdit}
-          onOpenDetails={openDetails}
-          sortByOptions={sortByOptions}
-          filterGenres={filters}
+          onDelete={movie => dispatch(openDeleteDialog(movie))}
+          onEdit={movie => dispatch(openEditDialog(movie))}
+          onOpenDetails={movie => dispatch(openDetails(movie))}
         />
       </ErrorBoundary>
       <Footer />
 
-      <Modal isOpen={isAddEditOpened}>
+      <Modal isOpen={!!editedMovie}>
         <AddEditDialog
-          isEdit={!!editingMovie}
-          movie={editingMovie}
-          onClose={closeAddEdit}
+          isEdit={!!editedMovie}
+          movie={editedMovie}
+          onClose={() => dispatch(closeEditDialog())}
           onSave={m => console.log('save', m)}
         />
       </Modal>
-      <Modal isOpen={isDeleteOpened}>
+      <Modal isOpen={!!deletedMovie}>
         <DeleteDialog
-          onClose={closeDelete}
-          onConfirm={() => console.log('delete', deletingMovie)}
+          onClose={() => dispatch(closeDeleteDialog())}
+          onConfirm={() => console.log('delete', deletedMovie)}
         />
       </Modal>
     </>
