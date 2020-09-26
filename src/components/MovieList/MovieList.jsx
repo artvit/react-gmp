@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import styled from 'styled-components';
 
-import { setFilterGenre, setSortBy } from '../../store';
+import { loadMovies, setFilterGenre, setSortBy } from '../../store';
 import ControlPanel from './ControlPanel/ControlPanel';
 import Movie from './Movie';
 
@@ -60,6 +60,9 @@ const MovieList = ({ onEdit, onDelete, onOpenDetails }) => {
   const sortByOptions = useSelector(sortByOptionsSelector);
   const sortBy = useSelector(sortBySelector);
   const genre = useSelector(filterGenreSelector);
+  useEffect(() => {
+    dispatch(loadMovies());
+  });
   return (
     <MoviesBox>
       <ControlPanel

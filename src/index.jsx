@@ -4,16 +4,13 @@ import { Provider } from 'react-redux';
 
 import App from './App';
 import './index.scss';
-import movies from './data/movies';
-import { loadMovies, store } from './store';
-
-store.dispatch(loadMovies(movies));
+import { store } from './store';
 
 ReactDOM.render(
-  <Provider store={store}>
-    <React.StrictMode>
+  <React.StrictMode>
+    <Provider store={store}>
       <App />
-    </React.StrictMode>
-  </Provider>,
+    </Provider>
+  </React.StrictMode>,
   document.getElementById('root')
 );

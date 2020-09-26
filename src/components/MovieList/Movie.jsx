@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -30,10 +31,11 @@ const TitleBox = styled.div`
   margin-top: 15px;
   display: flex;
   flex-flow: row nowrap;
+  justify-content: space-between;
 `;
 
 const Title = styled.div`
-  flex: 1 0 auto;
+  flex: 0 1 auto;
   font-size: 20px;
   cursor: pointer;
   ${textEllipsis}
@@ -73,6 +75,8 @@ const ActionButton = styled.button`
   }
 `;
 
+const formatYear = date => moment(date, 'yyyy-mm-dd').get('year');
+
 const Movie = ({
   movie, onDelete, onEdit, onOpenDetails
 }) => {
@@ -99,12 +103,12 @@ const Movie = ({
           </ActionButton>
         </OptionSelector>
       </ActionBox>
-      <Cover src={movie.imgSrc} alt={movie.title} onClick={() => onOpenDetails(movie)} />
+      <Cover src={movie.poster_path} alt={movie.title} onClick={() => onOpenDetails(movie)} />
       <TitleBox>
         <Title onClick={() => onOpenDetails(movie)}>{movie.title}</Title>
-        <Year>{movie.released}</Year>
+        <Year>{formatYear(movie.release_date)}</Year>
       </TitleBox>
-      <Genre>{movie.genre}</Genre>
+      <Genre>{movie.tagline}</Genre>
     </MovieBox>
   );
 };

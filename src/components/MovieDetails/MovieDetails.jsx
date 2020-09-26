@@ -35,14 +35,14 @@ const Cover = styled.img`
 `;
 
 const Title = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  align-items: center;
   font-size: 48px;
 `;
 
+const TitleText = styled.span`
+  margin-right: 20px;
+`;
+
 const Rating = styled.div`
-  margin-left: 20px;
   display: inline-block;
   height: 50px;
   width: 50px;
@@ -72,15 +72,18 @@ const MovieDetails = ({ movie, onSearchClick }) => (
       <SearchIcon icon={faSearch} onClick={onSearchClick} />
     </LogoBlock>
     <DetailsLayout>
-      <Cover src={movie.imgSrc} />
+      <Cover src={movie.poster_path} />
       <DetailsText>
-        <Title>{movie.title} <Rating>{movie.rate}</Rating></Title>
-        <div>{movie.shortDescription}</div>
+        <Title>
+          <TitleText>{movie.title}</TitleText>
+          <Rating>{movie.vote_average}</Rating>
+        </Title>
+        <div>{movie.tagline}</div>
         <YearLengthBlock>
-          <div>{movie.released}</div>
-          <div>{movie.length} min.</div>
+          <div>{movie.release_date}</div>
+          <div>{movie.runtime} min.</div>
         </YearLengthBlock>
-        <div>{movie.description}</div>
+        <div>{movie.overview}</div>
       </DetailsText>
     </DetailsLayout>
   </Background>

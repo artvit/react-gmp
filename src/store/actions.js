@@ -1,3 +1,4 @@
+import { fetchMovies } from '../data/movies';
 import ActionTypes from './action-types';
 
 export const openAddDialog = () => ({
@@ -31,10 +32,15 @@ export const closeDetails = () => ({
   type: ActionTypes.CLOSE_DETAILS
 });
 
-export const loadMovies = movies => ({
-  type: ActionTypes.LOAD_MOVIES,
+export const moviesLoaded = movies => ({
+  type: ActionTypes.MOVIES_LOADED,
   payload: movies
 });
+
+export const loadMovies = () => async dispatch => {
+  const movies = await fetchMovies();
+  dispatch(moviesLoaded(movies));
+};
 
 export const setFilterGenre = genre => ({
   type: ActionTypes.SET_FILTER_GENRE,

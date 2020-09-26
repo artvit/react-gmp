@@ -16,8 +16,8 @@ const movieReducer = (state, action) => {
       return { ...state, selected: action.payload };
     case ActionTypes.CLOSE_DETAILS:
       return { ...state, selected: null };
-    case ActionTypes.LOAD_MOVIES:
-      return { ...state, movies: action.payload };
+    case ActionTypes.MOVIES_LOADED:
+      return { ...state, movies: action.payload.data };
     case ActionTypes.SET_FILTER_GENRE:
       return { ...state, filterGenre: action.payload };
     case ActionTypes.SET_SORT_BY:

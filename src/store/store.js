@@ -1,10 +1,11 @@
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
+import thunk from 'redux-thunk';
 import genres from '../data/genres';
 import movieReducer from './reducer';
 
 const filters = ['All', ...genres.slice(0, 4)];
 const sortByOptions = [{
-  value: 'released',
+  value: 'release_date',
   title: 'Released Date'
 }, {
   value: 'title',
@@ -23,6 +24,6 @@ const initialState = {
   selected: null
 };
 
-const store = createStore(movieReducer, initialState);
+const store = createStore(movieReducer, initialState, applyMiddleware(thunk));
 
 export default store;

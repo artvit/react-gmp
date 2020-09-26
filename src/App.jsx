@@ -15,7 +15,7 @@ import {
   closeAddEditDialog,
   openDeleteDialog,
   openDetails,
-  openEditDialog
+  openEditDialog, openAddDialog
 } from './store';
 
 Modal.setAppElement('#root');
@@ -53,7 +53,7 @@ const App = () => {
             onSearchClick={() => dispatch(closeDetails())}
           />
         ) : (
-          <Header onAddClick={() => dispatch(openEditDialog(null))} />
+          <Header onAddClick={() => dispatch(openAddDialog())} />
         )}
       </ErrorBoundary>
       <ErrorBoundary>
