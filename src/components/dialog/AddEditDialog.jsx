@@ -1,3 +1,4 @@
+import { useFormik } from 'formik';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Input from '../../shared/Input';
@@ -8,21 +9,77 @@ import genres from '../../data/genres';
 
 const AddEditDialog = ({
   isEdit, onClose, onSave, movie
-}) => (
-  <Dialog title={isEdit ? 'Edit movie' : 'Add movie'} onClose={onClose}>
-    {isEdit && <Input title="Movie ID" value={movie.id} />}
-    <Input title="Title" placeholder="Title here" />
-    <Input title="Release Date" placeholder="Select Date" type="date" />
-    <Input title="Movie URL" placeholder="Movie URL here" />
-    <Input title="Genre" placeholder="Select Genre" type="select" options={genres} />
-    <Input title="Overview" placeholder="Overview here" />
-    <Input title="Runtime" placeholder="Runtime here" />
-    <BottomButtons>
-      <Button>Reset</Button>
-      <PrimaryButton onClick={onSave}>Submit</PrimaryButton>
-    </BottomButtons>
-  </Dialog>
-);
+}) => {
+  const reset = () => console.log('reset');
+  const formik = useFormik({
+    initialValues: {
+      id: '',
+      title: '',
+      released: '',
+      runtime: '',
+      genre: '',
+      overview: ''
+    },
+    onSubmit: v => onSave(v)
+  });
+  return (
+    <Dialog title={isEdit ? 'Edit movie' : 'Add movie'} onClose={onClose}>
+      <form onSubmit={formik.handleSubmit}>
+        {isEdit
+        && <Input title="Movie ID" value={formik.values.id} onChange={formik.handleChange} />}
+        <Input
+          name="title"
+          title="Title"
+          placeholder="Title here"
+          value={formik.values.title}
+          onChange={formik.handleChange}
+        />
+        <Input
+          name="released"
+          title="Release Date"
+          placeholder="Select Date"
+          type="date"
+          value={formik.values.released}
+          onChange={formik.handleChange}
+        />
+        <Input
+          name="url"
+          title="Movie URL"
+          placeholder="Movie URL here"
+          value={formik.values.url}
+          onChange={formik.handleChange}
+        />
+        <Input
+          name="genre"
+          title="Genre"
+          placeholder="Select Genre"
+          type="select"
+          options={genres}
+          value={formik.values.genre}
+          onChange={formik.handleChange}
+        />
+        <Input
+          name="overview"
+          title="Overview"
+          placeholder="Overview here"
+          value={formik.values.overview}
+          onChange={formik.handleChange}
+        />
+        <Input
+          name="runtime"
+          title="Runtime"
+          placeholder="Runtime here"
+          value={formik.values.runtime}
+          onChange={formik.handleChange}
+        />
+        <BottomButtons>
+          <Button type="button" onClick={reset}>Reset</Button>
+          <PrimaryButton type="submit">Submit</PrimaryButton>
+        </BottomButtons>
+      </form>
+    </Dialog>
+  );
+};
 
 AddEditDialog.defaultProps = {
   movie: {}

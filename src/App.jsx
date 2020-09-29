@@ -15,7 +15,7 @@ import {
   closeAddEditDialog,
   openDeleteDialog,
   openDetails,
-  openEditDialog, openAddDialog
+  openEditDialog, openAddDialog, deleteMovie
 } from './store';
 
 Modal.setAppElement('#root');
@@ -76,7 +76,7 @@ const App = () => {
       <Modal isOpen={!!deletedMovie}>
         <DeleteDialog
           onClose={() => dispatch(closeDeleteDialog())}
-          onConfirm={() => console.log('delete', deletedMovie)}
+          onConfirm={() => dispatch(deleteMovie(deleteMovie.id))}
         />
       </Modal>
     </>

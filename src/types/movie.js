@@ -7,7 +7,7 @@ const movieType = PropTypes.shape({
   overview: PropTypes.string,
   poster_path: PropTypes.string.isRequired,
   genres: PropTypes.arrayOf(PropTypes.string).isRequired,
-  release_date: PropTypes.number.isRequired,
+  release_date: PropTypes.string.isRequired,
   vote_average: PropTypes.number.isRequired,
   runtime: PropTypes.number.isRequired
 });

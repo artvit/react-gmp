@@ -1,4 +1,4 @@
-import { fetchMovies } from '../data/movies';
+import { fetchMovies, removeMovie } from '../data/movies';
 import ActionTypes from './action-types';
 
 export const openAddDialog = () => ({
@@ -32,14 +32,42 @@ export const closeDetails = () => ({
   type: ActionTypes.CLOSE_DETAILS
 });
 
-export const moviesLoaded = movies => ({
-  type: ActionTypes.MOVIES_LOADED,
+export const loadMoviesSuccess = movies => ({
+  type: ActionTypes.LOAD_MOVIES_SUCCESS,
   payload: movies
 });
 
+export const loadMoviesError = error => ({
+  type: ActionTypes.LOAD_MOVIES_ERROR,
+  payload: error
+});
+
 export const loadMovies = () => async dispatch => {
-  const movies = await fetchMovies();
-  dispatch(moviesLoaded(movies));
+  try {
+    const movies = await fetchMovies();
+    dispatch(loadMoviesSuccess(movies));
+  } catch (e) {
+    dispatch(loadMoviesError(e));
+  }
+};
+
+export const deleteMovieSuccess = movies => ({
+  type: ActionTypes.LOAD_MOVIES_SUCCESS,
+  payload: movies
+});
+
+export const deleteMovieError = error => ({
+  type: ActionTypes.LOAD_MOVIES_ERROR,
+  payload: error
+});
+
+export const deleteMovie = id => async dispatch => {
+  try {
+    const movies = await removeMovie(id);
+    dispatch(deleteMovieSuccess(movies));
+  } catch (e) {
+    dispatch(deleteMovieError(e));
+  }
 };
 
 export const setFilterGenre = genre => ({

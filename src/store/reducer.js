@@ -16,12 +16,14 @@ const movieReducer = (state, action) => {
       return { ...state, selected: action.payload };
     case ActionTypes.CLOSE_DETAILS:
       return { ...state, selected: null };
-    case ActionTypes.MOVIES_LOADED:
+    case ActionTypes.LOAD_MOVIES_SUCCESS:
       return { ...state, movies: action.payload.data };
     case ActionTypes.SET_FILTER_GENRE:
       return { ...state, filterGenre: action.payload };
     case ActionTypes.SET_SORT_BY:
       return { ...state, sortBy: action.payload };
+    case ActionTypes.DELETE_MOVIE_SUCCESS:
+      return { ...state, deletedMovie: null };
     default:
       return state;
   }
