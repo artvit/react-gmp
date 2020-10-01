@@ -7,21 +7,33 @@ import { BottomButtons, Button, PrimaryButton } from '../../shared/Dialog/dialog
 import movieType from '../../types/movie';
 import genres from '../../data/genres';
 
+const defaultInitialValues = {
+  id: '',
+  title: '',
+  released: '',
+  runtime: '',
+  genre: [],
+  overview: ''
+};
+
+const movieToForm = movie => ({
+  id: movie.id,
+  title: movie.title,
+  overview: movie.overview,
+  released: movie.released,
+  runtime: movie.runtime,
+  genre: movie.genres
+});
+
 const AddEditDialog = ({
   isEdit, onClose, onSave, movie
 }) => {
-  const reset = () => console.log('reset');
+  const initialValues = movie ? movieToForm(movie) : defaultInitialValues;
   const formik = useFormik({
-    initialValues: {
-      id: '',
-      title: '',
-      released: '',
-      runtime: '',
-      genre: '',
-      overview: ''
-    },
+    initialValues,
     onSubmit: v => onSave(v)
   });
+  const reset = () => formik.resetForm();
   return (
     <Dialog title={isEdit ? 'Edit movie' : 'Add movie'} onClose={onClose}>
       <form onSubmit={formik.handleSubmit}>
@@ -53,7 +65,7 @@ const AddEditDialog = ({
           name="genre"
           title="Genre"
           placeholder="Select Genre"
-          type="select"
+          type="multiselect"
           options={genres}
           value={formik.values.genre}
           onChange={formik.setFieldValue}

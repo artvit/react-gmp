@@ -4,7 +4,7 @@ const SERVER_URL = 'http://localhost:4000';
 const MOVIES_PATH = '/movies';
 
 export const fetchMovies = async () => {
-  const response = await axios.get(`${SERVER_URL}${MOVIES_PATH}?limit=1000`);
+  const response = await axios.get(`${SERVER_URL}${MOVIES_PATH}?limit=100`);
   return response.data;
 };
 

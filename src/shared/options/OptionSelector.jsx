@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faCheckSquare, faSquare, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Option, OptionList } from './option-list';
 import { optionType } from './option-type';
@@ -28,7 +28,7 @@ const CloseIcon = styled(FontAwesomeIcon)`
 `;
 
 const OptionSelector = ({
-  options, onClick, children, showCloseButton, hideChildren, positionRight
+  options, onClick, children, showCloseButton, hideChildren, positionRight, multi
 }) => {
   const [showOptions, setShowOptions] = useState(false);
   const toggleOptionsShown = () => setShowOptions(prevState => !prevState);
@@ -41,9 +41,18 @@ const OptionSelector = ({
   };
   const getOptionComponent = option => {
     if (typeof option === 'string') {
-      return <Option key={option} onClick={() => selectOption(option)}>{option}</Option>;
+      return (
+        <Option key={option} onClick={() => selectOption(option)}>
+          {option}
+        </Option>
+      );
     }
-    return <Option key={option.value} onClick={() => selectOption(option)}>{option.title}</Option>;
+    return (
+      <Option key={option.value} onClick={() => selectOption(option)}>
+        {multi
+        && <FontAwesomeIcon icon={option.selected ? faCheckSquare : faSquare} />} {option.title}
+      </Option>
+    );
   };
   const showChildren = !hideChildren || !showOptions;
 
@@ -69,14 +78,16 @@ const OptionSelector = ({
 OptionSelector.defaultProps = {
   showCloseButton: false,
   hideChildren: false,
-  positionRight: false
+  positionRight: false,
+  multi: false
 };
 OptionSelector.propTypes = {
   onClick: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(optionType).isRequired,
   showCloseButton: PropTypes.bool,
   hideChildren: PropTypes.bool,
-  positionRight: PropTypes.bool
+  positionRight: PropTypes.bool,
+  multi: PropTypes.bool
 };
 
 export default OptionSelector;

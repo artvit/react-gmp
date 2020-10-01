@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import InputControl from './InputControl';
+import MultiselectInputControl from './MultiselectInputControl';
+import ReadonlyInputControl from './ReadonlyInputControl';
 import SelectInputControl from './SelectInputControl';
 
 const InputBlock = styled.div`
@@ -14,16 +16,12 @@ const InputTitle = styled.div`
   margin-bottom: 12px;
 `;
 
-const TextValue = styled.div`
-  font-size: 16px;
-`;
-
 const Input = ({
   title, type, placeholder, value, options, onChange, name
 }) => {
   let inputControl;
   if (type === 'readonly') {
-    inputControl = <TextValue>{value}</TextValue>;
+    inputControl = <ReadonlyInputControl>{value}</ReadonlyInputControl>;
   } else if (type === 'select') {
     inputControl = (
       <SelectInputControl
@@ -31,7 +29,17 @@ const Input = ({
         placeholder={placeholder}
         value={value}
         options={options}
-        onClick={v => onChange(name, v)}
+        onChange={v => onChange(name, v)}
+      />
+    );
+  } else if (type === 'multiselect') {
+    inputControl = (
+      <MultiselectInputControl
+        name={name}
+        placeholder={placeholder}
+        value={value}
+        options={options}
+        onChange={v => onChange(name, v)}
       />
     );
   } else {
@@ -64,9 +72,13 @@ Input.defaultProps = {
 Input.propTypes = {
   name: PropTypes.string,
   title: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(['text', 'date', 'select', 'readonly']),
+  type: PropTypes.oneOf(['text', 'date', 'select', 'multiselect', 'readonly']),
   placeholder: PropTypes.string,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.arrayOf(PropTypes.string)
+  ]),
   options: PropTypes.arrayOf(PropTypes.any),
   onChange: PropTypes.func
 };

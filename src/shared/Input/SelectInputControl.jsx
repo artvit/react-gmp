@@ -10,28 +10,33 @@ const StyledOptionSelector = styled(OptionSelector)`
 `;
 
 const SelectInputControl = ({
-  value, placeholder, options, onChange
-}) => (
-  <StyledOptionSelector onClick={onChange} options={options}>
-    <InputControl
-      value={value}
-      placeholder={placeholder}
-      readOnly
-    />
-  </StyledOptionSelector>
-);
+  value, placeholder, options, onChange, multi
+}) => {
+  const displayValue = Array.isArray(value) ? value.join(', ') : value;
+  return (
+    <StyledOptionSelector onClick={onChange} options={options} multi={multi}>
+      <InputControl
+        value={displayValue}
+        placeholder={placeholder}
+        readOnly
+      />
+    </StyledOptionSelector>
+  );
+};
 
 SelectInputControl.defaultProps = {
   value: '',
   placeholder: 'Select...',
   options: [],
+  multi: false,
   onChange: () => {}
 };
 
 SelectInputControl.propTypes = {
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
   placeholder: PropTypes.string,
   options: PropTypes.arrayOf(optionType),
+  multi: PropTypes.bool,
   onChange: PropTypes.func
 };
 
