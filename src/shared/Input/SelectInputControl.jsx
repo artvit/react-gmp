@@ -12,7 +12,7 @@ const StyledOptionSelector = styled(OptionSelector)`
 const SelectInputControl = ({
   value, placeholder, options, onChange
 }) => (
-  <StyledOptionSelector onChange={onChange} options={options}>
+  <StyledOptionSelector onClick={onChange} options={options}>
     <InputControl
       value={value}
       placeholder={placeholder}

@@ -19,7 +19,7 @@ const TextValue = styled.div`
 `;
 
 const Input = ({
-  title, type, placeholder, value, options, onChange
+  title, type, placeholder, value, options, onChange, name
 }) => {
   let inputControl;
   if (type === 'readonly') {
@@ -27,10 +27,11 @@ const Input = ({
   } else if (type === 'select') {
     inputControl = (
       <SelectInputControl
+        name={name}
         placeholder={placeholder}
         value={value}
         options={options}
-        onChange={onChange}
+        onClick={v => onChange(name, v)}
       />
     );
   } else {
@@ -38,8 +39,8 @@ const Input = ({
       <InputControl
         type={type}
         placeholder={placeholder}
-        defaultValue={value}
-        onChange={onChange}
+        value={value}
+        onChange={evt => onChange(name, evt.target.value)}
       />
     );
   }
@@ -52,6 +53,7 @@ const Input = ({
 };
 
 Input.defaultProps = {
+  name: '',
   type: 'text',
   placeholder: '',
   value: '',
@@ -60,6 +62,7 @@ Input.defaultProps = {
 };
 
 Input.propTypes = {
+  name: PropTypes.string,
   title: PropTypes.string.isRequired,
   type: PropTypes.oneOf(['text', 'date', 'select', 'readonly']),
   placeholder: PropTypes.string,

@@ -26,13 +26,13 @@ const AddEditDialog = ({
     <Dialog title={isEdit ? 'Edit movie' : 'Add movie'} onClose={onClose}>
       <form onSubmit={formik.handleSubmit}>
         {isEdit
-        && <Input title="Movie ID" value={formik.values.id} onChange={formik.handleChange} />}
+        && <Input title="Movie ID" value={formik.values.id} onChange={formik.setFieldValue} />}
         <Input
           name="title"
           title="Title"
           placeholder="Title here"
           value={formik.values.title}
-          onChange={formik.handleChange}
+          onChange={formik.setFieldValue}
         />
         <Input
           name="released"
@@ -40,14 +40,14 @@ const AddEditDialog = ({
           placeholder="Select Date"
           type="date"
           value={formik.values.released}
-          onChange={formik.handleChange}
+          onChange={formik.setFieldValue}
         />
         <Input
           name="url"
           title="Movie URL"
           placeholder="Movie URL here"
           value={formik.values.url}
-          onChange={formik.handleChange}
+          onChange={formik.setFieldValue}
         />
         <Input
           name="genre"
@@ -56,21 +56,21 @@ const AddEditDialog = ({
           type="select"
           options={genres}
           value={formik.values.genre}
-          onChange={formik.handleChange}
+          onChange={formik.setFieldValue}
         />
         <Input
           name="overview"
           title="Overview"
           placeholder="Overview here"
           value={formik.values.overview}
-          onChange={formik.handleChange}
+          onChange={formik.setFieldValue}
         />
         <Input
           name="runtime"
           title="Runtime"
           placeholder="Runtime here"
           value={formik.values.runtime}
-          onChange={formik.handleChange}
+          onChange={formik.setFieldValue}
         />
         <BottomButtons>
           <Button type="button" onClick={reset}>Reset</Button>

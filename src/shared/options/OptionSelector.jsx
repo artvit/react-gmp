@@ -28,7 +28,7 @@ const CloseIcon = styled(FontAwesomeIcon)`
 `;
 
 const OptionSelector = ({
-  options, onChange, children, showCloseButton, hideChildren, positionRight
+  options, onClick, children, showCloseButton, hideChildren, positionRight
 }) => {
   const [showOptions, setShowOptions] = useState(false);
   const toggleOptionsShown = () => setShowOptions(prevState => !prevState);
@@ -36,7 +36,7 @@ const OptionSelector = ({
   const listRef = useClickOutside(onClickOutside);
 
   const selectOption = option => {
-    onChange(typeof option === 'string' ? option : option.value);
+    onClick(typeof option === 'string' ? option : option.value);
     setShowOptions(false);
   };
   const getOptionComponent = option => {
@@ -72,7 +72,7 @@ OptionSelector.defaultProps = {
   positionRight: false
 };
 OptionSelector.propTypes = {
-  onChange: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(optionType).isRequired,
   showCloseButton: PropTypes.bool,
   hideChildren: PropTypes.bool,

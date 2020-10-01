@@ -9,7 +9,7 @@ const SortBySelect = ({ onChange, selected, options }) => {
   return (
     <div>
       <Label>Sort by</Label>
-      <OptionSelector onChange={onChange} options={options}>
+      <OptionSelector onClick={onChange} options={options}>
         <Button>{selectedItem.title}</Button>
       </OptionSelector>
     </div>

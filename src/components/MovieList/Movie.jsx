@@ -92,7 +92,7 @@ const Movie = ({
     <MovieBox>
       <ActionBox>
         <OptionSelector
-          onChange={handleAction}
+          onClick={handleAction}
           options={actions}
           hideChildren
           showCloseButton
