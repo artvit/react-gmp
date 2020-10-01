@@ -12,6 +12,7 @@ const defaultInitialValues = {
   title: '',
   released: '',
   runtime: '',
+  url: '',
   genre: [],
   overview: ''
 };
@@ -20,9 +21,20 @@ const movieToForm = movie => ({
   id: movie.id,
   title: movie.title,
   overview: movie.overview,
-  released: movie.released,
+  released: movie.release_date,
+  url: movie.poster_path,
   runtime: movie.runtime,
   genre: movie.genres
+});
+
+const formToMovie = form => ({
+  id: form.id,
+  title: form.title,
+  overview: form.overview,
+  release_date: form.released,
+  poster_path: form.url,
+  runtime: +form.runtime,
+  genres: form.genre
 });
 
 const AddEditDialog = ({
@@ -31,7 +43,7 @@ const AddEditDialog = ({
   const initialValues = movie ? movieToForm(movie) : defaultInitialValues;
   const formik = useFormik({
     initialValues,
-    onSubmit: v => onSave(v)
+    onSubmit: v => onSave(formToMovie(v))
   });
   const reset = () => formik.resetForm();
   return (

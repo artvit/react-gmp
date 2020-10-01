@@ -10,12 +10,9 @@ const MultiselectInputControl = ({
     title: o,
     selected: value.includes(o)
   }));
-  const toggleOption = optionValue => {
+  const optionsChange = optionValue => {
     const option = extendedOptions.find(o => o.value === optionValue);
     option.selected = !option.selected;
-  };
-  const optionsChange = optionValue => {
-    toggleOption(optionValue);
     return extendedOptions.filter(o => o.selected).map(o => o.value);
   };
   return (
@@ -39,12 +36,8 @@ MultiselectInputControl.defaultProps = {
 MultiselectInputControl.propTypes = {
   placeholder: PropTypes.string,
   value: PropTypes.arrayOf(PropTypes.string),
-  options: PropTypes.arrayOf(PropTypes.any),
+  options: PropTypes.arrayOf(PropTypes.string),
   onChange: PropTypes.func
-};
-
-MultiselectInputControl.propTypes = {
-
 };
 
 export default MultiselectInputControl;
