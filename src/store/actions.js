@@ -39,7 +39,7 @@ export const loadMoviesSuccess = movies => ({
 
 export const loadMoviesError = error => ({
   type: ActionTypes.LOAD_MOVIES_ERROR,
-  payload: error
+  error
 });
 
 export const loadMovies = searchText => async dispatch => {
@@ -68,7 +68,7 @@ export const deleteMovieSuccess = movies => ({
 
 export const deleteMovieError = error => ({
   type: ActionTypes.DELETE_MOVIE_ERROR,
-  payload: error
+  error
 });
 
 export const deleteMovie = movie => async dispatch => {
@@ -87,7 +87,7 @@ export const createMovieSuccess = createdMovie => ({
 
 export const createMovieError = error => ({
   type: ActionTypes.CREATE_MOVIE_ERROR,
-  payload: error
+  error
 });
 
 export const createMovie = movie => async dispatch => {
@@ -106,7 +106,7 @@ export const editMovieSuccess = updatedMovie => ({
 
 export const editMovieError = error => ({
   type: ActionTypes.EDIT_MOVIE_ERROR,
-  payload: error
+  error
 });
 
 export const editMovie = movie => async dispatch => {
