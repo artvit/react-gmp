@@ -1,4 +1,4 @@
-import { fetchMovies, removeMovie } from '../data/movies';
+import MoviesAPI from '../data/movies';
 import ActionTypes from './action-types';
 
 export const openAddDialog = () => ({
@@ -44,29 +44,10 @@ export const loadMoviesError = error => ({
 
 export const loadMovies = () => async dispatch => {
   try {
-    const movies = await fetchMovies();
+    const movies = await MoviesAPI.fetchMovies();
     dispatch(loadMoviesSuccess(movies));
   } catch (e) {
     dispatch(loadMoviesError(e));
-  }
-};
-
-export const deleteMovieSuccess = movies => ({
-  type: ActionTypes.LOAD_MOVIES_SUCCESS,
-  payload: movies
-});
-
-export const deleteMovieError = error => ({
-  type: ActionTypes.LOAD_MOVIES_ERROR,
-  payload: error
-});
-
-export const deleteMovie = id => async dispatch => {
-  try {
-    const movies = await removeMovie(id);
-    dispatch(deleteMovieSuccess(movies));
-  } catch (e) {
-    dispatch(deleteMovieError(e));
   }
 };
 
@@ -79,3 +60,60 @@ export const setSortBy = sortBy => ({
   type: ActionTypes.SET_SORT_BY,
   payload: sortBy
 });
+
+export const deleteMovieSuccess = movies => ({
+  type: ActionTypes.DELETE_MOVIE_SUCCESS,
+  payload: movies
+});
+
+export const deleteMovieError = error => ({
+  type: ActionTypes.DELETE_MOVIE_ERROR,
+  payload: error
+});
+
+export const deleteMovie = id => async dispatch => {
+  try {
+    const movies = await MoviesAPI.removeMovie(id);
+    dispatch(deleteMovieSuccess(movies));
+  } catch (e) {
+    dispatch(deleteMovieError(e));
+  }
+};
+
+export const createMovieSuccess = createdMovie => ({
+  type: ActionTypes.CREATE_MOVIE_SUCCESS,
+  payload: createdMovie
+});
+
+export const createMovieError = error => ({
+  type: ActionTypes.CREATE_MOVIE_ERROR,
+  payload: error
+});
+
+export const createMovie = movie => async dispatch => {
+  try {
+    const createdMovie = await MoviesAPI.createMovie(movie);
+    dispatch(createMovieSuccess(createdMovie));
+  } catch (e) {
+    dispatch(createMovieError(e));
+  }
+};
+
+export const editMovieSuccess = updatedMovie => ({
+  type: ActionTypes.EDIT_MOVIE_SUCCESS,
+  payload: updatedMovie
+});
+
+export const editMovieError = error => ({
+  type: ActionTypes.EDIT_MOVIE_ERROR,
+  payload: error
+});
+
+export const editMovie = movie => async dispatch => {
+  try {
+    const updatedMovie = await MoviesAPI.updateMovie(movie);
+    dispatch(editMovieSuccess(updatedMovie));
+  } catch (e) {
+    dispatch(editMovieError(e));
+  }
+};

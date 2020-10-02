@@ -24,6 +24,19 @@ const movieReducer = (state, action) => {
       return { ...state, sortBy: action.payload };
     case ActionTypes.DELETE_MOVIE_SUCCESS:
       return { ...state, deletedMovie: null };
+    case ActionTypes.EDIT_MOVIE_SUCCESS:
+      return {
+        ...state,
+        editedMovie: null,
+        isAddEditOpened: false,
+        selected: action.payload
+      };
+    case ActionTypes.CREATE_MOVIE_SUCCESS:
+      return {
+        ...state,
+        isAddEditOpened: false,
+        selected: action.payload
+      };
     default:
       return state;
   }

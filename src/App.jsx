@@ -10,12 +10,16 @@ import MovieDetails from './components/MovieDetails/MovieDetails';
 import MovieList from './components/MovieList/MovieList';
 import ErrorBoundary from './shared/ErrorBoundary';
 import {
+  closeAddEditDialog,
   closeDeleteDialog,
   closeDetails,
-  closeAddEditDialog,
+  createMovie,
+  deleteMovie,
+  editMovie,
+  openAddDialog,
   openDeleteDialog,
   openDetails,
-  openEditDialog, openAddDialog, deleteMovie
+  openEditDialog
 } from './store';
 
 Modal.setAppElement('#root');
@@ -44,6 +48,7 @@ const App = () => {
   const deletedMovie = useSelector(deletedSelector);
   const selected = useSelector(selectedSelector);
   const isAddEditOpened = useSelector(isAddEditOpenedSelector);
+  const saveMovie = (movie, isEdit) => dispatch(isEdit ? editMovie(movie) : createMovie(movie));
   return (
     <>
       <ErrorBoundary>
@@ -70,7 +75,7 @@ const App = () => {
           isEdit={!!editedMovie}
           movie={editedMovie}
           onClose={() => dispatch(closeAddEditDialog())}
-          onSave={m => console.log('save', m)}
+          onSave={m => saveMovie(m, !!editedMovie)}
         />
       </Modal>
       <Modal isOpen={!!deletedMovie}>
