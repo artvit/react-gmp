@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Logo from '../../shared/layout/Logo';
@@ -69,21 +69,35 @@ const SearchButton = styled(Button)`
   color: white;
 `;
 
-const Header = ({ onAddClick }) => (
-  <Background>
-    <LogoBlock>
-      <Logo size="20px" />
-      <AddButton onClick={onAddClick}>+ Add movie</AddButton>
-    </LogoBlock>
-    <SearchBlock>
-      <SearchLabel>Find your movie</SearchLabel>
-      <SearchInput placeholder="What do you want to watch?" />
-      <SearchButton>Search</SearchButton>
-    </SearchBlock>
-  </Background>
-);
+const Header = ({ onAddClick, onSearch }) => {
+  const [searchText, setSearchText] = useState('');
+  const triggerSearch = () => onSearch(searchText);
+  const onEnterPressed = event => {
+    if (event.keyCode === 13) {
+      triggerSearch();
+    }
+  };
+  return (
+    <Background>
+      <LogoBlock>
+        <Logo size="20px" />
+        <AddButton onClick={onAddClick}>+ Add movie</AddButton>
+      </LogoBlock>
+      <SearchBlock>
+        <SearchLabel>Find your movie</SearchLabel>
+        <SearchInput
+          placeholder="What do you want to watch?"
+          onKeyDown={onEnterPressed}
+          onChange={e => setSearchText(e.target.value)}
+        />
+        <SearchButton onClick={triggerSearch}>Search</SearchButton>
+      </SearchBlock>
+    </Background>
+  );
+};
 
 Header.propTypes = {
+  onSearch: PropTypes.func.isRequired,
   onAddClick: PropTypes.func.isRequired
 };
 

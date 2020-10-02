@@ -42,9 +42,9 @@ export const loadMoviesError = error => ({
   payload: error
 });
 
-export const loadMovies = () => async dispatch => {
+export const loadMovies = searchText => async dispatch => {
   try {
-    const movies = await MoviesAPI.fetchMovies();
+    const movies = await MoviesAPI.fetchMovies(searchText);
     dispatch(loadMoviesSuccess(movies));
   } catch (e) {
     dispatch(loadMoviesError(e));

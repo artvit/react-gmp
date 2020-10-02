@@ -15,7 +15,7 @@ import {
   closeDetails,
   createMovie,
   deleteMovie,
-  editMovie,
+  editMovie, loadMovies,
   openAddDialog,
   openDeleteDialog,
   openDetails,
@@ -58,7 +58,10 @@ const App = () => {
             onSearchClick={() => dispatch(closeDetails())}
           />
         ) : (
-          <Header onAddClick={() => dispatch(openAddDialog())} />
+          <Header
+            onAddClick={() => dispatch(openAddDialog())}
+            onSearch={searchText => dispatch(loadMovies(searchText))}
+          />
         )}
       </ErrorBoundary>
       <ErrorBoundary>

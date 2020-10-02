@@ -3,8 +3,8 @@ import axios from 'axios';
 const SERVER_URL = 'http://localhost:4000';
 const MOVIES_PATH = '/movies';
 
-const fetchMovies = async () => {
-  const response = await axios.get(`${SERVER_URL}${MOVIES_PATH}?limit=100`);
+const fetchMovies = async searchText => {
+  const response = await axios.get(`${SERVER_URL}${MOVIES_PATH}?limit=1000&search=${searchText}&searchBy=title`);
   return response.data;
 };
 
