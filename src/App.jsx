@@ -15,7 +15,8 @@ import {
   closeDetails,
   createMovie,
   deleteMovie,
-  editMovie, loadMovies,
+  editMovie,
+  loadMovies,
   openAddDialog,
   openDeleteDialog,
   openDetails,
@@ -84,7 +85,7 @@ const App = () => {
       <Modal isOpen={!!deletedMovie}>
         <DeleteDialog
           onClose={() => dispatch(closeDeleteDialog())}
-          onConfirm={() => dispatch(deleteMovie(deleteMovie.id))}
+          onConfirm={() => dispatch(deleteMovie(deletedMovie))}
         />
       </Modal>
     </>

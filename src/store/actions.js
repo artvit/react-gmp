@@ -71,9 +71,9 @@ export const deleteMovieError = error => ({
   payload: error
 });
 
-export const deleteMovie = id => async dispatch => {
+export const deleteMovie = movie => async dispatch => {
   try {
-    const movies = await MoviesAPI.removeMovie(id);
+    const movies = await MoviesAPI.removeMovie(movie.id);
     dispatch(deleteMovieSuccess(movies));
   } catch (e) {
     dispatch(deleteMovieError(e));

@@ -14,7 +14,7 @@ const createMovie = async movie => {
 };
 
 const updateMovie = async movie => {
-  const response = await axios.put(`${SERVER_URL}${MOVIES_PATH}/${movie.id}`, movie);
+  const response = await axios.put(`${SERVER_URL}${MOVIES_PATH}`, movie);
   return response.data;
 };
 

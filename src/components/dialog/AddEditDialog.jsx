@@ -27,15 +27,20 @@ const movieToForm = movie => ({
   genre: movie.genres
 });
 
-const formToMovie = form => ({
-  id: form.id,
-  title: form.title,
-  overview: form.overview,
-  release_date: form.released,
-  poster_path: form.url,
-  runtime: +form.runtime,
-  genres: form.genre
-});
+const formToMovie = form => {
+  const movie = {
+    title: form.title,
+    overview: form.overview,
+    release_date: form.released,
+    poster_path: form.url,
+    runtime: +form.runtime,
+    genres: form.genre
+  };
+  if (form.id) {
+    movie.id = form.id;
+  }
+  return movie;
+};
 
 const AddEditDialog = ({
   isEdit, onClose, onSave, movie
