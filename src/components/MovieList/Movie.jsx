@@ -1,11 +1,11 @@
-import moment from 'moment';
+import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
-import PropTypes from 'prop-types';
-import movieType from '../../types/movie';
+import DateFormatters from '../../shared/date-formatters';
 import OptionSelector from '../../shared/options/OptionSelector';
+import movieType from '../../types/movie';
 
 const MovieBox = styled.div`
   width: 300px;
@@ -75,8 +75,6 @@ const ActionButton = styled.button`
   }
 `;
 
-const formatYear = date => moment(date, 'yyyy-mm-dd').get('year');
-
 const Movie = ({
   movie, onDelete, onEdit, onOpenDetails
 }) => {
@@ -106,7 +104,7 @@ const Movie = ({
       <Cover src={movie.poster_path} alt={movie.title} onClick={() => onOpenDetails(movie)} />
       <TitleBox>
         <Title onClick={() => onOpenDetails(movie)}>{movie.title}</Title>
-        <Year>{formatYear(movie.release_date)}</Year>
+        <Year>{DateFormatters.formatYear(movie.release_date)}</Year>
       </TitleBox>
       <Genre>{movie.tagline}</Genre>
     </MovieBox>

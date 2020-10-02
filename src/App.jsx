@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import AddEditDialog from './components/dialog/AddEditDialog';
 import DeleteDialog from './components/dialog/DeleteDialog';
 import Footer from './components/footer/Footer';
-import Header from './components/header/Header';
+import Header from './components/Header/Header';
 import MovieDetails from './components/MovieDetails/MovieDetails';
 import MovieList from './components/MovieList/MovieList';
 import ErrorBoundary from './shared/ErrorBoundary';
