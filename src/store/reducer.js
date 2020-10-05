@@ -23,19 +23,37 @@ const movieReducer = (state, action) => {
     case ActionTypes.SET_SORT_BY:
       return { ...state, sortBy: action.payload };
     case ActionTypes.DELETE_MOVIE_SUCCESS:
-      return { ...state, deletedMovie: null };
+      return {
+        ...state,
+        deletedMovie: null,
+        resultDialogOpened: true,
+        success: true,
+        resultMessage: 'The movie has been removed successfully'
+      };
     case ActionTypes.EDIT_MOVIE_SUCCESS:
       return {
         ...state,
         editedMovie: null,
         isAddEditOpened: false,
-        selected: action.payload
+        selected: action.payload,
+        resultDialogOpened: true,
+        success: true,
+        resultMessage: 'The movie has been updated successfully'
       };
     case ActionTypes.CREATE_MOVIE_SUCCESS:
       return {
         ...state,
         isAddEditOpened: false,
-        selected: action.payload
+        selected: action.payload,
+        resultDialogOpened: true,
+        success: true,
+        resultMessage: 'The movie has been added to database successfully'
+      };
+    case ActionTypes.CLOSE_RESULT_DIALOG:
+      return {
+        ...state,
+        resultDialogOpened: false,
+        resultMessage: null
       };
     default:
       return state;

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import AddEditDialog from './components/dialog/AddEditDialog';
 import DeleteDialog from './components/dialog/DeleteDialog';
+import ResultDialog from './components/dialog/ResultDialog';
 import Footer from './components/footer/Footer';
 import Header from './components/Header/Header';
 import MovieDetails from './components/MovieDetails/MovieDetails';
@@ -12,7 +13,7 @@ import ErrorBoundary from './shared/ErrorBoundary';
 import {
   closeAddEditDialog,
   closeDeleteDialog,
-  closeDetails,
+  closeDetails, closeResultDialog,
   createMovie,
   deleteMovie,
   editMovie,
@@ -42,6 +43,9 @@ const editedMovieSelector = state => state.editedMovie;
 const selectedSelector = state => state.selected;
 const deletedSelector = state => state.deletedMovie;
 const isAddEditOpenedSelector = state => state.isAddEditOpened;
+const resultDialogOpenedSelector = state => state.resultDialogOpened;
+const successSelector = state => state.success;
+const resultMessageSelector = state => state.resultMessage;
 
 const App = () => {
   const dispatch = useDispatch();
@@ -49,6 +53,9 @@ const App = () => {
   const deletedMovie = useSelector(deletedSelector);
   const selected = useSelector(selectedSelector);
   const isAddEditOpened = useSelector(isAddEditOpenedSelector);
+  const resultDialogOpened = useSelector(resultDialogOpenedSelector);
+  const success = useSelector(successSelector);
+  const resultMessage = useSelector(resultMessageSelector);
   const saveMovie = (movie, isEdit) => dispatch(isEdit ? editMovie(movie) : createMovie(movie));
   return (
     <>
@@ -86,6 +93,13 @@ const App = () => {
         <DeleteDialog
           onClose={() => dispatch(closeDeleteDialog())}
           onConfirm={() => dispatch(deleteMovie(deletedMovie))}
+        />
+      </Modal>
+      <Modal isOpen={resultDialogOpened}>
+        <ResultDialog
+          success={success}
+          message={resultMessage}
+          onClose={() => dispatch(closeResultDialog())}
         />
       </Modal>
     </>

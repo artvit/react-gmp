@@ -18,10 +18,13 @@ const initialState = {
   filterGenre: filters[0],
   sortByOptions,
   sortBy: sortByOptions[0].value,
+  selected: null,
   editedMovie: null,
   isAddEditOpened: false,
   deletedMovie: null,
-  selected: null
+  resultDialogOpened: false,
+  success: false,
+  resultMessage: null
 };
 
 const store = createStore(movieReducer, initialState, applyMiddleware(thunk));

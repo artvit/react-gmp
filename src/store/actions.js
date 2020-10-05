@@ -39,7 +39,8 @@ export const loadMoviesSuccess = movies => ({
 
 export const loadMoviesError = error => ({
   type: ActionTypes.LOAD_MOVIES_ERROR,
-  error
+  payload: error,
+  error: true
 });
 
 export const loadMovies = searchText => async dispatch => {
@@ -68,13 +69,14 @@ export const deleteMovieSuccess = movies => ({
 
 export const deleteMovieError = error => ({
   type: ActionTypes.DELETE_MOVIE_ERROR,
-  error
+  payload: error,
+  error: true
 });
 
 export const deleteMovie = movie => async dispatch => {
   try {
-    const movies = await MoviesAPI.removeMovie(movie.id);
-    dispatch(deleteMovieSuccess(movies));
+    await MoviesAPI.removeMovie(movie.id);
+    dispatch(deleteMovieSuccess(movie));
   } catch (e) {
     dispatch(deleteMovieError(e));
   }
@@ -87,7 +89,8 @@ export const createMovieSuccess = createdMovie => ({
 
 export const createMovieError = error => ({
   type: ActionTypes.CREATE_MOVIE_ERROR,
-  error
+  payload: error,
+  error: true
 });
 
 export const createMovie = movie => async dispatch => {
@@ -106,7 +109,8 @@ export const editMovieSuccess = updatedMovie => ({
 
 export const editMovieError = error => ({
   type: ActionTypes.EDIT_MOVIE_ERROR,
-  error
+  payload: error,
+  error: true
 });
 
 export const editMovie = movie => async dispatch => {
@@ -117,3 +121,7 @@ export const editMovie = movie => async dispatch => {
     dispatch(editMovieError(e));
   }
 };
+
+export const closeResultDialog = () => ({
+  type: ActionTypes.CLOSE_RESULT_DIALOG
+});
