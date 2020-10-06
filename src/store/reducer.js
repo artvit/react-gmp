@@ -49,6 +49,16 @@ const movieReducer = (state, action) => {
         success: true,
         resultMessage: 'The movie has been added to database successfully'
       };
+    case ActionTypes.CREATE_MOVIE_ERROR:
+    case ActionTypes.EDIT_MOVIE_ERROR:
+    case ActionTypes.DELETE_MOVIE_ERROR:
+      return {
+        ...state,
+        deletedMovie: null,
+        resultDialogOpened: true,
+        success: false,
+        resultMessage: action.payload.messages.join('\n')
+      };
     case ActionTypes.CLOSE_RESULT_DIALOG:
       return {
         ...state,
