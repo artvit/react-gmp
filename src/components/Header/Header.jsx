@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import Logo from '../../shared/layout/Logo';
-import LogoBlock from '../../shared/layout/LogoBlock';
+import Logo from '../../shared/logo/Logo';
+import LogoBlock from '../../shared/logo/LogoBlock';
 import Background from './Background';
 import {
   AddButton,
