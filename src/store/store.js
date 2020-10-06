@@ -1,9 +1,8 @@
 import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
-import genres from '../data/genres';
 import movieReducer from './reducer';
 
-const filters = ['All', ...genres.slice(0, 4)];
+const filters = ['All'];
 const sortByOptions = [{
   value: 'release_date',
   title: 'Released Date'

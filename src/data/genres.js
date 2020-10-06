@@ -1,8 +1,22 @@
 const genres = [
-  'Documentary',
+  'Drama',
+  'Romance',
+  'Animation',
+  'Adventure',
+  'Family',
   'Comedy',
+  'Fantasy',
+  'Science Fiction',
+  'Action',
+  'Mystery',
+  'Thriller',
+  'Music',
+  'War',
+  'Crime',
+  'History',
   'Horror',
-  'Crime'
+  'Western',
+  'Documentary',
+  'TV Movie'
 ];
-
 export default genres;

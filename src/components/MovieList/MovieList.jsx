@@ -35,7 +35,15 @@ const filteredSortedMoviesSelector = createSelector(
   filterMovies
 );
 
-const filterGenresSelector = state => state.filters;
+const filterGenresSelector = createSelector(
+  moviesSelector,
+  movies => ['All', ...Array.from(
+    movies
+      .map(m => m.genres)
+      .flat()
+      .reduce((set, genre) => set.add(genre), new Set())
+  )]
+);
 const sortByOptionsSelector = state => state.sortByOptions;
 
 const MovieList = ({ onEdit, onDelete, onOpenDetails }) => {
