@@ -5,7 +5,7 @@ const MOVIES_PATH = '/movies';
 
 const fetchMovies = async searchText => {
   try {
-    const response = await axios.get(`${SERVER_URL}${MOVIES_PATH}?limit=1000&search=${searchText}&searchBy=title`);
+    const response = await axios.get(`${SERVER_URL}${MOVIES_PATH}?limit=100&search=${searchText}&searchBy=title`);
     return response.data;
   } catch (error) {
     throw error?.response || error;

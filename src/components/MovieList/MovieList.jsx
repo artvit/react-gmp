@@ -2,31 +2,16 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
-import styled from 'styled-components';
 
 import { setFilterGenre, setSortBy } from '../../store';
 import ControlPanel from './ControlPanel/ControlPanel';
 import Movie from './Movie';
-
-const MoviesBox = styled.div`
-  margin: 10px 70px;
-`;
-
-const MoviesLayout = styled.div`
-  margin-top: 20px;
-  display: grid;
-  grid-gap: 50px 50px;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-`;
-
-const CountBox = styled.div`
-  margin-top: 20px;
-`;
+import { CountBox, MoviesBox, MoviesLayout } from './MovieList.style';
 
 const filterMovies = (movies, genre, sortBy) => {
   let result = movies;
   if (genre && genre !== 'All') {
-    result = result.filter(m => m.genre === genre);
+    result = result.filter(m => m.genres.includes(genre));
   }
   if (sortBy) {
     result = result.sort((m1, m2) => {
