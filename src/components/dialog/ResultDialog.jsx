@@ -8,9 +8,13 @@ const ResultDialog = ({ success, message, onClose }) => (
   </Dialog>
 );
 
+ResultDialog.defaultProps = {
+  message: ''
+};
+
 ResultDialog.propTypes = {
   success: PropTypes.bool.isRequired,
-  message: PropTypes.string.isRequired,
+  message: PropTypes.string,
   onClose: PropTypes.func.isRequired
 };
 

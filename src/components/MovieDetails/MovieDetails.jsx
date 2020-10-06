@@ -28,7 +28,7 @@ const MovieDetails = ({ movie, onSearchClick }) => (
       <DetailsText>
         <Title>
           <TitleText>{movie.title}</TitleText>
-          <Rating>{movie.vote_average}</Rating>
+          {movie.vote_average && <Rating>{movie.vote_average}</Rating>}
         </Title>
         <div>{movie.tagline}</div>
         <YearLengthBlock>
