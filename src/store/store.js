@@ -1,31 +1,16 @@
-import { applyMiddleware, createStore } from 'redux';
-import thunk from 'redux-thunk';
-import movieReducer from './reducer';
+import { configureStore } from '@reduxjs/toolkit';
+import addEditDialogSlice from './add-edit-dialog-slice';
+import deleteDialogSlice from './delete-dialog-slice';
+import moviesSlice from './movies-slice';
+import resultDialogSlice from './result-dialog-slice';
 
-const filters = ['All'];
-const sortByOptions = [{
-  value: 'release_date',
-  title: 'Released Date'
-}, {
-  value: 'title',
-  title: 'Title'
-}];
-
-const initialState = {
-  movies: [],
-  filters,
-  filterGenre: filters[0],
-  sortByOptions,
-  sortBy: sortByOptions[0].value,
-  selected: null,
-  editedMovie: null,
-  isAddEditOpened: false,
-  deletedMovie: null,
-  resultDialogOpened: false,
-  success: false,
-  resultMessage: null
-};
-
-const store = createStore(movieReducer, initialState, applyMiddleware(thunk));
+const store = configureStore({
+  reducer: {
+    movies: moviesSlice.reducer,
+    addEditDialog: addEditDialogSlice.reducer,
+    deleteDialog: deleteDialogSlice.reducer,
+    resultDialog: resultDialogSlice.reducer
+  }
+});
 
 export default store;

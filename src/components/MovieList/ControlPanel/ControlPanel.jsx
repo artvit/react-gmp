@@ -6,7 +6,12 @@ import FilterSelect from './FilterSelect';
 import { optionArrayType } from '../../../shared/options/option-type';
 
 const ControlPanel = ({
-  onFilterChange, onSortChange, selectedFilter, selectedSortBy, sortByOptions, genreOptions
+  onFilterChange,
+  onSortChange,
+  selectedFilter,
+  selectedSortBy,
+  sortByOptions,
+  genreOptions
 }) => (
   <ControlBox>
     <FilterSelect

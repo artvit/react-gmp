@@ -39,13 +39,13 @@ Modal.defaultStyles.content = {
   outline: 0
 };
 
-const editedMovieSelector = state => state.editedMovie;
-const selectedSelector = state => state.selected;
-const deletedSelector = state => state.deletedMovie;
-const isAddEditOpenedSelector = state => state.isAddEditOpened;
-const resultDialogOpenedSelector = state => state.resultDialogOpened;
-const successSelector = state => state.success;
-const resultMessageSelector = state => state.resultMessage;
+const selectedSelector = state => state.movies.selected;
+const isAddEditOpenedSelector = state => state.addEditDialog.isAddEditOpened;
+const editedMovieSelector = state => state.addEditDialog.editedMovie;
+const deletedSelector = state => state.deleteDialog.deletedMovie;
+const resultDialogOpenedSelector = state => state.resultDialog.resultDialogOpened;
+const successSelector = state => state.resultDialog.success;
+const resultMessageSelector = state => state.resultDialog.resultMessage;
 
 const App = () => {
   const dispatch = useDispatch();

@@ -22,6 +22,9 @@
     "comma-dangle": ["error", "never"],
     "arrow-parens": ["error", "as-needed"],
     "react/jsx-one-expression-per-line": "off",
-    "react/prop-types": ["error", { "ignore": ["children"] }]
+    "react/prop-types": ["error", { "ignore": ["children"] }],
+    "no-param-reassign": ["error", { "props": false }],
+    "object-curly-newline": ["error", { "multiline": true, "consistent": true }],
+    "object-property-newline": ["error", { "allowAllPropertiesOnSameLine": true }]
   }
 }

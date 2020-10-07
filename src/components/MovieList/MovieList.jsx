@@ -14,7 +14,7 @@ const filterMovies = (movies, genre, sortBy) => {
     result = result.filter(m => m.genres.includes(genre));
   }
   if (sortBy) {
-    result = result.sort((m1, m2) => {
+    result = result.slice().sort((m1, m2) => {
       if (m1[sortBy] === m2[sortBy]) {
         return 0;
       }
@@ -24,9 +24,9 @@ const filterMovies = (movies, genre, sortBy) => {
   return result;
 };
 
-const moviesSelector = state => state.movies;
-const filterGenreSelector = state => state.filterGenre;
-const sortBySelector = state => state.sortBy;
+const moviesSelector = state => state.movies.data;
+const filterGenreSelector = state => state.movies.filterGenre;
+const sortBySelector = state => state.movies.sortBy;
 
 const filteredSortedMoviesSelector = createSelector(
   moviesSelector,
@@ -44,7 +44,7 @@ const filterGenresSelector = createSelector(
       .reduce((set, genre) => set.add(genre), new Set())
   )]
 );
-const sortByOptionsSelector = state => state.sortByOptions;
+const sortByOptionsSelector = state => state.movies.sortByOptions;
 
 const MovieList = ({ onEdit, onDelete, onOpenDetails }) => {
   const dispatch = useDispatch();
