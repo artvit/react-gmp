@@ -13,7 +13,8 @@ import {
   ActionButton,
   Cover,
   Genre,
-  MovieBox, Title,
+  MovieBox,
+  Title,
   TitleBox,
   Year
 } from './Movie.style';

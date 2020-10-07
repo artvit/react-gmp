@@ -9,7 +9,7 @@ const movieType = PropTypes.shape({
   genres: PropTypes.arrayOf(PropTypes.string).isRequired,
   release_date: PropTypes.string.isRequired,
   vote_average: PropTypes.number,
-  runtime: PropTypes.number.isRequired
+  runtime: PropTypes.number
 });
 
 export default movieType;
