@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { loadMovies } from './movie-thunks';
+import { createMovie, deleteMovie, editMovie, loadMovies } from './movie-thunks';
 
 const sortByOptions = [{
   value: 'release_date',
@@ -35,12 +35,20 @@ const moviesSlice = createSlice({
   extraReducers: {
     [loadMovies.fulfilled]: (state, action) => {
       state.data = action.payload.data;
+    },
+    [deleteMovie.fulfilled]: (state, action) => {
+      state.data = state.data.filter(movie => movie.id !== action.payload);
+    },
+    [createMovie.fulfilled]: (state, action) => {
+      state.data.push(action.payload);
+    },
+    [editMovie.fulfilled]: (state, action) => {
+      const idx = state.data.findIndex(movie => movie.id === action.payload.id);
+      state.data[idx] = action.payload;
     }
   }
 });
 
-export const {
-  setFilterGenre, setSortBy, openDetails, closeDetails
-} = moviesSlice.actions;
+export const { setFilterGenre, setSortBy, openDetails, closeDetails } = moviesSlice.actions;
 
 export default moviesSlice;

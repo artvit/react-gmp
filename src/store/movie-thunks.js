@@ -18,5 +18,8 @@ export const editMovie = createAsyncThunk(
 
 export const deleteMovie = createAsyncThunk(
   'movies/deleteMovie',
-  async movie => MoviesAPI.removeMovie(movie.id)
+  async movie => {
+    await MoviesAPI.removeMovie(movie.id);
+    return movie.id;
+  }
 );

@@ -5,7 +5,6 @@ const apiErrorReducer = (state, action) => {
   state.resultDialogOpened = true;
   state.success = false;
   state.resultMessage = action.error.message;
-  // state.resultMessage = action.payload.messages.join('\n')
 };
 
 const apiSuccessReducer = message => state => {
