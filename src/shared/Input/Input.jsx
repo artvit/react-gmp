@@ -18,7 +18,7 @@ const Input = ({ title, type, placeholder, value, options, onChange, name, error
         placeholder={placeholder}
         value={value}
         options={options}
-        errored={!!error}
+        errored={touched && !!error}
         onChange={v => onChange(name, v)}
       />
     );
@@ -29,7 +29,7 @@ const Input = ({ title, type, placeholder, value, options, onChange, name, error
         placeholder={placeholder}
         value={value}
         options={options}
-        errored={!!error}
+        errored={touched && !!error}
         onChange={v => onChange(name, v)}
       />
     );
@@ -39,7 +39,7 @@ const Input = ({ title, type, placeholder, value, options, onChange, name, error
         type={type}
         placeholder={placeholder}
         value={value}
-        errored={!!error}
+        errored={touched && !!error}
         onChange={evt => onChange(name, evt.target.value)}
       />
     );
