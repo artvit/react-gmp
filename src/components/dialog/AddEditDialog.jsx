@@ -1,6 +1,8 @@
 import { useFormik } from 'formik';
 import React from 'react';
 import PropTypes from 'prop-types';
+import * as Yup from 'yup';
+
 import Input from '../../shared/Input';
 import Dialog from '../../shared/Dialog/Dialog';
 import { BottomButtons, Button, PrimaryButton } from '../../shared/Dialog/dialog-buttons';
@@ -16,6 +18,29 @@ const defaultInitialValues = {
   genre: [],
   overview: ''
 };
+
+const movieFormScheme = Yup.object().shape({
+  id: Yup.number(),
+  title: Yup.string()
+    .required('Title is required'),
+  released: Yup.date()
+    .required('Release date is required'),
+  runtime: Yup.number('Runtime must be a number')
+    // eslint-disable-next-line no-template-curly-in-string
+    .min(0, 'Runtime must be at least ${min} minutes')
+    // eslint-disable-next-line no-template-curly-in-string
+    .max(500, 'Runtime must be below ${max} minutes')
+    .required('Runtime is required'),
+  url: Yup.string()
+    .url('Should be valid url!')
+    .required('Poster URL is required'),
+  genre: Yup.array()
+    .of(Yup.string().oneOf(genres))
+    .min(1, 'At least one genre must be provided')
+    .required('Genres are required'),
+  overview: Yup.string()
+    .required('Overview is required')
+});
 
 const movieToForm = movie => ({
   id: movie.id,
@@ -42,12 +67,11 @@ const formToMovie = form => {
   return movie;
 };
 
-const AddEditDialog = ({
-  isEdit, onClose, onSave, movie
-}) => {
+const AddEditDialog = ({ isEdit, onClose, onSave, movie }) => {
   const initialValues = movie ? movieToForm(movie) : defaultInitialValues;
   const formik = useFormik({
     initialValues,
+    validationSchema: movieFormScheme,
     onSubmit: v => onSave(formToMovie(v))
   });
   const reset = () => formik.resetForm();
