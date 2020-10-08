@@ -25,7 +25,8 @@ const movieFormScheme = Yup.object().shape({
     .required('Title is required'),
   released: Yup.date()
     .required('Release date is required'),
-  runtime: Yup.number('Runtime must be a number')
+  runtime: Yup.number()
+    .typeError('Runtime must be a number')
     // eslint-disable-next-line no-template-curly-in-string
     .min(0, 'Runtime must be at least ${min} minutes')
     // eslint-disable-next-line no-template-curly-in-string
@@ -85,6 +86,8 @@ const AddEditDialog = ({ isEdit, onClose, onSave, movie }) => {
           title="Title"
           placeholder="Title here"
           value={formik.values.title}
+          touched={formik.touched.title}
+          error={formik.errors.title}
           onChange={formik.setFieldValue}
         />
         <Input
@@ -93,6 +96,8 @@ const AddEditDialog = ({ isEdit, onClose, onSave, movie }) => {
           placeholder="Select Date"
           type="date"
           value={formik.values.released}
+          touched={formik.touched.released}
+          error={formik.errors.released}
           onChange={formik.setFieldValue}
         />
         <Input
@@ -100,6 +105,8 @@ const AddEditDialog = ({ isEdit, onClose, onSave, movie }) => {
           title="Movie URL"
           placeholder="Movie URL here"
           value={formik.values.url}
+          touched={formik.touched.url}
+          error={formik.errors.url}
           onChange={formik.setFieldValue}
         />
         <Input
@@ -109,6 +116,8 @@ const AddEditDialog = ({ isEdit, onClose, onSave, movie }) => {
           type="multiselect"
           options={genres}
           value={formik.values.genre}
+          touched={formik.touched.genre}
+          error={formik.errors.genre}
           onChange={formik.setFieldValue}
         />
         <Input
@@ -116,6 +125,8 @@ const AddEditDialog = ({ isEdit, onClose, onSave, movie }) => {
           title="Overview"
           placeholder="Overview here"
           value={formik.values.overview}
+          touched={formik.touched.overview}
+          error={formik.errors.overview}
           onChange={formik.setFieldValue}
         />
         <Input
@@ -123,6 +134,8 @@ const AddEditDialog = ({ isEdit, onClose, onSave, movie }) => {
           title="Runtime"
           placeholder="Runtime here"
           value={formik.values.runtime}
+          touched={formik.touched.runtime}
+          error={formik.errors.runtime}
           onChange={formik.setFieldValue}
         />
         <BottomButtons>

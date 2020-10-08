@@ -1,24 +1,13 @@
-import React from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import React from 'react';
+
+import { ErrorText, InputBlock, InputTitle } from './Input.style';
 import InputControl from './InputControl';
 import MultiselectInputControl from './MultiselectInputControl';
 import ReadonlyInputControl from './ReadonlyInputControl';
 import SelectInputControl from './SelectInputControl';
 
-const InputBlock = styled.div`
-  margin: 20px 0;
-`;
-
-const InputTitle = styled.div`
-  text-transform: uppercase;
-  color: #f65261;
-  margin-bottom: 12px;
-`;
-
-const Input = ({
-  title, type, placeholder, value, options, onChange, name
-}) => {
+const Input = ({ title, type, placeholder, value, options, onChange, name, error, touched }) => {
   let inputControl;
   if (type === 'readonly') {
     inputControl = <ReadonlyInputControl>{value}</ReadonlyInputControl>;
@@ -29,6 +18,7 @@ const Input = ({
         placeholder={placeholder}
         value={value}
         options={options}
+        errored={!!error}
         onChange={v => onChange(name, v)}
       />
     );
@@ -39,6 +29,7 @@ const Input = ({
         placeholder={placeholder}
         value={value}
         options={options}
+        errored={!!error}
         onChange={v => onChange(name, v)}
       />
     );
@@ -48,6 +39,7 @@ const Input = ({
         type={type}
         placeholder={placeholder}
         value={value}
+        errored={!!error}
         onChange={evt => onChange(name, evt.target.value)}
       />
     );
@@ -56,6 +48,9 @@ const Input = ({
     <InputBlock>
       {title && <InputTitle>{title}</InputTitle>}
       {inputControl}
+      <ErrorText shown={!!error}>
+        {touched && error}
+      </ErrorText>
     </InputBlock>
   );
 };
@@ -66,6 +61,8 @@ Input.defaultProps = {
   placeholder: '',
   value: '',
   options: [],
+  touched: false,
+  error: undefined,
   onChange: () => {}
 };
 
@@ -80,6 +77,8 @@ Input.propTypes = {
     PropTypes.arrayOf(PropTypes.string)
   ]),
   options: PropTypes.arrayOf(PropTypes.any),
+  touched: PropTypes.bool,
+  error: PropTypes.string,
   onChange: PropTypes.func
 };
 

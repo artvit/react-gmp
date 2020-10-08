@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import SelectInputControl from './SelectInputControl';
 
-const MultiselectInputControl = ({
-  placeholder, value, options, onChange
-}) => {
+const MultiselectInputControl = ({ placeholder, value, options, onChange, errored }) => {
   const extendedOptions = options.map(o => ({
     value: o,
     title: o,
@@ -21,6 +19,7 @@ const MultiselectInputControl = ({
       placeholder={placeholder}
       value={value}
       options={extendedOptions}
+      errored={errored}
       onChange={v => onChange(optionsChange(v))}
     />
   );
@@ -30,6 +29,7 @@ MultiselectInputControl.defaultProps = {
   placeholder: '',
   value: '',
   options: [],
+  errored: false,
   onChange: () => {}
 };
 
@@ -37,6 +37,7 @@ MultiselectInputControl.propTypes = {
   placeholder: PropTypes.string,
   value: PropTypes.arrayOf(PropTypes.string),
   options: PropTypes.arrayOf(PropTypes.string),
+  errored: PropTypes.bool,
   onChange: PropTypes.func
 };
 
