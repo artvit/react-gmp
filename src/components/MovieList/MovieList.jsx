@@ -5,6 +5,7 @@ import { createSelector } from 'reselect';
 
 import { setFilterGenre, setSortBy } from '../../store';
 import ControlPanel from './ControlPanel/ControlPanel';
+import Empty from './Empty';
 import Movie from './Movie';
 import { CountBox, MoviesBox, MoviesLayout } from './MovieList.style';
 
@@ -64,20 +65,24 @@ const MovieList = ({ onEdit, onDelete, onOpenDetails }) => {
         onFilterChange={g => dispatch(setFilterGenre(g))}
         onSortChange={sb => dispatch(setSortBy(sb))}
       />
-      <CountBox>
-        <b>{filteredMovies.length}</b> movies found
-      </CountBox>
-      <MoviesLayout>
-        {filteredMovies.map(m => (
-          <Movie
-            key={m.id}
-            movie={m}
-            onEdit={onEdit}
-            onDelete={onDelete}
-            onOpenDetails={onOpenDetails}
-          />
-        ))}
-      </MoviesLayout>
+      {filteredMovies.length ? (
+        <>
+          <CountBox>
+            <b>{filteredMovies.length}</b> movies found
+          </CountBox>
+          <MoviesLayout>
+            {filteredMovies.map(m => (
+              <Movie
+                key={m.id}
+                movie={m}
+                onEdit={onEdit}
+                onDelete={onDelete}
+                onOpenDetails={onOpenDetails}
+              />
+            ))}
+          </MoviesLayout>
+        </>
+      ) : <Empty /> }
     </MoviesBox>
   );
 };

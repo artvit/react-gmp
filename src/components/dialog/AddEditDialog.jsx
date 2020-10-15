@@ -33,7 +33,7 @@ const movieFormScheme = Yup.object().shape({
     .max(500, 'Runtime must be below ${max} minutes')
     .required('Runtime is required'),
   url: Yup.string()
-    .url('Should be valid url')
+    .url('Should be a valid url')
     .required('Poster URL is required'),
   genre: Yup.array()
     .of(Yup.string().oneOf(genres))
