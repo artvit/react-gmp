@@ -5,10 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import AddEditDialog from './components/dialog/AddEditDialog';
 import DeleteDialog from './components/dialog/DeleteDialog';
 import ResultDialog from './components/dialog/ResultDialog';
-import Footer from './components/footer/Footer';
+import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import MovieDetails from './components/MovieDetails/MovieDetails';
 import MovieList from './components/MovieList/MovieList';
+import NotFound from './components/NotFound/NotFound';
 import ErrorBoundary from './shared/ErrorBoundary';
 import {
   closeAddEditDialog,
@@ -59,6 +60,7 @@ const App = () => {
   const saveMovie = (movie, isEdit) => dispatch(isEdit ? editMovie(movie) : createMovie(movie));
   return (
     <>
+      <NotFound />
       <ErrorBoundary>
         {selected ? (
           <MovieDetails
@@ -71,8 +73,6 @@ const App = () => {
             onSearch={searchText => dispatch(loadMovies(searchText))}
           />
         )}
-      </ErrorBoundary>
-      <ErrorBoundary>
         <MovieList
           onDelete={movie => dispatch(openDeleteDialog(movie))}
           onEdit={movie => dispatch(openEditDialog(movie))}
