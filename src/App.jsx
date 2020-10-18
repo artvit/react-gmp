@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 
 import AddEditDialog from './components/dialog/AddEditDialog';
 import DeleteDialog from './components/dialog/DeleteDialog';
@@ -14,16 +15,15 @@ import ErrorBoundary from './shared/ErrorBoundary';
 import {
   closeAddEditDialog,
   closeDeleteDialog,
-  closeDetails, closeResultDialog,
+  closeResultDialog,
   createMovie,
   deleteMovie,
   editMovie,
-  loadMovies,
   openAddDialog,
   openDeleteDialog,
-  openDetails,
   openEditDialog
 } from './store';
+import { moviesSelector } from './store/common-selectors';
 
 Modal.setAppElement('#root');
 Object.assign(Modal.defaultStyles.overlay, {
@@ -40,7 +40,6 @@ Modal.defaultStyles.content = {
   outline: 0
 };
 
-const selectedSelector = state => state.movies.selected;
 const isAddEditOpenedSelector = state => state.addEditDialog.isAddEditOpened;
 const editedMovieSelector = state => state.addEditDialog.editedMovie;
 const deletedSelector = state => state.deleteDialog.deletedMovie;
@@ -52,33 +51,69 @@ const App = () => {
   const dispatch = useDispatch();
   const editedMovie = useSelector(editedMovieSelector);
   const deletedMovie = useSelector(deletedSelector);
-  const selected = useSelector(selectedSelector);
+  const movies = useSelector(moviesSelector);
   const isAddEditOpened = useSelector(isAddEditOpenedSelector);
   const resultDialogOpened = useSelector(resultDialogOpenedSelector);
   const success = useSelector(successSelector);
   const resultMessage = useSelector(resultMessageSelector);
   const saveMovie = (movie, isEdit) => dispatch(isEdit ? editMovie(movie) : createMovie(movie));
+  const history = useHistory();
+
+  const onSearch = useCallback(searchText => history.push({
+    pathname: '/film',
+    search: `?searchQuery=${searchText}`
+  }), [history]);
+  const onOpenDetails = useCallback(movie => history.push({
+    pathname: `/film/${movie.id}`,
+    search: history.location.search
+  }), [history]);
+  const onCloseDetails = useCallback(() => history.push({
+    pathname: '/film',
+    search: history.location.search
+  }), [history]);
+
   return (
     <>
-      <NotFound />
-      <ErrorBoundary>
-        {selected ? (
-          <MovieDetails
-            movie={selected}
-            onSearchClick={() => dispatch(closeDetails())}
-          />
-        ) : (
-          <Header
-            onAddClick={() => dispatch(openAddDialog())}
-            onSearch={searchText => dispatch(loadMovies(searchText))}
-          />
-        )}
-        <MovieList
-          onDelete={movie => dispatch(openDeleteDialog(movie))}
-          onEdit={movie => dispatch(openEditDialog(movie))}
-          onOpenDetails={movie => dispatch(openDetails(movie))}
-        />
-      </ErrorBoundary>
+      <Switch>
+        <Route path="/film">
+          <ErrorBoundary>
+            <Switch>
+              <Route
+                path="/film/:movieId"
+                render={({ match }) => {
+                  const movie = movies?.find(m => m.id === +match.params.movieId);
+                  return (
+                    <>
+                      {movie && (
+                        <MovieDetails
+                          movie={movie}
+                          onSearchClick={onCloseDetails}
+                        />
+                      )}
+                    </>
+                  );
+                }}
+              />
+              <Route path="/film">
+                <Header
+                  onAddClick={() => dispatch(openAddDialog())}
+                  onSearch={onSearch}
+                />
+              </Route>
+            </Switch>
+            <MovieList
+              onDelete={movie => dispatch(openDeleteDialog(movie))}
+              onEdit={movie => dispatch(openEditDialog(movie))}
+              onOpenDetails={onOpenDetails}
+            />
+          </ErrorBoundary>
+        </Route>
+        <Redirect from="/" to="/film" />
+        <Route path="*">
+          <NotFound />
+        </Route>
+      </Switch>
+
       <Footer />
 
       <Modal isOpen={isAddEditOpened}>

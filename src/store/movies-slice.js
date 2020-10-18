@@ -13,7 +13,6 @@ const moviesSlice = createSlice({
   name: 'movies',
   initialState: {
     data: [],
-    selected: null,
     filterGenre: 'All',
     sortByOptions,
     sortBy: sortByOptions[0].value
@@ -24,12 +23,6 @@ const moviesSlice = createSlice({
     },
     setFilterGenre: (state, action) => {
       state.filterGenre = action.payload;
-    },
-    openDetails: (state, action) => {
-      state.selected = action.payload;
-    },
-    closeDetails: state => {
-      state.selected = null;
     }
   },
   extraReducers: {

@@ -1,6 +1,6 @@
 {
   "name": "react-gmp",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "private": true,
   "scripts": {
     "start": "npm run start:dev",
@@ -21,6 +21,7 @@
     "formik": "^2.1.5",
     "moment": "^2.29.0",
     "prop-types": "^15.7.2",
+    "query-string": "^6.13.6",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-image": "^4.0.3",

@@ -1,40 +1,19 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import qs from 'query-string';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { createSelector } from 'reselect';
-
-import { setFilterGenre, setSortBy } from '../../store';
+import { loadMovies, setFilterGenre, setSortBy } from '../../store';
+import {
+  filteredSortedMoviesSelector, filterGenreSelector,
+  moviesSelector,
+  sortBySelector
+} from '../../store/common-selectors';
 import ControlPanel from './ControlPanel/ControlPanel';
 import Empty from './Empty';
 import Movie from './Movie';
 import { CountBox, MoviesBox, MoviesLayout } from './MovieList.style';
-
-const filterMovies = (movies, genre, sortBy) => {
-  let result = movies;
-  if (genre && genre !== 'All') {
-    result = result.filter(m => m.genres.includes(genre));
-  }
-  if (sortBy) {
-    result = result.slice().sort((m1, m2) => {
-      if (m1[sortBy] === m2[sortBy]) {
-        return 0;
-      }
-      return m1[sortBy] < m2[sortBy] ? -1 : 1;
-    });
-  }
-  return result;
-};
-
-const moviesSelector = state => state.movies.data;
-const filterGenreSelector = state => state.movies.filterGenre;
-const sortBySelector = state => state.movies.sortBy;
-
-const filteredSortedMoviesSelector = createSelector(
-  moviesSelector,
-  filterGenreSelector,
-  sortBySelector,
-  filterMovies
-);
 
 const filterGenresSelector = createSelector(
   moviesSelector,
@@ -48,12 +27,18 @@ const filterGenresSelector = createSelector(
 const sortByOptionsSelector = state => state.movies.sortByOptions;
 
 const MovieList = ({ onEdit, onDelete, onOpenDetails }) => {
+  const { searchQuery } = qs.parse(useLocation().search);
   const dispatch = useDispatch();
   const filteredMovies = useSelector(filteredSortedMoviesSelector);
   const filterGenres = useSelector(filterGenresSelector);
   const sortByOptions = useSelector(sortByOptionsSelector);
   const sortBy = useSelector(sortBySelector);
   const genre = useSelector(filterGenreSelector);
+  useEffect(() => {
+    if (searchQuery !== undefined) {
+      dispatch(loadMovies(searchQuery));
+    }
+  }, [searchQuery]);
 
   return (
     <MoviesBox>

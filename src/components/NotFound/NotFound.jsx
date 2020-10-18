@@ -1,23 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import styled from 'styled-components';
 import { Button } from '../../shared/Dialog/dialog-buttons';
-
 import Logo from '../../shared/logo/Logo';
 import LogoBlock from '../../shared/logo/LogoBlock';
-
-const NotFoundTextBox = styled.div`
-  padding: 70px 0 30px;
-  width: 100%;
-  text-align: center;
-  font-size: 200px;
-`;
-
-const ButtonBlock = styled.div`
-  width: 100%;
-  text-align: center;
-  padding-bottom: 100px;
-`;
+import { ButtonBlock, NotFoundTextBox } from './NotFound.style';
 
 const NotFound = () => {
   const history = useHistory();
