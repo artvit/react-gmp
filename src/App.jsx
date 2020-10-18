@@ -71,6 +71,7 @@ const App = () => {
     pathname: '/film',
     search: history.location.search
   }), [history]);
+  const onGoToHome = useCallback(() => history.push('/'), [history]);
 
   return (
     <>
@@ -110,7 +111,7 @@ const App = () => {
         </Route>
         <Redirect from="/" to="/film" />
         <Route path="*">
-          <NotFound />
+          <NotFound onGoToHomeClick={onGoToHome} />
         </Route>
       </Switch>
 

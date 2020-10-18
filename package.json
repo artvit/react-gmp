@@ -39,6 +39,7 @@
     "@babel/plugin-proposal-optional-chaining": "^7.11.0",
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-react": "^7.10.4",
+    "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^10.4.9",
     "babel-jest": "^26.3.0",
     "babel-loader": "^8.1.0",
@@ -66,5 +67,12 @@
   },
   "browserslist": [
     "last 2 Chrome version"
-  ]
+  ],
+  "jest": {
+    "setupFilesAfterEnv": ["./config/jest/jest.setup.js"],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/config/jest/file-mock.js",
+      "\\.(css|less)$": "<rootDir>/config/jest/style-mock.js"
+    }
+  }
 }
