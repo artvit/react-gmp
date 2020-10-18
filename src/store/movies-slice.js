@@ -42,6 +42,6 @@ const moviesSlice = createSlice({
   }
 });
 
-export const { setFilterGenre, setSortBy, openDetails, closeDetails } = moviesSlice.actions;
+export const { setFilterGenre, setSortBy } = moviesSlice.actions;
 
 export default moviesSlice;
