@@ -23,13 +23,14 @@ const Input = ({ title, type, placeholder, value, options, onChange, name, error
       />
     );
   } else if (type === 'multiselect') {
+    const calculatedTouched = Array.isArray(touched) ? touched.some(t => t) : touched;
     inputControl = (
       <MultiselectInputControl
         name={name}
         placeholder={placeholder}
         value={value}
         options={options}
-        errored={touched && !!error}
+        errored={calculatedTouched && !!error}
         onChange={v => onChange(name, v)}
       />
     );
@@ -77,7 +78,10 @@ Input.propTypes = {
     PropTypes.arrayOf(PropTypes.string)
   ]),
   options: PropTypes.arrayOf(PropTypes.any),
-  touched: PropTypes.bool,
+  touched: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.arrayOf(PropTypes.bool)
+  ]),
   error: PropTypes.string,
   onChange: PropTypes.func
 };

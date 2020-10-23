@@ -69,13 +69,12 @@ const formToMovie = form => {
 };
 
 const AddEditDialog = ({ isEdit, onClose, onSave, movie }) => {
-  const initialValues = movie ? movieToForm(movie) : defaultInitialValues;
+  const initialValues = isEdit ? movieToForm(movie) : defaultInitialValues;
   const formik = useFormik({
     initialValues,
     validationSchema: movieFormScheme,
     onSubmit: v => onSave(formToMovie(v))
   });
-  const reset = () => formik.resetForm();
   return (
     <Dialog title={isEdit ? 'Edit movie' : 'Add movie'} onClose={onClose}>
       <form onSubmit={formik.handleSubmit}>
@@ -139,7 +138,7 @@ const AddEditDialog = ({ isEdit, onClose, onSave, movie }) => {
           onChange={formik.setFieldValue}
         />
         <BottomButtons>
-          <Button type="button" onClick={reset}>Reset</Button>
+          <Button type="button" onClick={() => formik.resetForm()}>Reset</Button>
           <PrimaryButton type="submit">Submit</PrimaryButton>
         </BottomButtons>
       </form>

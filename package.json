@@ -10,6 +10,7 @@
     "build:prod": "cross-env NODE_ENV=prod webpack --progress",
     "build:dev": "cross-env NODE_ENV=dev webpack --progress",
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "lint": "eslint src/**/*.js src/**/*.jsx --no-error-on-unmatched-pattern"
   },
   "dependencies": {
