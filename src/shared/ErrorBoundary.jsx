@@ -26,7 +26,7 @@ class ErrorBoundary extends React.Component {
 
     if (hasError) {
       // You can render any custom fallback UI
-      return <ErrorBlock>Something went wrong.</ErrorBlock>;
+      return <ErrorBlock>Something went wrong</ErrorBlock>;
     }
 
     return children;

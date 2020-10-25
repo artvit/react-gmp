@@ -12,7 +12,7 @@ import {
   ActionBox,
   ActionButton,
   Cover,
-  Genre,
+  Tagline,
   MovieBox,
   Title,
   TitleBox,
@@ -45,7 +45,7 @@ const Movie = ({
           positionRight
         >
           <ActionButton>
-            <FontAwesomeIcon icon={faEllipsisV} />
+            <FontAwesomeIcon icon={faEllipsisV} data-testid="actionsButton" />
           </ActionButton>
         </OptionSelector>
       </ActionBox>
@@ -58,7 +58,7 @@ const Movie = ({
         <Title onClick={() => onOpenDetails(movie)}>{movie.title}</Title>
         <Year>{DateFormatters.formatYear(movie.release_date)}</Year>
       </TitleBox>
-      <Genre>{movie.tagline}</Genre>
+      <Tagline>{movie.tagline}</Tagline>
     </MovieBox>
   );
 };

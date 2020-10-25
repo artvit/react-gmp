@@ -41,7 +41,7 @@ export const Year = styled.div`
   border-radius: 4px;
 `;
 
-export const Genre = styled.div`
+export const Tagline = styled.div`
   margin-top: 10px;
   ${textEllipsis}
 `;

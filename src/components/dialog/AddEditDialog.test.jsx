@@ -2,8 +2,6 @@ import { fireEvent, render, waitFor } from '@testing-library/react';
 import React from 'react';
 import AddEditDialog from './AddEditDialog';
 
-jest.unmock('./AddEditDialog');
-
 describe('AddEditDialog', () => {
   let onClose;
   let onSave;
