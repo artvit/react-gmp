@@ -17,6 +17,14 @@ The page will reload if you make edits.<br />
 
 You will see any lint errors in the console.
 
+### `npm test`
+
+Runs all tests.
+
+### `npm run test:coverage`
+
+Runs all tests with coverage report.
+
 ### `npm run build`
 
 Builds the app for production to the `build` folder.<br />
