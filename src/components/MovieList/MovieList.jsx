@@ -1,12 +1,11 @@
 import PropTypes from 'prop-types';
-import qs from 'query-string';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
 import { createSelector } from 'reselect';
 import { loadMovies, setFilterGenre, setSortBy } from '../../store';
 import {
-  filteredSortedMoviesSelector, filterGenreSelector,
+  filteredSortedMoviesSelector,
+  filterGenreSelector,
   moviesSelector,
   sortBySelector
 } from '../../store/common-selectors';
@@ -26,8 +25,7 @@ const filterGenresSelector = createSelector(
 );
 const sortByOptionsSelector = state => state.movies.sortByOptions;
 
-const MovieList = ({ onEdit, onDelete, onOpenDetails }) => {
-  const { searchQuery } = qs.parse(useLocation().search);
+const MovieList = ({ onEdit, onDelete, onOpenDetails, searchQuery }) => {
   const dispatch = useDispatch();
   const filteredMovies = useSelector(filteredSortedMoviesSelector);
   const filterGenres = useSelector(filterGenresSelector);
@@ -72,7 +70,12 @@ const MovieList = ({ onEdit, onDelete, onOpenDetails }) => {
   );
 };
 
+MovieList.defaultProps = {
+  searchQuery: undefined
+};
+
 MovieList.propTypes = {
+  searchQuery: PropTypes.string,
   onDelete: PropTypes.func.isRequired,
   onEdit: PropTypes.func.isRequired,
   onOpenDetails: PropTypes.func.isRequired

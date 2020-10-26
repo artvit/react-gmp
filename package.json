@@ -1,6 +1,6 @@
 {
   "name": "react-gmp",
-  "version": "0.9.1",
+  "version": "0.10.0",
   "private": true,
   "scripts": {
     "start": "npm run start:dev",
@@ -9,6 +9,9 @@
     "build": "npm run build:prod",
     "build:prod": "cross-env NODE_ENV=prod webpack --progress",
     "build:dev": "cross-env NODE_ENV=dev webpack --progress",
+    "ssr:dev": "next dev",
+    "ssr:build": "next build",
+    "ssr:start": "next start",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "lint": "eslint src/**/*.js src/**/*.jsx --no-error-on-unmatched-pattern"
@@ -21,6 +24,8 @@
     "axios": "^0.20.0",
     "formik": "^2.1.5",
     "moment": "^2.29.0",
+    "next": "^9.5.5",
+    "next-images": "^1.6.0",
     "prop-types": "^15.7.2",
     "query-string": "^6.13.6",
     "react": "^16.13.1",
@@ -44,6 +49,7 @@
     "@testing-library/react": "^10.4.9",
     "babel-jest": "^26.3.0",
     "babel-loader": "^8.1.0",
+    "babel-plugin-styled-components": "^1.11.1",
     "cross-env": "^7.0.2",
     "css-loader": "^4.3.0",
     "eslint": "^7.9.0",
@@ -56,7 +62,7 @@
     "html-loader": "^1.3.1",
     "html-webpack-plugin": "^4.5.0",
     "jest": "^26.4.2",
-    "node-sass": "^4.14.1",
+    "sass": "^1.27.0",
     "sass-loader": "^9.0.3",
     "style-loader": "^1.2.1",
     "uglifyjs-webpack-plugin": "^2.2.0",

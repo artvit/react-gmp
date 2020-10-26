@@ -1,7 +1,8 @@
+import qs from 'query-string';
 import React, { useCallback } from 'react';
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
+import { Redirect, Route, Switch, useHistory, useLocation } from 'react-router-dom';
 
 import AddEditDialog from './components/dialog/AddEditDialog';
 import DeleteDialog from './components/dialog/DeleteDialog';
@@ -57,7 +58,7 @@ const App = () => {
   const resultMessage = useSelector(resultMessageSelector);
   const saveMovie = (movie, isEdit) => dispatch(isEdit ? editMovie(movie) : createMovie(movie));
   const history = useHistory();
-
+  const { searchQuery } = qs.parse(useLocation().search);
   const onSearch = useCallback(searchText => history.push({
     pathname: '/film',
     search: `?searchQuery=${searchText}`
@@ -102,6 +103,7 @@ const App = () => {
               </Route>
             </Switch>
             <MovieList
+              searchQuery={searchQuery}
               onDelete={movie => dispatch(openDeleteDialog(movie))}
               onEdit={movie => dispatch(openEditDialog(movie))}
               onOpenDetails={onOpenDetails}
