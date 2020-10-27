@@ -1,12 +1,12 @@
 import Modal from 'react-modal';
 
 const setupModal = () => {
-  // Modal.setAppElement('#root');
-  Object.assign(Modal.defaultStyles.overlay, {
+  Modal.defaultStyles.overlay = {
+    ...Modal.defaultStyles.overlay,
     backgroundColor: 'rgba(0,0,0,0.75)',
     backdropFilter: 'blur(5px)',
     height: '100vh'
-  });
+  };
   Modal.defaultStyles.content = {
     position: 'relative',
     margin: 'auto',

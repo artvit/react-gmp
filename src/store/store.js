@@ -1,55 +1,29 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { useMemo } from 'react';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { createWrapper, HYDRATE } from 'next-redux-wrapper';
 import addEditDialogSlice from './add-edit-dialog-slice';
 import deleteDialogSlice from './delete-dialog-slice';
 import moviesSlice from './movies-slice';
 import resultDialogSlice from './result-dialog-slice';
 
-const defaultOptions = {
-  reducer: {
-    movies: moviesSlice.reducer,
-    addEditDialog: addEditDialogSlice.reducer,
-    deleteDialog: deleteDialogSlice.reducer,
-    resultDialog: resultDialogSlice.reducer
-  }
-};
-
-// eslint-disable-next-line import/no-mutable-exports
-let store = configureStore(defaultOptions);
-
-export const initStore = initState => configureStore({
-  ...defaultOptions,
-  preloadedState: initState
+const appReducer = combineReducers({
+  movies: moviesSlice.reducer,
+  addEditDialog: addEditDialogSlice.reducer,
+  deleteDialog: deleteDialogSlice.reducer,
+  resultDialog: resultDialogSlice.reducer
 });
 
-export const initializeStore = preloadedState => {
-  let tStore = store || initStore(preloadedState);
-
-  // After navigating to a page with an initial Redux state, merge that state
-  // with the current state in the store, and create a new store
-  if (preloadedState && store) {
-    tStore = initStore({
-      ...store.getState(),
-      ...preloadedState
-    });
-    // Reset the current store
-    store = undefined;
+const reducer = (state, action) => {
+  if (action.type === HYDRATE) {
+    return { ...state, ...action.payload };
   }
-
-  // For SSG and SSR always create a new store
-  if (typeof window === 'undefined') {
-    return tStore;
-  }
-  // Create the store once in the client
-  if (!store) {
-    store = tStore;
-  }
-
-  return tStore;
+  return appReducer(state, action);
 };
 
-export function useStore(initialState) {
-  return useMemo(() => initializeStore(initialState), [initialState]);
-}
+const initStore = () => configureStore({ reducer });
+
+// eslint-disable-next-line import/no-mutable-exports
+const store = initStore();
+
+export const wrapper = createWrapper(initStore);
 
 export default store;

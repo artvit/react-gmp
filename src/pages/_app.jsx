@@ -1,18 +1,16 @@
 import React from 'react';
-import { Provider } from 'react-redux';
 import '../index.scss';
 import Modals from '../shared/Dialog/Modals';
-import { useStore } from '../store/store';
+import { wrapper } from '../store/store';
 
 // eslint-disable-next-line react/prop-types
-export default function App({ Component, pageProps }) {
-  const store = useStore();
-  return (
-    <Provider store={store}>
-      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-      <Component {...pageProps} />
+const App = ({ Component, pageProps }) => (
+  <>
+    {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+    <Component {...pageProps} />
 
-      <Modals />
-    </Provider>
-  );
-}
+    <Modals />
+  </>
+);
+
+export default wrapper.withRedux(App);

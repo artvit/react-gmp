@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import Footer from '../../components/Footer/Footer';
 import MovieDetails from '../../components/MovieDetails/MovieDetails';
 import MovieList from '../../components/MovieList/MovieList';
-import { openDeleteDialog, openEditDialog } from '../../store';
+import { loadMovies, openDeleteDialog, openEditDialog } from '../../store';
 import { moviesSelector } from '../../store/common-selectors';
+import { wrapper } from '../../store/store';
 
 const FilmDetailsPage = () => {
   const router = useRouter();
@@ -40,5 +41,10 @@ const FilmDetailsPage = () => {
     </>
   );
 };
+
+export const getServerSideProps = wrapper.getServerSideProps(async ({ store, query }) => {
+  const { searchQuery } = query;
+  await store.dispatch(loadMovies(searchQuery));
+});
 
 export default FilmDetailsPage;

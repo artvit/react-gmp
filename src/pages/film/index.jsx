@@ -4,7 +4,8 @@ import { useDispatch } from 'react-redux';
 import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
 import MovieList from '../../components/MovieList/MovieList';
-import { openAddDialog, openDeleteDialog, openEditDialog } from '../../store';
+import { loadMovies, openAddDialog, openDeleteDialog, openEditDialog } from '../../store';
+import { wrapper } from '../../store/store';
 
 const FilmPage = () => {
   const router = useRouter();
@@ -34,5 +35,10 @@ const FilmPage = () => {
     </>
   );
 };
+
+export const getServerSideProps = wrapper.getServerSideProps(async ({ store, query }) => {
+  const { searchQuery } = query;
+  await store.dispatch(loadMovies(searchQuery));
+});
 
 export default FilmPage;

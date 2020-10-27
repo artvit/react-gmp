@@ -32,11 +32,11 @@ const MovieList = ({ onEdit, onDelete, onOpenDetails, searchQuery }) => {
   const sortByOptions = useSelector(sortByOptionsSelector);
   const sortBy = useSelector(sortBySelector);
   const genre = useSelector(filterGenreSelector);
-  useEffect(() => {
-    if (searchQuery !== undefined) {
-      dispatch(loadMovies(searchQuery));
-    }
-  }, [searchQuery]);
+  // useEffect(() => {
+  //   if (searchQuery !== undefined) {
+  //     dispatch(loadMovies(searchQuery));
+  //   }
+  // }, [searchQuery]);
 
   return (
     <MoviesBox>
