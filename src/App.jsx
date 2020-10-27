@@ -7,7 +7,7 @@ import Header from './components/Header/Header';
 import MovieDetails from './components/MovieDetails/MovieDetails';
 import MovieList from './components/MovieList/MovieList';
 import NotFound from './components/NotFound/NotFound';
-import Modals from './shared/Dialog/Modals';
+import Modals from './components/dialog/Modals';
 import ErrorBoundary from './shared/ErrorBoundary';
 import { openAddDialog, openDeleteDialog, openEditDialog } from './store';
 import { moviesSelector } from './store/common-selectors';

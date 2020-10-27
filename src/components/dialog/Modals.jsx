@@ -1,9 +1,9 @@
 import React from 'react';
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
-import AddEditDialog from '../../components/dialog/AddEditDialog';
-import DeleteDialog from '../../components/dialog/DeleteDialog';
-import ResultDialog from '../../components/dialog/ResultDialog';
+import AddEditDialog from './AddEditDialog';
+import DeleteDialog from './DeleteDialog';
+import ResultDialog from './ResultDialog';
 import {
   closeAddEditDialog,
   closeDeleteDialog,
@@ -11,7 +11,7 @@ import {
   deleteMovie,
   editMovie
 } from '../../store';
-import setupModal from './setup-modal';
+import setupModal from '../../shared/Dialog/setup-modal';
 
 setupModal();
 

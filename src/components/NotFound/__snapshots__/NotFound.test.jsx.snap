@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotFound render component 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-jSFkmK gjVGIP"
+  >
+    <span
+      class="sc-hKFyIo iirmuI"
+    >
+      <span
+        class="sc-eCApGN vYYqg"
+      >
+        netflix
+      </span>
+      roulette
+    </span>
+  </div>
+  <div
+    class="sc-gKAblj kxAosu"
+  >
+    404
+  </div>
+  <div
+    class="sc-iCoHVE fwKHFs"
+  >
+    <button
+      class="sc-gtssRu Fbbfx"
+    >
+      Go Back To Home
+    </button>
+  </div>
+</DocumentFragment>
+`;

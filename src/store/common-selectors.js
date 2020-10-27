@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect';
+import { createSelector } from '@reduxjs/toolkit';
 
 const filterMovies = (movies, genre, sortBy) => {
   let result = movies;

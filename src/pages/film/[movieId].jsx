@@ -18,10 +18,13 @@ const FilmDetailsPage = () => {
     pathname: '/film/[movieId]',
     query: { ...router.query, movieId: movie.id }
   }, undefined, { shallow: true }), [router]);
-  const onCloseDetails = useCallback(() => router.push({
-    pathname: '/film',
-    query: router.query
-  }), [router]);
+  const onCloseDetails = useCallback(() => {
+    const { movieId: _, ...newQuery } = router.query;
+    return router.push({
+      pathname: '/film',
+      query: newQuery
+    });
+  }, [router]);
   const movie = useMemo(() => movies?.find(m => m.id === +movieId), [movies, movieId]);
   return (
     <>
