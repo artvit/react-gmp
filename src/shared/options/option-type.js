@@ -4,9 +4,9 @@ export const optionType = PropTypes.oneOfType([
   PropTypes.shape({
     value: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    selected: PropTypes.bool
+    selected: PropTypes.bool,
   }),
-  PropTypes.string
+  PropTypes.string,
 ]);
 
 export const optionArrayType = PropTypes.arrayOf(optionType);

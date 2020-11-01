@@ -5,7 +5,7 @@ const setupModal = () => {
     ...Modal.defaultStyles.overlay,
     backgroundColor: 'rgba(0,0,0,0.75)',
     backdropFilter: 'blur(5px)',
-    height: '100vh'
+    height: '100vh',
   };
   Modal.defaultStyles.content = {
     position: 'relative',
@@ -13,7 +13,7 @@ const setupModal = () => {
     width: 'fit-content',
     height: '100%',
     overflow: 'auto',
-    outline: 0
+    outline: 0,
   };
 };
 

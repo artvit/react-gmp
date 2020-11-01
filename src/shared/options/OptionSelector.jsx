@@ -28,18 +28,18 @@ const CloseIcon = styled(FontAwesomeIcon)`
 `;
 
 const OptionSelector = ({
-  options, onClick, children, showCloseButton, hideChildren, positionRight, multi
+  options, onClick, children, showCloseButton, hideChildren, positionRight, multi,
 }) => {
   const [showOptions, setShowOptions] = useState(false);
-  const toggleOptionsShown = () => setShowOptions(prevState => !prevState);
+  const toggleOptionsShown = () => setShowOptions((prevState) => !prevState);
   const onClickOutside = useCallback(() => setShowOptions(false), []);
   const listRef = useClickOutside(onClickOutside);
 
-  const selectOption = option => {
+  const selectOption = (option) => {
     onClick(typeof option === 'string' ? option : option.value);
     setShowOptions(false);
   };
-  const getOptionComponent = option => {
+  const getOptionComponent = (option) => {
     if (typeof option === 'string') {
       return (
         <Option key={option} onClick={() => selectOption(option)}>
@@ -79,7 +79,7 @@ OptionSelector.defaultProps = {
   showCloseButton: false,
   hideChildren: false,
   positionRight: false,
-  multi: false
+  multi: false,
 };
 OptionSelector.propTypes = {
   onClick: PropTypes.func.isRequired,
@@ -87,7 +87,7 @@ OptionSelector.propTypes = {
   showCloseButton: PropTypes.bool,
   hideChildren: PropTypes.bool,
   positionRight: PropTypes.bool,
-  multi: PropTypes.bool
+  multi: PropTypes.bool,
 };
 
 export default OptionSelector;

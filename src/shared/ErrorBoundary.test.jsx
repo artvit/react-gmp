@@ -15,7 +15,7 @@ describe('ErrorBoundary', () => {
     const { getByText } = render(
       <ErrorBoundary>
         <Errored />
-      </ErrorBoundary>
+      </ErrorBoundary>,
     );
     expect(getByText('Something went wrong')).toBeInTheDocument();
   });
@@ -24,7 +24,7 @@ describe('ErrorBoundary', () => {
     const { getByText, queryByText } = render(
       <ErrorBoundary>
         <Ok />
-      </ErrorBoundary>
+      </ErrorBoundary>,
     );
     expect(getByText('ok')).toBeInTheDocument();
     expect(queryByText('Something went wrong')).not.toBeInTheDocument();

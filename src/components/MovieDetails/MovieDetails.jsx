@@ -17,13 +17,13 @@ import {
   SearchIcon,
   Title,
   TitleText,
-  YearLengthBlock
+  YearLengthBlock,
 } from './MovieDetails.style';
 
 const MovieDetails = ({ movie, onSearchClick }) => {
   const { src: posterSrc } = useImage({
     srcList: [movie.poster_path, fallbackImg],
-    useSuspense: false
+    useSuspense: false,
   });
   return (
     <Background>
@@ -52,7 +52,7 @@ const MovieDetails = ({ movie, onSearchClick }) => {
 
 MovieDetails.propTypes = {
   movie: movieType.isRequired,
-  onSearchClick: PropTypes.func.isRequired
+  onSearchClick: PropTypes.func.isRequired,
 };
 
 export default MovieDetails;

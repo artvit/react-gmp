@@ -14,7 +14,7 @@ const DeleteDialog = ({ onClose, onConfirm }) => (
 
 DeleteDialog.propTypes = {
   onClose: PropTypes.func.isRequired,
-  onConfirm: PropTypes.func.isRequired
+  onConfirm: PropTypes.func.isRequired,
 };
 
 export default DeleteDialog;

@@ -16,14 +16,14 @@ import {
   MovieBox,
   Title,
   TitleBox,
-  Year
+  Year,
 } from './Movie.style';
 
 const Movie = ({
-  movie, onDelete, onEdit, onOpenDetails
+  movie, onDelete, onEdit, onOpenDetails,
 }) => {
   const actions = ['Edit', 'Delete'];
-  const handleAction = useCallback(action => {
+  const handleAction = useCallback((action) => {
     if (action === 'Edit') {
       onEdit(movie);
     } else if (action === 'Delete') {
@@ -32,7 +32,7 @@ const Movie = ({
   }, [movie, onDelete, onEdit]);
   const { src: posterSrc } = useImage({
     srcList: [movie.poster_path, fallbackImg],
-    useSuspense: false
+    useSuspense: false,
   });
   return (
     <MovieBox>
@@ -67,7 +67,7 @@ Movie.propTypes = {
   movie: movieType.isRequired,
   onDelete: PropTypes.func.isRequired,
   onEdit: PropTypes.func.isRequired,
-  onOpenDetails: PropTypes.func.isRequired
+  onOpenDetails: PropTypes.func.isRequired,
 };
 
 export default Movie;

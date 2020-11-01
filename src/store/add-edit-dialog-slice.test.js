@@ -8,13 +8,13 @@ describe('addEditDialogSlice', () => {
     const resultState = reducer(
       {
         editedMovie: null,
-        isAddEditOpened: false
+        isAddEditOpened: false,
       },
-      actions.openAddDialog()
+      actions.openAddDialog(),
     );
     expect(resultState).toEqual({
       editedMovie: null,
-      isAddEditOpened: true
+      isAddEditOpened: true,
     });
   });
 
@@ -23,13 +23,13 @@ describe('addEditDialogSlice', () => {
     const resultState = reducer(
       {
         editedMovie: null,
-        isAddEditOpened: false
+        isAddEditOpened: false,
       },
-      actions.openEditDialog(testMovie)
+      actions.openEditDialog(testMovie),
     );
     expect(resultState).toEqual({
       editedMovie: testMovie,
-      isAddEditOpened: true
+      isAddEditOpened: true,
     });
   });
 
@@ -38,13 +38,13 @@ describe('addEditDialogSlice', () => {
     const resultState = reducer(
       {
         editedMovie: testMovie,
-        isAddEditOpened: true
+        isAddEditOpened: true,
       },
-      actions.closeAddEditDialog()
+      actions.closeAddEditDialog(),
     );
     expect(resultState).toEqual({
       editedMovie: null,
-      isAddEditOpened: false
+      isAddEditOpened: false,
     });
   });
 
@@ -53,13 +53,13 @@ describe('addEditDialogSlice', () => {
     const resultState = reducer(
       {
         editedMovie: testMovie,
-        isAddEditOpened: true
+        isAddEditOpened: true,
       },
-      createMovie.fulfilled()
+      createMovie.fulfilled(),
     );
     expect(resultState).toEqual({
       editedMovie: null,
-      isAddEditOpened: false
+      isAddEditOpened: false,
     });
   });
 
@@ -68,13 +68,13 @@ describe('addEditDialogSlice', () => {
     const resultState = reducer(
       {
         editedMovie: testMovie,
-        isAddEditOpened: true
+        isAddEditOpened: true,
       },
-      editMovie.fulfilled()
+      editMovie.fulfilled(),
     );
     expect(resultState).toEqual({
       editedMovie: null,
-      isAddEditOpened: false
+      isAddEditOpened: false,
     });
   });
 });

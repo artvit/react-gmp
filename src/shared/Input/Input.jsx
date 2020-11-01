@@ -19,11 +19,11 @@ const Input = ({ title, type, placeholder, value, options, onChange, name, error
         value={value}
         options={options}
         errored={touched && !!error}
-        onChange={v => onChange(name, v)}
+        onChange={(v) => onChange(name, v)}
       />
     );
   } else if (type === 'multiselect') {
-    const calculatedTouched = Array.isArray(touched) ? touched.some(t => t) : touched;
+    const calculatedTouched = Array.isArray(touched) ? touched.some((t) => t) : touched;
     inputControl = (
       <MultiselectInputControl
         name={name}
@@ -31,7 +31,7 @@ const Input = ({ title, type, placeholder, value, options, onChange, name, error
         value={value}
         options={options}
         errored={calculatedTouched && !!error}
-        onChange={v => onChange(name, v)}
+        onChange={(v) => onChange(name, v)}
       />
     );
   } else {
@@ -41,7 +41,7 @@ const Input = ({ title, type, placeholder, value, options, onChange, name, error
         placeholder={placeholder}
         value={value}
         errored={touched && !!error}
-        onChange={evt => onChange(name, evt.target.value)}
+        onChange={(evt) => onChange(name, evt.target.value)}
       />
     );
   }
@@ -64,7 +64,7 @@ Input.defaultProps = {
   options: [],
   touched: false,
   error: undefined,
-  onChange: () => {}
+  onChange: () => {},
 };
 
 Input.propTypes = {
@@ -75,15 +75,15 @@ Input.propTypes = {
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
-    PropTypes.arrayOf(PropTypes.string)
+    PropTypes.arrayOf(PropTypes.string),
   ]),
   options: PropTypes.arrayOf(PropTypes.any),
   touched: PropTypes.oneOfType([
     PropTypes.bool,
-    PropTypes.arrayOf(PropTypes.bool)
+    PropTypes.arrayOf(PropTypes.bool),
   ]),
   error: PropTypes.string,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
 };
 
 export default Input;

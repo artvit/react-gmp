@@ -9,13 +9,13 @@ const ResultDialog = ({ success, message, onClose }) => (
 );
 
 ResultDialog.defaultProps = {
-  message: ''
+  message: '',
 };
 
 ResultDialog.propTypes = {
   success: PropTypes.bool.isRequired,
   message: PropTypes.string,
-  onClose: PropTypes.func.isRequired
+  onClose: PropTypes.func.isRequired,
 };
 
 export default ResultDialog;

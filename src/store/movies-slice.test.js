@@ -18,14 +18,14 @@ describe('moviesSlice', () => {
     const resultState = reducer({ data: [] }, loadMovies.fulfilled({
       data: [{
         id: 1,
-        name: 'test'
-      }]
+        name: 'test',
+      }],
     }));
 
     expect(resultState.data.length).toBe(1);
     expect(resultState.data).toContainEqual({
       id: 1,
-      name: 'test'
+      name: 'test',
     });
   });
 
@@ -34,7 +34,7 @@ describe('moviesSlice', () => {
 
     expect(resultState.data).not.toContainEqual({
       id: 1,
-      name: 'test'
+      name: 'test',
     });
   });
 
@@ -43,31 +43,31 @@ describe('moviesSlice', () => {
 
     expect(resultState.data).not.toContainEqual({
       id: 1,
-      name: 'test'
+      name: 'test',
     });
   });
 
   test('createMovie.fulfilled', () => {
     const resultState = reducer({ data: [] }, createMovie.fulfilled({
       id: 1,
-      name: 'test'
+      name: 'test',
     }));
 
     expect(resultState.data).toContainEqual({
       id: 1,
-      name: 'test'
+      name: 'test',
     });
   });
 
   test('editMovie.fulfilled', () => {
     const resultState = reducer({ data: [{ id: 1, name: 'test' }] }, editMovie.fulfilled({
       id: 1,
-      name: 'test_new'
+      name: 'test_new',
     }));
 
     expect(resultState.data).toContainEqual({
       id: 1,
-      name: 'test_new'
+      name: 'test_new',
     });
   });
 });

@@ -3,10 +3,10 @@ import { createMovie, deleteMovie, editMovie, loadMovies } from './movie-thunks'
 
 const sortByOptions = [{
   value: 'release_date',
-  title: 'Released Date'
+  title: 'Released Date',
 }, {
   value: 'title',
-  title: 'Title'
+  title: 'Title',
 }];
 
 const moviesSlice = createSlice({
@@ -15,7 +15,7 @@ const moviesSlice = createSlice({
     data: [],
     filterGenre: 'All',
     sortByOptions,
-    sortBy: sortByOptions[0].value
+    sortBy: sortByOptions[0].value,
   },
   reducers: {
     setSortBy: (state, action) => {
@@ -23,23 +23,23 @@ const moviesSlice = createSlice({
     },
     setFilterGenre: (state, action) => {
       state.filterGenre = action.payload;
-    }
+    },
   },
   extraReducers: {
     [loadMovies.fulfilled]: (state, action) => {
       state.data = action.payload.data;
     },
     [deleteMovie.fulfilled]: (state, action) => {
-      state.data = state.data.filter(movie => movie.id !== action.payload);
+      state.data = state.data.filter((movie) => movie.id !== action.payload);
     },
     [createMovie.fulfilled]: (state, action) => {
       state.data.push(action.payload);
     },
     [editMovie.fulfilled]: (state, action) => {
-      const idx = state.data.findIndex(movie => movie.id === action.payload.id);
+      const idx = state.data.findIndex((movie) => movie.id === action.payload.id);
       state.data[idx] = action.payload;
-    }
-  }
+    },
+  },
 });
 
 export const { setFilterGenre, setSortBy } = moviesSlice.actions;

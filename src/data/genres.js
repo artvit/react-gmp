@@ -17,6 +17,6 @@ const genres = [
   'Horror',
   'Western',
   'Documentary',
-  'TV Movie'
+  'TV Movie',
 ];
 export default genres;

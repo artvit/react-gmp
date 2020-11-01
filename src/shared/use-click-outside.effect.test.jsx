@@ -21,7 +21,7 @@ describe('useClickOutside', () => {
       <>
         <Clickable />
         <div>a</div>
-      </>
+      </>,
     );
     fireEvent.mouseDown(getByText('a'));
     expect(handler).toHaveBeenCalled();

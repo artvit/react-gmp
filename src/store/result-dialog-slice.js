@@ -7,7 +7,7 @@ const apiErrorReducer = (state, action) => {
   state.resultMessage = action.error.message;
 };
 
-const apiSuccessReducer = message => state => {
+const apiSuccessReducer = (message) => (state) => {
   state.resultDialogOpened = true;
   state.success = true;
   state.resultMessage = message;
@@ -18,12 +18,12 @@ const resultDialogSlice = createSlice({
   initialState: {
     resultDialogOpened: false,
     success: false,
-    resultMessage: null
+    resultMessage: null,
   },
   reducers: {
-    closeResultDialog: state => {
+    closeResultDialog: (state) => {
       state.resultDialogOpened = false;
-    }
+    },
   },
   extraReducers: {
     [createMovie.fulfilled]: apiSuccessReducer('The movie has been added to database successfully'),
@@ -32,8 +32,8 @@ const resultDialogSlice = createSlice({
     [createMovie.rejected]: apiErrorReducer,
     [editMovie.rejected]: apiErrorReducer,
     [deleteMovie.rejected]: apiErrorReducer,
-    [loadMovies.rejected]: apiErrorReducer
-  }
+    [loadMovies.rejected]: apiErrorReducer,
+  },
 });
 
 export const { closeResultDialog } = resultDialogSlice.actions;

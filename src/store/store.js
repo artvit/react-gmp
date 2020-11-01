@@ -9,7 +9,7 @@ const appReducer = combineReducers({
   movies: moviesSlice.reducer,
   addEditDialog: addEditDialogSlice.reducer,
   deleteDialog: deleteDialogSlice.reducer,
-  resultDialog: resultDialogSlice.reducer
+  resultDialog: resultDialogSlice.reducer,
 });
 
 const reducer = (state, action) => {

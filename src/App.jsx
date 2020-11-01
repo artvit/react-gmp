@@ -1,5 +1,5 @@
 import qs from 'query-string';
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import Footer from './components/Footer/Footer';
@@ -9,7 +9,7 @@ import MovieList from './components/MovieList/MovieList';
 import NotFound from './components/NotFound/NotFound';
 import Modals from './components/dialog/Modals';
 import ErrorBoundary from './shared/ErrorBoundary';
-import { openAddDialog, openDeleteDialog, openEditDialog } from './store';
+import { loadMovies, openAddDialog, openDeleteDialog, openEditDialog } from './store';
 import { moviesSelector } from './store/common-selectors';
 
 const App = () => {
@@ -18,17 +18,23 @@ const App = () => {
 
   const history = useHistory();
   const { searchQuery } = qs.parse(useLocation().search);
-  const onSearch = useCallback(searchText => history.push({
+  useEffect(() => {
+    if (searchQuery !== undefined) {
+      dispatch(loadMovies(searchQuery));
+    }
+  }, [searchQuery]);
+
+  const onSearch = useCallback((searchText) => history.push({
     pathname: '/film',
-    search: `?searchQuery=${searchText}`
+    search: `?searchQuery=${searchText}`,
   }), [history]);
-  const onOpenDetails = useCallback(movie => history.push({
+  const onOpenDetails = useCallback((movie) => history.push({
     pathname: `/film/${movie.id}`,
-    search: history.location.search
+    search: history.location.search,
   }), [history]);
   const onCloseDetails = useCallback(() => history.push({
     pathname: '/film',
-    search: history.location.search
+    search: history.location.search,
   }), [history]);
   const onGoToHome = useCallback(() => history.push('/'), [history]);
 
@@ -41,7 +47,7 @@ const App = () => {
               <Route
                 path="/film/:movieId"
                 render={({ match }) => {
-                  const movie = movies?.find(m => m.id === +match.params.movieId);
+                  const movie = movies?.find((m) => m.id === +match.params.movieId);
                   return (
                     <>
                       {movie && (
@@ -62,9 +68,8 @@ const App = () => {
               </Route>
             </Switch>
             <MovieList
-              searchQuery={searchQuery}
-              onDelete={movie => dispatch(openDeleteDialog(movie))}
-              onEdit={movie => dispatch(openEditDialog(movie))}
+              onDelete={(movie) => dispatch(openDeleteDialog(movie))}
+              onEdit={(movie) => dispatch(openEditDialog(movie))}
               onOpenDetails={onOpenDetails}
             />
           </ErrorBoundary>

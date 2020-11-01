@@ -14,7 +14,7 @@ describe('resultDialogSlice', () => {
     expect(resultState).toEqual({
       resultDialogOpened: true,
       success: true,
-      resultMessage: 'The movie has been added to database successfully'
+      resultMessage: 'The movie has been added to database successfully',
     });
   });
 
@@ -23,7 +23,7 @@ describe('resultDialogSlice', () => {
     expect(resultState).toEqual({
       resultDialogOpened: true,
       success: true,
-      resultMessage: 'The movie has been updated successfully'
+      resultMessage: 'The movie has been updated successfully',
     });
   });
 
@@ -32,7 +32,7 @@ describe('resultDialogSlice', () => {
     expect(resultState).toEqual({
       resultDialogOpened: true,
       success: true,
-      resultMessage: 'The movie has been removed successfully'
+      resultMessage: 'The movie has been removed successfully',
     });
   });
 
@@ -44,7 +44,7 @@ describe('resultDialogSlice', () => {
     expect(resultState).toEqual({
       resultDialogOpened: true,
       success: false,
-      resultMessage: errorMessage
+      resultMessage: errorMessage,
     });
   });
 
@@ -53,7 +53,7 @@ describe('resultDialogSlice', () => {
     expect(resultState).toEqual({
       resultDialogOpened: true,
       success: false,
-      resultMessage: errorMessage
+      resultMessage: errorMessage,
     });
   });
 
@@ -62,7 +62,7 @@ describe('resultDialogSlice', () => {
     expect(resultState).toEqual({
       resultDialogOpened: true,
       success: false,
-      resultMessage: errorMessage
+      resultMessage: errorMessage,
     });
   });
 
@@ -71,7 +71,7 @@ describe('resultDialogSlice', () => {
     expect(resultState).toEqual({
       resultDialogOpened: true,
       success: false,
-      resultMessage: errorMessage
+      resultMessage: errorMessage,
     });
   });
 });

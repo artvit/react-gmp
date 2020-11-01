@@ -29,7 +29,7 @@ SelectInputControl.defaultProps = {
   options: [],
   multi: false,
   errored: false,
-  onChange: () => {}
+  onChange: () => {},
 };
 
 SelectInputControl.propTypes = {
@@ -38,7 +38,7 @@ SelectInputControl.propTypes = {
   options: PropTypes.arrayOf(optionType),
   multi: PropTypes.bool,
   errored: PropTypes.bool,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
 };
 
 export default SelectInputControl;

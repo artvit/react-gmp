@@ -4,7 +4,7 @@ import {
   CloseButton,
   CloseButtonBox,
   DialogPanel,
-  Title
+  Title,
 } from './Dialog.style';
 
 const Dialog = ({ title, children, onClose }) => (
@@ -17,7 +17,7 @@ const Dialog = ({ title, children, onClose }) => (
 
 Dialog.propTypes = {
   title: PropTypes.string.isRequired,
-  onClose: PropTypes.func.isRequired
+  onClose: PropTypes.func.isRequired,
 };
 
 export default Dialog;

@@ -16,7 +16,7 @@ const NotFound = ({ onGoToHomeClick }) => (
 );
 
 NotFound.propTypes = {
-  onGoToHomeClick: PropTypes.func.isRequired
+  onGoToHomeClick: PropTypes.func.isRequired,
 };
 
 export default NotFound;

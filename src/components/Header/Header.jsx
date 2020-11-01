@@ -8,13 +8,13 @@ import {
   SearchBlock,
   SearchButton,
   SearchInput,
-  SearchLabel
+  SearchLabel,
 } from './Header.style';
 
 const Header = ({ onAddClick, onSearch }) => {
   const [searchText, setSearchText] = useState('');
   const triggerSearch = () => onSearch(searchText);
-  const onEnterPressed = event => {
+  const onEnterPressed = (event) => {
     if (event.keyCode === 13) {
       triggerSearch();
     }
@@ -30,7 +30,7 @@ const Header = ({ onAddClick, onSearch }) => {
         <SearchInput
           placeholder="What do you want to watch?"
           onKeyDown={onEnterPressed}
-          onChange={e => setSearchText(e.target.value)}
+          onChange={(e) => setSearchText(e.target.value)}
         />
         <SearchButton onClick={triggerSearch}>Search</SearchButton>
       </SearchBlock>
@@ -40,7 +40,7 @@ const Header = ({ onAddClick, onSearch }) => {
 
 Header.propTypes = {
   onSearch: PropTypes.func.isRequired,
-  onAddClick: PropTypes.func.isRequired
+  onAddClick: PropTypes.func.isRequired,
 };
 
 export default Header;

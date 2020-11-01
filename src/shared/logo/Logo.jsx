@@ -21,11 +21,11 @@ const Logo = ({ size }) => (
 );
 
 Logo.defaultProps = {
-  size: ''
+  size: '',
 };
 
 Logo.propTypes = {
-  size: PropTypes.string
+  size: PropTypes.string,
 };
 
 export default Logo;

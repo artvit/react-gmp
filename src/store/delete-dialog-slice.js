@@ -8,15 +8,15 @@ const deleteDialogSlice = createSlice({
     openDeleteDialog: (state, action) => {
       state.deletedMovie = action.payload;
     },
-    closeDeleteDialog: state => {
+    closeDeleteDialog: (state) => {
       state.deletedMovie = null;
-    }
+    },
   },
   extraReducers: {
-    [deleteMovie.fulfilled]: state => {
+    [deleteMovie.fulfilled]: (state) => {
       state.deletedMovie = null;
-    }
-  }
+    },
+  },
 });
 
 export const { openDeleteDialog, closeDeleteDialog } = deleteDialogSlice.actions;

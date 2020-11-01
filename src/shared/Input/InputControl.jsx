@@ -5,7 +5,7 @@ const InputControl = styled.input`
   color: white;
   width: 100%;
   padding: 10px;
-  border: 1px solid ${({ errored }) => errored ? '#f65261' : 'rgba(0,0,0,0)'};
+  border: 1px solid ${({ errored }) => (errored ? '#f65261' : 'rgba(0,0,0,0)')};
   font-size: 16px;
   border-radius: 4px;
   box-sizing: border-box;

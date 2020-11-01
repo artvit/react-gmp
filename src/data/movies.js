@@ -3,9 +3,9 @@ import axios from 'axios';
 const SERVER_URL = 'http://localhost:4000';
 const MOVIES_PATH = '/movies';
 
-const wrapError = error => error?.response?.messages ? new Error(error.response.messages.join('\n')) : error;
+const wrapError = (error) => (error?.response?.messages ? new Error(error.response.messages.join('\n')) : error);
 
-const fetchMovies = async searchText => {
+const fetchMovies = async (searchText) => {
   try {
     const response = await axios.get(`${SERVER_URL}${MOVIES_PATH}?limit=100&search=${searchText}&searchBy=title`);
     return response.data;
@@ -14,7 +14,7 @@ const fetchMovies = async searchText => {
   }
 };
 
-const createMovie = async movie => {
+const createMovie = async (movie) => {
   try {
     const response = await axios.post(`${SERVER_URL}${MOVIES_PATH}`, movie);
     return response.data;
@@ -23,7 +23,7 @@ const createMovie = async movie => {
   }
 };
 
-const updateMovie = async movie => {
+const updateMovie = async (movie) => {
   try {
     const response = await axios.put(`${SERVER_URL}${MOVIES_PATH}`, movie);
     return response.data;
@@ -32,7 +32,7 @@ const updateMovie = async movie => {
   }
 };
 
-const removeMovie = async id => {
+const removeMovie = async (id) => {
   try {
     const response = await axios.delete(`${SERVER_URL}${MOVIES_PATH}/${id}`);
     return response.data;
@@ -45,7 +45,7 @@ const MoviesAPI = {
   fetchMovies,
   createMovie,
   updateMovie,
-  removeMovie
+  removeMovie,
 };
 
 export default MoviesAPI;

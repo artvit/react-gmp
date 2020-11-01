@@ -1,13 +1,13 @@
+import { createSelector } from '@reduxjs/toolkit';
 import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
-import { loadMovies, setFilterGenre, setSortBy } from '../../store';
+import { setFilterGenre, setSortBy } from '../../store';
 import {
   filteredSortedMoviesSelector,
   filterGenreSelector,
   moviesSelector,
-  sortBySelector
+  sortBySelector,
 } from '../../store/common-selectors';
 import ControlPanel from './ControlPanel/ControlPanel';
 import Empty from './Empty';
@@ -16,27 +16,22 @@ import { CountBox, MoviesBox, MoviesLayout } from './MovieList.style';
 
 const filterGenresSelector = createSelector(
   moviesSelector,
-  movies => ['All', ...Array.from(
+  (movies) => ['All', ...Array.from(
     movies
-      .map(m => m.genres)
+      .map((m) => m.genres)
       .flat()
-      .reduce((set, genre) => set.add(genre), new Set())
-  )]
+      .reduce((set, genre) => set.add(genre), new Set()),
+  )],
 );
-const sortByOptionsSelector = state => state.movies.sortByOptions;
+const sortByOptionsSelector = (state) => state.movies.sortByOptions;
 
-const MovieList = ({ onEdit, onDelete, onOpenDetails, searchQuery }) => {
+const MovieList = ({ onEdit, onDelete, onOpenDetails }) => {
   const dispatch = useDispatch();
   const filteredMovies = useSelector(filteredSortedMoviesSelector);
   const filterGenres = useSelector(filterGenresSelector);
   const sortByOptions = useSelector(sortByOptionsSelector);
   const sortBy = useSelector(sortBySelector);
   const genre = useSelector(filterGenreSelector);
-  // useEffect(() => {
-  //   if (searchQuery !== undefined) {
-  //     dispatch(loadMovies(searchQuery));
-  //   }
-  // }, [searchQuery]);
 
   return (
     <MoviesBox>
@@ -45,8 +40,8 @@ const MovieList = ({ onEdit, onDelete, onOpenDetails, searchQuery }) => {
         selectedSortBy={sortBy}
         genreOptions={filterGenres}
         sortByOptions={sortByOptions}
-        onFilterChange={g => dispatch(setFilterGenre(g))}
-        onSortChange={sb => dispatch(setSortBy(sb))}
+        onFilterChange={(g) => dispatch(setFilterGenre(g))}
+        onSortChange={(sb) => dispatch(setSortBy(sb))}
       />
       {filteredMovies.length ? (
         <>
@@ -54,7 +49,7 @@ const MovieList = ({ onEdit, onDelete, onOpenDetails, searchQuery }) => {
             <b>{filteredMovies.length}</b> movies found
           </CountBox>
           <MoviesLayout>
-            {filteredMovies.map(m => (
+            {filteredMovies.map((m) => (
               <Movie
                 key={m.id}
                 movie={m}
@@ -70,15 +65,10 @@ const MovieList = ({ onEdit, onDelete, onOpenDetails, searchQuery }) => {
   );
 };
 
-MovieList.defaultProps = {
-  searchQuery: undefined
-};
-
 MovieList.propTypes = {
-  searchQuery: PropTypes.string,
   onDelete: PropTypes.func.isRequired,
   onEdit: PropTypes.func.isRequired,
-  onOpenDetails: PropTypes.func.isRequired
+  onOpenDetails: PropTypes.func.isRequired,
 };
 
 export default MovieList;

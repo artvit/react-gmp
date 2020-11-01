@@ -12,12 +12,12 @@ const FilmPage = () => {
   const { searchQuery } = router.query;
   const dispatch = useDispatch();
   const onSearch = useCallback(
-    searchText => router.push(`/film?searchQuery=${searchText}`),
-    [router]
+    (searchText) => router.push(`/film?searchQuery=${searchText}`),
+    [router],
   );
-  const onOpenDetails = useCallback(movie => router.push({
+  const onOpenDetails = useCallback((movie) => router.push({
     pathname: '/film/[movieId]',
-    query: { ...router.query, movieId: movie.id }
+    query: { ...router.query, movieId: movie.id },
   }, undefined, { shallow: true }), [router]);
   return (
     <>
@@ -27,8 +27,8 @@ const FilmPage = () => {
       />
       <MovieList
         searchQuery={searchQuery}
-        onDelete={movie => dispatch(openDeleteDialog(movie))}
-        onEdit={movie => dispatch(openEditDialog(movie))}
+        onDelete={(movie) => dispatch(openDeleteDialog(movie))}
+        onEdit={(movie) => dispatch(openEditDialog(movie))}
         onOpenDetails={onOpenDetails}
       />
       <Footer />

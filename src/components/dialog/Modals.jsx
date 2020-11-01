@@ -9,18 +9,18 @@ import {
   closeDeleteDialog,
   closeResultDialog, createMovie,
   deleteMovie,
-  editMovie
+  editMovie,
 } from '../../store';
 import setupModal from '../../shared/Dialog/setup-modal';
 
 setupModal();
 
-const isAddEditOpenedSelector = state => state.addEditDialog.isAddEditOpened;
-const editedMovieSelector = state => state.addEditDialog.editedMovie;
-const deletedSelector = state => state.deleteDialog.deletedMovie;
-const resultDialogOpenedSelector = state => state.resultDialog.resultDialogOpened;
-const successSelector = state => state.resultDialog.success;
-const resultMessageSelector = state => state.resultDialog.resultMessage;
+const isAddEditOpenedSelector = (state) => state.addEditDialog.isAddEditOpened;
+const editedMovieSelector = (state) => state.addEditDialog.editedMovie;
+const deletedSelector = (state) => state.deleteDialog.deletedMovie;
+const resultDialogOpenedSelector = (state) => state.resultDialog.resultDialogOpened;
+const successSelector = (state) => state.resultDialog.success;
+const resultMessageSelector = (state) => state.resultDialog.resultMessage;
 
 const Modals = () => {
   const dispatch = useDispatch();
@@ -38,7 +38,7 @@ const Modals = () => {
           isEdit={!!editedMovie}
           movie={editedMovie}
           onClose={() => dispatch(closeAddEditDialog())}
-          onSave={m => saveMovie(m, !!editedMovie)}
+          onSave={(m) => saveMovie(m, !!editedMovie)}
         />
       </Modal>
       <Modal isOpen={!!deletedMovie}>

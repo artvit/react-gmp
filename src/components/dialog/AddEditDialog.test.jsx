@@ -18,18 +18,18 @@ describe('AddEditDialog', () => {
           isEdit={false}
           onClose={onClose}
           onSave={onSave}
-        />
+        />,
       );
       expect(queryByText('Movie ID')).not.toBeInTheDocument();
     });
 
-    it('should call onSave callback on submit button click', async done => {
+    it('should call onSave callback on submit button click', async (done) => {
       const { getByText, getByPlaceholderText } = render(
         <AddEditDialog
           isEdit={false}
           onClose={onClose}
           onSave={onSave}
-        />
+        />,
       );
       const submitButton = getByText('Submit');
       expect(submitButton).toBeInTheDocument();
@@ -57,7 +57,7 @@ describe('AddEditDialog', () => {
       genres: ['Comedy', 'Horror'],
       release_date: '2012-12-12',
       overview: 'overview',
-      runtime: 123
+      runtime: 123,
     };
 
     it('should render to edit', () => {
@@ -70,7 +70,7 @@ describe('AddEditDialog', () => {
       expect(getByText('Movie ID')).toBeInTheDocument();
     });
 
-    it('should call onSave callback on submit button click', async done => {
+    it('should call onSave callback on submit button click', async (done) => {
       const { getByText } = render(<AddEditDialog
         isEdit
         movie={movie}

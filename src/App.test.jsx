@@ -13,7 +13,7 @@ jest.mock('react-redux', () => {
   return {
     useDispatch: jest.fn(),
     useSelector,
-    Provider
+    Provider,
   };
 });
 

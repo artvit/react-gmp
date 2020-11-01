@@ -13,7 +13,7 @@ describe('Movie', () => {
     poster_path: 'http://localhost.com/123.jpg',
     genres: ['Comedy', 'Drama'],
     release_date: '2012-01-30',
-    tagline: 'Tagline test'
+    tagline: 'Tagline test',
   };
 
   beforeEach(() => {
@@ -29,7 +29,7 @@ describe('Movie', () => {
         onDelete={onDelete}
         onEdit={onEdit}
         onOpenDetails={onOpenDetails}
-      />
+      />,
     );
     expect(baseElement).toBeInTheDocument();
   });
@@ -41,7 +41,7 @@ describe('Movie', () => {
         onDelete={onDelete}
         onEdit={onEdit}
         onOpenDetails={onOpenDetails}
-      />
+      />,
     );
     fireEvent.click(getByText(testMovie.title));
     expect(onOpenDetails).toHaveBeenCalled();
@@ -54,7 +54,7 @@ describe('Movie', () => {
         onDelete={onDelete}
         onEdit={onEdit}
         onOpenDetails={onOpenDetails}
-      />
+      />,
     );
     fireEvent.click(getByAltText(testMovie.title));
     expect(onOpenDetails).toHaveBeenCalled();
@@ -67,7 +67,7 @@ describe('Movie', () => {
         onDelete={onDelete}
         onEdit={onEdit}
         onOpenDetails={onOpenDetails}
-      />
+      />,
     );
     fireEvent.click(getByTestId('actionsButton'));
     fireEvent.click(getByText('Delete'));
@@ -81,7 +81,7 @@ describe('Movie', () => {
         onDelete={onDelete}
         onEdit={onEdit}
         onOpenDetails={onOpenDetails}
-      />
+      />,
     );
     fireEvent.click(getByTestId('actionsButton'));
     fireEvent.click(getByText('Edit'));

@@ -1,9 +1,9 @@
 import moment from 'moment';
 
-const formatYear = date => moment(date, 'yyyy-mm-dd').get('year');
+const formatYear = (date) => moment(date, 'yyyy-mm-dd').get('year');
 
 const DateFormatters = {
-  formatYear
+  formatYear,
 };
 
 export default DateFormatters;

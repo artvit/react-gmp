@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 import SelectInputControl from './SelectInputControl';
 
 const MultiselectInputControl = ({ placeholder, value, options, onChange, errored }) => {
-  const extendedOptions = options.map(o => ({
+  const extendedOptions = options.map((o) => ({
     value: o,
     title: o,
-    selected: value.includes(o)
+    selected: value.includes(o),
   }));
-  const optionsChange = optionValue => {
-    const option = extendedOptions.find(o => o.value === optionValue);
+  const optionsChange = (optionValue) => {
+    const option = extendedOptions.find((o) => o.value === optionValue);
     option.selected = !option.selected;
-    return extendedOptions.filter(o => o.selected).map(o => o.value);
+    return extendedOptions.filter((o) => o.selected).map((o) => o.value);
   };
   return (
     <SelectInputControl
@@ -20,7 +20,7 @@ const MultiselectInputControl = ({ placeholder, value, options, onChange, errore
       value={value}
       options={extendedOptions}
       errored={errored}
-      onChange={v => onChange(optionsChange(v))}
+      onChange={(v) => onChange(optionsChange(v))}
     />
   );
 };
@@ -30,7 +30,7 @@ MultiselectInputControl.defaultProps = {
   value: '',
   options: [],
   errored: false,
-  onChange: () => {}
+  onChange: () => {},
 };
 
 MultiselectInputControl.propTypes = {
@@ -38,7 +38,7 @@ MultiselectInputControl.propTypes = {
   value: PropTypes.arrayOf(PropTypes.string),
   options: PropTypes.arrayOf(PropTypes.string),
   errored: PropTypes.bool,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
 };
 
 export default MultiselectInputControl;

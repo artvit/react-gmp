@@ -11,7 +11,7 @@ const ControlPanel = ({
   selectedFilter,
   selectedSortBy,
   sortByOptions,
-  genreOptions
+  genreOptions,
 }) => (
   <ControlBox>
     <FilterSelect
@@ -33,7 +33,7 @@ ControlPanel.propTypes = {
   selectedFilter: PropTypes.string.isRequired,
   selectedSortBy: PropTypes.string.isRequired,
   sortByOptions: optionArrayType.isRequired,
-  genreOptions: PropTypes.arrayOf(PropTypes.string).isRequired
+  genreOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default ControlPanel;

@@ -16,7 +16,7 @@ const defaultInitialValues = {
   runtime: '',
   url: '',
   genre: [],
-  overview: ''
+  overview: '',
 };
 
 const movieFormScheme = Yup.object().shape({
@@ -40,27 +40,27 @@ const movieFormScheme = Yup.object().shape({
     .min(1, 'At least one genre must be provided')
     .required('Genres are required'),
   overview: Yup.string()
-    .required('Overview is required')
+    .required('Overview is required'),
 });
 
-const movieToForm = movie => ({
+const movieToForm = (movie) => ({
   id: movie.id,
   title: movie.title,
   overview: movie.overview,
   released: movie.release_date,
   url: movie.poster_path,
   runtime: movie.runtime,
-  genre: movie.genres
+  genre: movie.genres,
 });
 
-const formToMovie = form => {
+const formToMovie = (form) => {
   const movie = {
     title: form.title,
     overview: form.overview,
     release_date: form.released,
     poster_path: form.url,
     runtime: +form.runtime,
-    genres: form.genre
+    genres: form.genre,
   };
   if (form.id) {
     movie.id = form.id;
@@ -73,7 +73,7 @@ const AddEditDialog = ({ isEdit, onClose, onSave, movie }) => {
   const formik = useFormik({
     initialValues,
     validationSchema: movieFormScheme,
-    onSubmit: v => onSave(formToMovie(v))
+    onSubmit: (v) => onSave(formToMovie(v)),
   });
   return (
     <Dialog title={isEdit ? 'Edit movie' : 'Add movie'} onClose={onClose}>
@@ -147,16 +147,16 @@ const AddEditDialog = ({ isEdit, onClose, onSave, movie }) => {
 };
 
 AddEditDialog.defaultProps = {
-  movie: {}
+  movie: {},
 };
 
 AddEditDialog.propTypes = {
   isEdit: PropTypes.bool.isRequired,
   movie: (props, propName, componentName) => props.isEdit && PropTypes.checkPropTypes(
-    { [propName]: movieType.isRequired }, props, propName, componentName
+    { [propName]: movieType.isRequired }, props, propName, componentName,
   ),
   onClose: PropTypes.func.isRequired,
-  onSave: PropTypes.func.isRequired
+  onSave: PropTypes.func.isRequired,
 };
 
 export default AddEditDialog;
