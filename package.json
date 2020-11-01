@@ -14,7 +14,9 @@
     "ssr:start": "next start",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "lint": "eslint src/**/*.js src/**/*.jsx --no-error-on-unmatched-pattern"
+    "lint": "eslint src/**/*.js src/**/*.jsx --no-error-on-unmatched-pattern",
+    "storybook": "start-storybook -p 6006 --no-dll",
+    "build-storybook": "build-storybook --no-dll"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
@@ -45,6 +47,10 @@
     "@babel/plugin-proposal-optional-chaining": "^7.11.0",
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-react": "^7.10.4",
+    "@storybook/addon-actions": "^6.0.28",
+    "@storybook/addon-essentials": "^6.0.28",
+    "@storybook/addon-links": "^6.0.28",
+    "@storybook/react": "^6.0.28",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^10.4.9",
     "babel-jest": "^26.3.0",
@@ -62,6 +68,7 @@
     "html-loader": "^1.3.1",
     "html-webpack-plugin": "^4.5.0",
     "jest": "^26.4.2",
+    "react-is": "^17.0.1",
     "sass": "^1.27.0",
     "sass-loader": "^9.0.3",
     "style-loader": "^1.2.1",

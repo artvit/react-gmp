@@ -1,18 +1,18 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import SelectInputControl from './SelectInputControl';
 
 const MultiselectInputControl = ({ placeholder, value, options, onChange, errored }) => {
-  const extendedOptions = options.map((o) => ({
+  const extendedOptions = useMemo(() => options.map((o) => ({
     value: o,
     title: o,
     selected: value.includes(o),
-  }));
-  const optionsChange = (optionValue) => {
+  })), [options, value]);
+  const optionsChange = useCallback((optionValue) => {
     const option = extendedOptions.find((o) => o.value === optionValue);
     option.selected = !option.selected;
     return extendedOptions.filter((o) => o.selected).map((o) => o.value);
-  };
+  }, [extendedOptions]);
   return (
     <SelectInputControl
       multi

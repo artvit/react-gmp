@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { optionType } from '../options/option-type';
 import { ErrorText, InputBlock, InputTitle } from './Input.style';
 import InputControl from './InputControl';
 import MultiselectInputControl from './MultiselectInputControl';
@@ -77,7 +78,7 @@ Input.propTypes = {
     PropTypes.number,
     PropTypes.arrayOf(PropTypes.string),
   ]),
-  options: PropTypes.arrayOf(PropTypes.any),
+  options: PropTypes.arrayOf(optionType),
   touched: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.arrayOf(PropTypes.bool),
