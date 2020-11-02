@@ -1,31 +1,11 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { faCheckSquare, faSquare, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Option, OptionList } from './option-list';
+import { Option } from './option-list';
 import { optionType } from './option-type';
 import useClickOutside from '../use-click-outside.effect';
-
-const PositionedOptionList = styled(OptionList)`
-  position: absolute;
-  ${({ positionRight }) => positionRight && `
-    right: 0;
-  `}
-`;
-
-const InlineBlock = styled.div`
-  display: inline-block;
-`;
-
-const CloseButton = styled.div`
-  text-align: right;
-  padding-right: 10px;
-`;
-
-const CloseIcon = styled(FontAwesomeIcon)`
-  cursor: pointer;
-`;
+import { CloseButton, CloseIcon, InlineBlock, PositionedOptionList } from './OptionSelector.style';
 
 const OptionSelector = ({
   options, onClick, children, showCloseButton, hideChildren, positionRight, multi,

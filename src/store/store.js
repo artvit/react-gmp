@@ -21,7 +21,7 @@ const reducer = (state, action) => {
 
 const initStore = () => configureStore({ reducer });
 
-// eslint-disable-next-line import/no-mutable-exports
+// PATTERN: singleton
 const store = initStore();
 
 export const wrapper = createWrapper(initStore);

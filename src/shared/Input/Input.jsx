@@ -8,6 +8,7 @@ import MultiselectInputControl from './MultiselectInputControl';
 import ReadonlyInputControl from './ReadonlyInputControl';
 import SelectInputControl from './SelectInputControl';
 
+// PATTERN: facade
 const Input = ({ title, type, placeholder, value, options, onChange, name, error, touched }) => {
   let inputControl;
   if (type === 'readonly') {

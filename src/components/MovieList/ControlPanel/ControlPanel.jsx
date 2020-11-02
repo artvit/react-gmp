@@ -5,6 +5,7 @@ import SortBySelect from './SortBySelect';
 import FilterSelect from './FilterSelect';
 import { optionArrayType } from '../../../shared/options/option-type';
 
+// PATTERN: composite
 const ControlPanel = ({
   onFilterChange,
   onSortChange,

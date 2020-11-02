@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
 import AddEditDialog from './AddEditDialog';
@@ -22,6 +22,7 @@ const resultDialogOpenedSelector = (state) => state.resultDialog.resultDialogOpe
 const successSelector = (state) => state.resultDialog.success;
 const resultMessageSelector = (state) => state.resultDialog.resultMessage;
 
+// PATTERN: composite
 const Modals = () => {
   const dispatch = useDispatch();
   const editedMovie = useSelector(editedMovieSelector);
@@ -30,7 +31,10 @@ const Modals = () => {
   const resultDialogOpened = useSelector(resultDialogOpenedSelector);
   const success = useSelector(successSelector);
   const resultMessage = useSelector(resultMessageSelector);
-  const saveMovie = (movie, isEdit) => dispatch(isEdit ? editMovie(movie) : createMovie(movie));
+  const saveMovie = useCallback(
+    (movie, isEdit) => dispatch(isEdit ? editMovie(movie) : createMovie(movie)),
+    [dispatch],
+  );
   return (
     <>
       <Modal isOpen={isAddEditOpened}>

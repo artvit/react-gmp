@@ -30,6 +30,7 @@ const Movie = ({
       onDelete(movie);
     }
   }, [movie, onDelete, onEdit]);
+  const openDetails = useCallback(() => onOpenDetails(movie), [movie]);
   const { src: posterSrc } = useImage({
     srcList: [movie.poster_path, fallbackImg],
     useSuspense: false,
@@ -52,10 +53,10 @@ const Movie = ({
       <Cover
         src={posterSrc}
         alt={movie.title}
-        onClick={() => onOpenDetails(movie)}
+        onClick={openDetails}
       />
       <TitleBox>
-        <Title onClick={() => onOpenDetails(movie)}>{movie.title}</Title>
+        <Title onClick={openDetails}>{movie.title}</Title>
         <Year>{DateFormatters.formatYear(movie.release_date)}</Year>
       </TitleBox>
       <Tagline>{movie.tagline}</Tagline>
